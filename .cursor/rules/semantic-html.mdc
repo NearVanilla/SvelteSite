@@ -1,0 +1,57 @@
+---
+description: Use semantic HTML elements instead of generic divs and spans
+globs: **/*.svelte, **/*.html
+alwaysApply: false
+---
+
+# Semantic HTML
+
+Prefer semantic elements over generic `<div>` and `<span>` wrappers.
+
+## Common Mappings
+
+| Use case | ✅ Semantic | ❌ Avoid |
+|---|---|---|
+| Page sections | `<header>`, `<main>`, `<footer>`, `<aside>` | `<div id="header">` |
+| Navigation | `<nav>` | `<div class="nav">` |
+| Article/blog content | `<article>` | `<div class="post">` |
+| Grouped content | `<section>` | `<div class="section">` |
+| Buttons | `<button>` | `<div onClick>` |
+| Links | `<a href="...">` | `<span onClick>` |
+| Lists | `<ul>`, `<ol>`, `<li>` | `<div class="list">` |
+| Images with captions | `<figure>` + `<figcaption>` | `<div class="image">` |
+| Inline emphasis | `<strong>`, `<em>` | `<span class="bold">` |
+| Forms | `<form>`, `<label>`, `<fieldset>` | bare `<div>` wrappers |
+| Time/dates | `<time datetime="...">` | `<span>` |
+
+## Examples
+
+```html
+<!-- ❌ BAD -->
+<div class="header">
+  <div class="nav">
+    <div onclick="go('/')">Home</div>
+  </div>
+</div>
+
+<!-- ✅ GOOD -->
+<header>
+  <nav>
+    <a href="/">Home</a>
+  </nav>
+</header>
+```
+
+```html
+<!-- ❌ BAD -->
+<div class="post">
+  <div class="title">My Post</div>
+  <div class="content">...</div>
+</div>
+
+<!-- ✅ GOOD -->
+<article>
+  <h1>My Post</h1>
+  <p>...</p>
+</article>
+```
