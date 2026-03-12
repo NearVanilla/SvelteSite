@@ -6,12 +6,12 @@ This is the NearVanilla community website: a hub for Minecraft server info, join
 
 ## Project Configuration
 
-| Setting          | Value                     |
-| ---------------- | ------------------------- |
-| Language         | TypeScript (strict)       |
-| Package Manager  | bun                       |
-| Framework        | SvelteKit 2 + Svelte 5    |
-| Add-ons          | Prettier, ESLint, MCP     |
+| Setting         | Value                  |
+| --------------- | ---------------------- |
+| Language        | TypeScript (strict)    |
+| Package Manager | bun                    |
+| Framework       | SvelteKit 2 + Svelte 5 |
+| Add-ons         | Prettier, ESLint, MCP  |
 
 ---
 
@@ -48,14 +48,14 @@ New routes go under `src/routes/`. Shared utilities and components belong in `sr
 
 ## Common Commands
 
-| Command            | Purpose                          |
-| ------------------ | -------------------------------- |
-| `bun run dev`      | Start dev server                 |
-| `bun run build`    | Production build                 |
-| `bun run preview`  | Preview production build locally |
-| `bun run check`    | TypeScript + Svelte type check   |
-| `bun run lint`     | Prettier + ESLint (check only)   |
-| `bun run format`   | Auto-format all files            |
+| Command           | Purpose                          |
+| ----------------- | -------------------------------- |
+| `bun run dev`     | Start dev server                 |
+| `bun run build`   | Production build                 |
+| `bun run preview` | Preview production build locally |
+| `bun run check`   | TypeScript + Svelte type check   |
+| `bun run lint`    | Prettier + ESLint (check only)   |
+| `bun run format`  | Auto-format all files            |
 
 Always run `bun run check` and `bun run lint` after making changes.
 
@@ -104,10 +104,10 @@ Generates a shareable Svelte Playground URL. **Never call this if the code has a
 
 ## Key Files Reference
 
-| File                          | Purpose                                  |
-| ----------------------------- | ---------------------------------------- |
-| `svelte.config.js`            | SvelteKit adapter config                 |
-| `vite.config.ts`              | Vite plugin config                       |
-| `tsconfig.json`               | Extends `.svelte-kit/tsconfig.json`      |
-| `eslint.config.js`            | ESLint flat config with Svelte plugin    |
-| `.prettierrc`                 | Formatting rules                         |
+| File               | Purpose                               |
+| ------------------ | ------------------------------------- |
+| `svelte.config.js` | SvelteKit adapter config              |
+| `vite.config.ts`   | Vite plugin config                    |
+| `tsconfig.json`    | Extends `.svelte-kit/tsconfig.json`   |
+| `eslint.config.js` | ESLint flat config with Svelte plugin |
+| `.prettierrc`      | Formatting rules                      |
