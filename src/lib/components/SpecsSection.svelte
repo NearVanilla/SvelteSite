@@ -88,7 +88,7 @@
 <style>
 	.specs-section {
 		background-color: var(--color-surface-alt);
-		padding: 4rem 1.5rem;
+		padding: clamp(2.5rem, 5vw, 5rem) 1.5rem;
 	}
 
 	.specs-section__inner {
@@ -100,7 +100,7 @@
 	.specs-section__heading {
 		font-family: var(--font-display);
 		font-weight: 800;
-		font-size: 2rem;
+		font-size: clamp(1.5rem, 2.5vw, 2rem);
 		letter-spacing: 0.06em;
 		text-transform: uppercase;
 		margin-bottom: 0.75rem;

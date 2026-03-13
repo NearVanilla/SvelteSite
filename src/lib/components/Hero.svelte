@@ -9,11 +9,11 @@
 			<p class="hero__eyebrow">Welcome to</p>
 			<h1 class="hero__title">Near<span class="hero__title-accent">Vanilla</span></h1>
 			<p class="hero__subtitle">
-				Semi-vanilla Minecraft survival — community-first, fair, and fun.
+				A Semi-Vanilla Minecraft Survival Server that puts the community first.
 			</p>
 			<div class="hero__actions">
 				<a href="#apply" class="hero__cta">Join the Server</a>
-				<a href="/map" class="hero__secondary">View Live Map</a>
+				<a href="https://map.nearvanilla.com" class="hero__secondary">View Live Map</a>
 			</div>
 		</figcaption>
 	</figure>

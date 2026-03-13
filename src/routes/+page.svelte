@@ -4,6 +4,7 @@
 	import Gallery from '$lib/components/Gallery.svelte';
 	import PluginsSection from '$lib/components/PluginsSection.svelte';
 	import SpecsSection from '$lib/components/SpecsSection.svelte';
+	import spawnImg from '$lib/assets/screenshots/spawn.webp';
 </script>
 
 <main>
@@ -12,9 +13,13 @@
 		heading="What is"
 		headingAccent="Near Vanilla?"
 		body="NearVanilla is a semi-vanilla Minecraft survival server focused on keeping gameplay close
-			to the original experience while fostering a friendly and welcoming community. Join
+			to the original experience while fostering a friendly and welcoming community. We believe
+			the best Minecraft adventures happen when the game stays true to its roots — no pay-to-win,
+			no game-breaking mods, just you, the world, and the people you meet along the way. Join
 			hundreds of players building, exploring, and surviving together in a fair and fun
 			environment."
+		image={spawnImg}
+		imageAlt="NearVanilla spawn area"
 	/>
 	<InfoSection
 		heading="The"

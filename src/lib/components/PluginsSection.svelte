@@ -41,7 +41,7 @@
 <style>
 	.plugins-section {
 		background-color: var(--color-bg);
-		padding: 4rem 1.5rem;
+		padding: clamp(2.5rem, 5vw, 5rem) 1.5rem;
 	}
 
 	.plugins-section__inner {
@@ -56,7 +56,7 @@
 	.plugins-section__heading {
 		font-family: var(--font-display);
 		font-weight: 800;
-		font-size: 1.8rem;
+		font-size: clamp(1.4rem, 2.5vw, 1.8rem);
 		letter-spacing: 0.04em;
 		text-transform: uppercase;
 		margin-bottom: 0.75rem;
