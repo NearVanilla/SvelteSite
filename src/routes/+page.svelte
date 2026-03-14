@@ -8,6 +8,27 @@
 	import communityImg from '$lib/assets/screenshots/community.webp';
 </script>
 
+<svelte:head>
+	<title>NearVanilla — Semi-Vanilla Minecraft Survival Server</title>
+	<meta
+		name="description"
+		content="Join NearVanilla, a semi-vanilla Minecraft survival server designed to stay close to the original experience while providing a welcoming community. Explore, build, and connect."
+	/>
+	<meta property="og:title" content="NearVanilla — Semi-Vanilla Minecraft Server" />
+	<meta
+		property="og:description"
+		content="A community-focused Minecraft survival server that puts the vanilla experience first."
+	/>
+	<meta property="og:type" content="website" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="NearVanilla — Semi-Vanilla Minecraft Server" />
+	<meta
+		name="twitter:description"
+		content="A community-focused Minecraft survival server that puts the vanilla experience first."
+	/>
+	<link rel="canonical" href="https://nearvanilla.com/" />
+</svelte:head>
+
 <main>
 	<Hero />
 	<InfoSection

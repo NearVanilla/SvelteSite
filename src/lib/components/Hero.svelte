@@ -13,7 +13,13 @@
 			</p>
 			<div class="hero__actions">
 				<a href="#apply" class="hero__cta">Join the Server</a>
-				<a href="https://map.nearvanilla.com" class="hero__secondary">View Live Map</a>
+				<a
+					href="https://map.nearvanilla.com"
+					class="hero__secondary"
+					rel="noopener noreferrer"
+					target="_blank"
+					aria-label="View NearVanilla live map (opens in new tab)">View Live Map</a
+				>
 			</div>
 		</figcaption>
 	</figure>

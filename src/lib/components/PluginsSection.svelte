@@ -88,7 +88,13 @@
 					</p>
 				</div>
 			</div>
-			<a href="https://map.nearvanilla.com" class="dynmap-card__link">Open Live Map &rarr;</a>
+			<a
+				href="https://map.nearvanilla.com"
+				class="dynmap-card__link"
+				rel="noopener noreferrer"
+				target="_blank"
+				aria-label="Open NearVanilla live map (opens in new tab)">Open Live Map &rarr;</a
+			>
 		</article>
 
 		<ul class="plugins-grid" role="list">
