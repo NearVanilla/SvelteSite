@@ -45,5 +45,6 @@
 
 	main {
 		min-height: calc(100vh - var(--nav-height) - 91px);
+		padding-top: var(--nav-height);
 	}
 </style>

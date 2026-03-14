@@ -62,4 +62,14 @@
 		opacity: 0.8;
 		line-height: 1.4;
 	}
+
+	@media (max-width: 360px) {
+		.spec-card {
+			padding: 1rem 0.5rem;
+		}
+
+		.spec-card__value {
+			font-size: 0.8rem;
+		}
+	}
 </style>

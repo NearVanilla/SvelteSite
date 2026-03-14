@@ -28,6 +28,8 @@
 <style>
 	.hero {
 		width: 100%;
+		margin-top: calc(var(--nav-height) * -1);
+		padding-top: var(--nav-height);
 	}
 
 	.hero__figure {
