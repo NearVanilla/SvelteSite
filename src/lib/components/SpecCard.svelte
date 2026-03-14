@@ -24,7 +24,7 @@
 	.spec-card {
 		background-color: var(--color-accent);
 		border-radius: 6px;
-		padding: 1.5rem 1rem;
+		padding: 1.25rem 0.75rem;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
