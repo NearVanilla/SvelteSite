@@ -2,6 +2,7 @@
 	import '../app.css';
 	import favicon from '$lib/assets/favicon.svg';
 	import Nav from '$lib/components/Nav.svelte';
+	import Footer from '$lib/components/Footer.svelte';
 
 	let { children } = $props();
 </script>
@@ -16,6 +17,7 @@
 <main id="main-content">
 	{@render children()}
 </main>
+<Footer />
 
 <style>
 	.skip-link {
@@ -42,6 +44,6 @@
 	}
 
 	main {
-		min-height: calc(100vh - var(--nav-height));
+		min-height: calc(100vh - var(--nav-height) - 91px);
 	}
 </style>
