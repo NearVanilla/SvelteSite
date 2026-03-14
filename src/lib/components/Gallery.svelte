@@ -1,68 +1,152 @@
 <script lang="ts">
-	const galleryRow1 = [0, 1, 2, 3];
-	const galleryRow2 = [0, 1, 2, 3, 4];
+	interface GalleryImage {
+		src: string;
+		alt: string;
+	}
+
+	// Picks up every .webp dropped into the community folder at build time.
+	// Add or remove files there — no code change needed.
+	const modules = import.meta.glob('../assets/screenshots/community/*.webp', {
+		eager: true,
+		query: '?url',
+		import: 'default'
+	}) as Record<string, string>;
+
+	const images: GalleryImage[] = Object.entries(modules).map(([path, src]) => {
+		const filename = path.split('/').pop()?.replace('.webp', '') ?? 'screenshot';
+		return { src, alt: `NearVanilla community — ${filename}` };
+	});
+
+	function tile<T>(arr: T[], n: number): T[] {
+		return Array.from({ length: n }, () => arr).flat();
+	}
+
+	// Repeat enough times so each half is at least ~4000px wide (covers 4K screens).
+	// Each image is roughly 340px; with many images one repeat is already sufficient.
+	const tilesNeeded = Math.max(1, Math.ceil(12 / images.length));
+	const half = tile(images, tilesNeeded);
+	const track = [...half, ...half];
 </script>
 
-<section class="gallery gallery--large" aria-label="Server screenshot gallery">
-	{#each galleryRow1 as slot (slot)}
-		<figure class="gallery__slot" aria-label="Screenshot {slot + 1} placeholder"></figure>
-	{/each}
-</section>
+<section class="gallery" aria-label="Server screenshot gallery">
+	<div class="gallery__viewport">
+		<div class="gallery__track">
+			{#each track as img, i (i)}
+				<figure class="gallery__item">
+					<img src={img.src} alt={img.alt} class="gallery__img" loading="eager" />
+				</figure>
+			{/each}
+		</div>
+	</div>
 
-<section class="gallery gallery--small" aria-label="Server screenshot gallery continued">
-	{#each galleryRow2 as slot (slot)}
-		<figure class="gallery__slot" aria-label="Screenshot {slot + 5} placeholder"></figure>
-	{/each}
+	<div class="gallery__viewport">
+		<div class="gallery__track gallery__track--reverse">
+			{#each track as img, i (i)}
+				<figure class="gallery__item">
+					<img src={img.src} alt={img.alt} class="gallery__img" loading="eager" />
+				</figure>
+			{/each}
+		</div>
+	</div>
 </section>
 
 <style>
 	.gallery {
+		background-color: var(--color-surface-alt);
+		padding: 2rem 0;
 		display: flex;
+		flex-direction: column;
+		gap: 0.625rem;
+	}
+
+	.gallery__viewport {
+		position: relative;
 		width: 100%;
-		overflow: hidden;
+		/* overflow-x: clip keeps the wide track hidden without forcing overflow-y to auto.
+		   overflow-y: visible lets the scale(1.04) hover effect show without being clipped. */
+		overflow-x: clip;
+		overflow-y: visible;
 	}
 
-	.gallery--large {
-		height: 200px;
-	}
-
-	.gallery--small {
-		height: 120px;
-	}
-
-	.gallery__slot {
-		flex: 1 0 0;
-		margin: 0;
-		background-color: #2a2f3a;
-		border-right: 2px solid var(--color-bg);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		overflow: hidden;
-	}
-
-	.gallery__slot:last-child {
-		border-right: none;
-	}
-
-	.gallery__slot::after {
+	.gallery__viewport::before,
+	.gallery__viewport::after {
 		content: '';
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		width: clamp(48px, 10vw, 120px);
+		z-index: 2;
+		pointer-events: none;
+	}
+
+	.gallery__viewport::before {
+		left: 0;
+		background: linear-gradient(to right, var(--color-surface-alt), transparent);
+	}
+
+	.gallery__viewport::after {
+		right: 0;
+		background: linear-gradient(to left, var(--color-surface-alt), transparent);
+	}
+
+	.gallery__track {
+		display: flex;
+		gap: 6px;
+		width: max-content;
+		animation: gallery-scroll 50s linear infinite;
+	}
+
+	.gallery__track--reverse {
+		animation-direction: reverse;
+	}
+
+	.gallery__viewport:hover .gallery__track {
+		animation-play-state: paused;
+	}
+
+	.gallery__item {
+		flex-shrink: 0;
+		margin: 0;
+	}
+
+	.gallery__img {
+		width: clamp(200px, 22vw, 340px);
+		aspect-ratio: 16 / 9;
+		object-fit: cover;
+		border-radius: 4px;
 		display: block;
-		width: 32px;
-		height: 32px;
-		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='3' width='18' height='18' rx='2'/%3E%3Ccircle cx='8.5' cy='8.5' r='1.5'/%3E%3Cpath d='m21 15-5-5L5 21'/%3E%3C/svg%3E");
-		background-repeat: no-repeat;
-		background-size: contain;
-		opacity: 0.5;
+		transition:
+			transform 0.25s ease,
+			box-shadow 0.25s ease;
+	}
+
+	.gallery__img:hover {
+		transform: scale(1.04);
+		box-shadow:
+			0 0 0 2px var(--color-accent),
+			0 8px 32px rgba(0, 0, 0, 0.6);
+		position: relative;
+		z-index: 3;
+	}
+
+	@keyframes gallery-scroll {
+		from {
+			transform: translateX(0);
+		}
+		to {
+			transform: translateX(-50%);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.gallery__track {
+			animation: none;
+		}
 	}
 
 	@media (max-width: 768px) {
-		.gallery--large {
-			height: 140px;
-		}
-
-		.gallery--small {
-			height: 90px;
+		.gallery__img {
+			width: clamp(150px, 38vw, 220px);
 		}
 	}
 </style>

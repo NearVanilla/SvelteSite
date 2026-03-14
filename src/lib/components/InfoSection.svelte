@@ -36,7 +36,7 @@
 <style>
 	.info-section {
 		background-color: var(--color-bg);
-		padding: clamp(2rem, 3.5vw, 4rem) 1.5rem;
+		padding: clamp(4rem, 7vw, 8rem) clamp(1.5rem, 4vw, 3rem);
 	}
 
 	.info-section--alt {
@@ -45,10 +45,10 @@
 
 	.info-section__inner {
 		display: grid;
-		grid-template-columns: 2fr 3fr;
+		grid-template-columns: 5fr 6fr;
 		gap: 2.5rem;
 		align-items: center;
-		max-width: 1100px;
+		max-width: 1400px;
 		margin: 0 auto;
 	}
 
@@ -92,7 +92,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
-		padding: 0 1rem;
+		padding: 0;
 	}
 
 	.info-section__heading {
@@ -116,7 +116,7 @@
 		}
 
 		.info-section__content {
-			padding: 0 0.5rem;
+			padding: 0;
 		}
 	}
 
