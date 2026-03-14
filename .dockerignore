@@ -1,0 +1,29 @@
+# Dependencies
+node_modules
+bun.lockb
+
+# Build outputs
+.svelte-kit
+build
+
+# Version control
+.git
+.gitignore
+
+# IDE
+.vscode
+.idea
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Documentation
+README.md
+LICENSE
+
+# Environment
+.env
+.env.*
+!.env.example
