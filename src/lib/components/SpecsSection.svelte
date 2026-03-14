@@ -12,7 +12,7 @@
 			log in. Here's a look at what powers the server.
 		</p>
 		<div class="specs-grid">
-			<SpecCard label="Processor" value="Intel Core i9" sub="3.6 GHz">
+			<SpecCard label="Processor" value="AMD Ryzen 7 7700" sub="3.8-5.3 GHz">
 				{#snippet icon()}
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +30,7 @@
 				{/snippet}
 			</SpecCard>
 
-			<SpecCard label="Storage" value="1 TB SSD" sub="NVMe">
+			<SpecCard label="Storage" value="2 TB" sub="NVMe">
 				{#snippet icon()}
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -64,7 +64,7 @@
 				{/snippet}
 			</SpecCard>
 
-			<SpecCard label="Network" value="1 Gbit/s" sub="1000 Mbps / Free">
+			<SpecCard label="Network" value="1 Gbit/s" sub="1000 Mbps">
 				{#snippet icon()}
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
