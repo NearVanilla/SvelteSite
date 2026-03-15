@@ -31,6 +31,7 @@
 
 <Hero />
 <InfoSection
+	id="about"
 	heading="What is"
 	headingAccent="Near Vanilla?"
 	body="NearVanilla is a semi-vanilla Minecraft survival server designed to stay as close to the

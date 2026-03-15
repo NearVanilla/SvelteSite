@@ -2,10 +2,10 @@
 	let isMenuOpen = $state(false);
 
 	const navLinks = [
-		{ label: 'Server', href: '/server' },
-		{ label: 'Players', href: '/players' },
-		{ label: 'Map', href: '/map' },
-		{ label: 'Other', href: '/other' }
+		{ label: 'Home', href: '#home' },
+		{ label: 'About', href: '#about' },
+		{ label: 'Plugins', href: '#plugins' },
+		{ label: 'Specs', href: '#specs' }
 	];
 
 	function toggleMenu() {
@@ -119,7 +119,7 @@
 		text-transform: uppercase;
 		background-color: var(--color-accent);
 		color: var(--color-text);
-		padding: 0.45rem 1rem;
+		padding: 0.35rem 0.9rem;
 		border-radius: 4px;
 		white-space: nowrap;
 		transition: background-color 0.15s ease;

@@ -1,5 +1,6 @@
 <script lang="ts">
 	interface Props {
+		id?: string;
 		heading: string;
 		headingAccent: string;
 		body: string;
@@ -8,10 +9,10 @@
 		imageAlt?: string;
 	}
 
-	let { heading, headingAccent, body, alt = false, image, imageAlt = '' }: Props = $props();
+	let { id, heading, headingAccent, body, alt = false, image, imageAlt = '' }: Props = $props();
 </script>
 
-<section class="info-section" class:info-section--alt={alt}>
+<section {id} class="info-section" class:info-section--alt={alt}>
 	<div class="info-section__inner">
 		<figure
 			class="info-section__image"

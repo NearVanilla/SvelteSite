@@ -2,7 +2,7 @@
 	import SpecCard from './SpecCard.svelte';
 </script>
 
-<section class="specs-section">
+<section id="specs" class="specs-section">
 	<div class="specs-section__inner">
 		<h2 class="specs-section__heading">
 			Server <span class="accent">Specs</span>

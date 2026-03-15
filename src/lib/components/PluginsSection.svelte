@@ -50,7 +50,7 @@
 	];
 </script>
 
-<section class="plugins-section">
+<section id="plugins" class="plugins-section">
 	<div class="plugins-section__inner">
 		<header class="plugins-section__header">
 			<h2 class="plugins-section__heading">Our <span class="accent">Plugins & Datapacks</span></h2>
