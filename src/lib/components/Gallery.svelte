@@ -1,7 +1,10 @@
 <script lang="ts">
+	import { getMeta, type ScreenshotMeta } from '$lib/data/gallery';
+
 	interface GalleryImage {
 		src: string;
 		alt: string;
+		meta: ScreenshotMeta | undefined;
 	}
 
 	// Picks up every .webp dropped into the community folder at build time.
@@ -14,7 +17,7 @@
 
 	const images: GalleryImage[] = Object.entries(modules).map(([path, src]) => {
 		const filename = path.split('/').pop()?.replace('.webp', '') ?? 'screenshot';
-		return { src, alt: `NearVanilla community — ${filename}` };
+		return { src, alt: `NearVanilla community — ${filename}`, meta: getMeta(filename) };
 	});
 
 	function tile<T>(arr: T[], n: number): T[] {
@@ -34,6 +37,19 @@
 			{#each track as img, i (i)}
 				<figure class="gallery__item">
 					<img src={img.src} alt={img.alt} class="gallery__img" loading="lazy" decoding="async" />
+					{#if img.meta}
+						<figcaption class="gallery__caption">
+							<p class="gallery__caption-build">{img.meta.buildName}</p>
+							<ul class="gallery__caption-builders">
+								{#each img.meta.builders as builder (builder.name)}
+									<li>
+										<span class="gallery__flag" aria-hidden="true">{builder.flag ?? '🇺🇳'}</span>
+										{builder.name}
+									</li>
+								{/each}
+							</ul>
+						</figcaption>
+					{/if}
 				</figure>
 			{/each}
 		</div>
@@ -44,6 +60,19 @@
 			{#each track as img, i (i)}
 				<figure class="gallery__item">
 					<img src={img.src} alt={img.alt} class="gallery__img" loading="lazy" decoding="async" />
+					{#if img.meta}
+						<figcaption class="gallery__caption">
+							<p class="gallery__caption-build">{img.meta.buildName}</p>
+							<ul class="gallery__caption-builders">
+								{#each img.meta.builders as builder (builder.name)}
+									<li>
+										<span class="gallery__flag" aria-hidden="true">{builder.flag ?? '🇺🇳'}</span>
+										{builder.name}
+									</li>
+								{/each}
+							</ul>
+						</figcaption>
+					{/if}
 				</figure>
 			{/each}
 		</div>
@@ -104,29 +133,79 @@
 		animation-play-state: paused;
 	}
 
-	.gallery__item {
-		flex-shrink: 0;
-		margin: 0;
-	}
-
 	.gallery__img {
 		width: clamp(200px, 22vw, 340px);
 		aspect-ratio: 16 / 9;
 		object-fit: cover;
 		border-radius: 4px;
 		display: block;
+	}
+
+	.gallery__item {
+		flex-shrink: 0;
+		margin: 0;
+		position: relative;
+		border-radius: 4px;
 		transition:
 			transform 0.25s ease,
 			box-shadow 0.25s ease;
 	}
 
-	.gallery__img:hover {
+	.gallery__item:hover {
 		transform: scale(1.04);
 		box-shadow:
 			0 0 0 2px var(--color-accent),
 			0 8px 32px rgba(0, 0, 0, 0.6);
-		position: relative;
 		z-index: 3;
+	}
+
+	.gallery__caption {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		border-radius: 0 0 4px 4px;
+		background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, transparent 100%);
+		padding: 2rem 0.625rem 0.5rem;
+		opacity: 0;
+		transition: opacity 0.2s ease;
+		pointer-events: none;
+		z-index: 4;
+	}
+
+	.gallery__item:hover .gallery__caption {
+		opacity: 1;
+	}
+
+	.gallery__caption-build {
+		margin: 0 0 0.25rem;
+		font-size: 0.8rem;
+		font-weight: 600;
+		color: #fff;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.gallery__caption-builders {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.125rem;
+	}
+
+	.gallery__caption-builders li {
+		font-size: 0.7rem;
+		color: rgba(255, 255, 255, 0.85);
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.gallery__flag {
+		font-size: 0.85rem;
 	}
 
 	@keyframes gallery-scroll {

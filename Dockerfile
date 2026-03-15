@@ -16,21 +16,13 @@ COPY . .
 RUN bun run build
 
 # Production stage
-FROM oven/bun:1 AS runner
+FROM nginx:alpine AS runner
 
-WORKDIR /app
-
-# Copy built artifacts from builder
-COPY --from=builder /app/build ./build
-COPY --from=builder /app/package.json ./package.json
-COPY --from=builder /app/node_modules ./node_modules
-
-# Set production environment
-ENV NODE_ENV=production
-ENV PORT=8000
+# Copy built static files from builder
+COPY --from=builder /app/build /usr/share/nginx/html
 
 # Expose port
-EXPOSE 8000
+EXPOSE 80
 
-# Start the Node.js server
-CMD ["node", "build"]
+
+# nginx runs by default
