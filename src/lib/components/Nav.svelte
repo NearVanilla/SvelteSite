@@ -5,7 +5,8 @@
 		{ label: 'Home', href: '#home' },
 		{ label: 'About', href: '#about' },
 		{ label: 'Plugins', href: '#plugins' },
-		{ label: 'Specs', href: '#specs' }
+		{ label: 'Specs', href: '#specs' },
+		{ label: 'Downloads', href: '/downloads' }
 	];
 
 	function toggleMenu() {

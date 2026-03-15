@@ -3,6 +3,7 @@
 	import favicon from '$lib/assets/favicon.svg';
 	import Nav from '$lib/components/Nav.svelte';
 	import Footer from '$lib/components/Footer.svelte';
+	import KonamiToast from '$lib/components/KonamiToast.svelte';
 
 	let { children } = $props();
 </script>
@@ -13,6 +14,7 @@
 
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
+<KonamiToast />
 <Nav />
 <main id="main-content">
 	{@render children()}
