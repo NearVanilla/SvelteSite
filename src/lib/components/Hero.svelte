@@ -16,7 +16,7 @@
 				A Semi-Vanilla Minecraft Survival Server that puts<br />the community first.
 			</p>
 			<div class="hero__actions">
-				<a href="#apply" class="hero__cta">Join the Server</a>
+				<a href="https://discord.com/invite/KHAuj5F" class="hero__cta">Join the Server</a>
 				<a
 					href="https://map.nearvanilla.com"
 					class="hero__secondary"

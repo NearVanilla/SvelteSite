@@ -8,11 +8,9 @@
 			&copy; {currentYear} NearVanilla. Not affiliated with Mojang or Microsoft.
 		</p>
 		<nav class="footer__links" aria-label="Footer navigation">
-			<a href="https://discord.gg/nearvanilla" class="footer__link" target="_blank" rel="noopener">
+			<a href="https://discord.com/invite/KHAuj5F" class="footer__link" target="_blank" rel="noopener">
 				Discord
 			</a>
-			<span class="footer__divider" aria-hidden="true">·</span>
-			<a href="/rules" class="footer__link">Rules</a>
 		</nav>
 	</div>
 </footer>

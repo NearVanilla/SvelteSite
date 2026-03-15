@@ -30,7 +30,7 @@
 				{/snippet}
 			</SpecCard>
 
-			<SpecCard label="Storage" value="2 TB" sub="NVMe">
+			<SpecCard label="Storage" value="2 TB" sub="Hybrid">
 				{#snippet icon()}
 					<svg
 						xmlns="http://www.w3.org/2000/svg"

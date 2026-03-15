@@ -46,7 +46,7 @@
 			{#each navLinks as link (link.label)}
 				<a href={link.href} class="nav__link" onclick={closeMenu}>{link.label}</a>
 			{/each}
-			<a href="#apply" class="nav__cta" onclick={closeMenu}>Apply Now</a>
+			<a href="https://discord.com/invite/KHAuj5F" class="nav__cta" onclick={closeMenu}>Apply Now</a>
 		</nav>
 	</div>
 </header>
@@ -58,6 +58,14 @@
 		left: 0;
 		right: 0;
 		z-index: 100;
+	}
+
+	/* Backdrop blur lives on a pseudo-element so .nav itself never creates
+	   a new containing block for position:fixed descendants (the mobile overlay). */
+	.nav::before {
+		content: '';
+		position: absolute;
+		inset: 0;
 		background-color: rgba(10, 10, 10, 0.75);
 		backdrop-filter: blur(12px);
 		-webkit-backdrop-filter: blur(12px);
@@ -65,6 +73,7 @@
 	}
 
 	.nav__inner {
+		position: relative;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;

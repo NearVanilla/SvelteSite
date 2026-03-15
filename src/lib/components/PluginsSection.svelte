@@ -148,7 +148,7 @@
 	.plugins-section__heading {
 		font-family: var(--font-display);
 		font-weight: 800;
-		font-size: clamp(1.5rem, 2.5vw, 2rem);
+		font-size: clamp(1rem, 5vw, 2rem);
 		letter-spacing: 0.06em;
 		text-transform: uppercase;
 		margin-bottom: 0.75rem;
