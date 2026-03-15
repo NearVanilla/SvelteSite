@@ -29,35 +29,33 @@
 	<link rel="canonical" href="https://nearvanilla.com/" />
 </svelte:head>
 
-<main>
-	<Hero />
-	<InfoSection
-		heading="What is"
-		headingAccent="Near Vanilla?"
-		body="NearVanilla is a semi-vanilla Minecraft survival server designed to stay as close to the
-			original experience as possible while still supporting a welcoming and active community.
-			Our goal is to maintain the spirit of vanilla Minecraft while providing the stability,
-			moderation and community that make long-term survival servers great. Players are free to
-			create, collaborate and shape the world around them naturally. Whether you're building
-			something ambitious, exploring the wilderness or simply enjoying the game at your own pace,
-			NearVanilla is a place where players collaborate, build together and shape the world as a
-			community."
-		image={aboutImg}
-		imageAlt="NearVanilla spawn area"
-	/>
-	<InfoSection
-		heading="The"
-		headingAccent="Community"
-		body="NearVanilla thrives because of its community. Players regularly come together to share ideas and
-			resources, collaborate on builds, create projects and host events together. With an active Discord,
-			community discussions, and our thriving ecosystem of plugins and tools, there are always opportunities
-			to connect, contribute, and build lasting friendships. Whether you're a solo adventurer or a group
-			player, you'll find a welcoming atmosphere and a space where everyone's input is valued."
-		image={communityImg}
-		imageAlt="NearVanilla community"
-		alt
-	/>
-	<Gallery />
-	<PluginsSection />
-	<SpecsSection />
-</main>
+<Hero />
+<InfoSection
+	heading="What is"
+	headingAccent="Near Vanilla?"
+	body="NearVanilla is a semi-vanilla Minecraft survival server designed to stay as close to the
+		original experience as possible while still supporting a welcoming and active community.
+		Our goal is to maintain the spirit of vanilla Minecraft while providing the stability,
+		moderation and community that make long-term survival servers great. Players are free to
+		create, collaborate and shape the world around them naturally. Whether you're building
+		something ambitious, exploring the wilderness or simply enjoying the game at your own pace,
+		NearVanilla is a place where players collaborate, build together and shape the world as a
+		community."
+	image={aboutImg}
+	imageAlt="NearVanilla spawn area"
+/>
+<InfoSection
+	heading="The"
+	headingAccent="Community"
+	body="NearVanilla thrives because of its community. Players regularly come together to share ideas and
+		resources, collaborate on builds, create projects and host events together. With an active Discord,
+		community discussions, and our thriving ecosystem of plugins and tools, there are always opportunities
+		to connect, contribute, and build lasting friendships. Whether you're a solo adventurer or a group
+		player, you'll find a welcoming atmosphere and a space where everyone's input is valued."
+	image={communityImg}
+	imageAlt="NearVanilla community"
+	alt
+/>
+<Gallery />
+<PluginsSection />
+<SpecsSection />

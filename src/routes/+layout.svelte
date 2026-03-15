@@ -44,7 +44,7 @@
 	}
 
 	main {
-		min-height: calc(100vh - var(--nav-height) - 91px);
+		flex: 1;
 		padding-top: var(--nav-height);
 	}
 </style>

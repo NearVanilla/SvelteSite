@@ -71,7 +71,7 @@
 		max-width: 1200px;
 		margin: 0 auto;
 		padding: 0 1.5rem;
-		height: 48px;
+		height: var(--nav-height);
 	}
 
 	.nav__logo {

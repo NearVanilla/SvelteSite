@@ -56,7 +56,7 @@
 		position: relative;
 		width: 100%;
 		aspect-ratio: 16 / 9;
-		background-color: #2a2f3a;
+		background-color: var(--color-placeholder);
 		border-radius: 4px;
 		margin: 0;
 		overflow: hidden;
@@ -114,20 +114,12 @@
 		.info-section__inner {
 			gap: 1.75rem;
 		}
-
-		.info-section__content {
-			padding: 0;
-		}
 	}
 
 	@media (max-width: 768px) {
 		.info-section__inner {
 			grid-template-columns: 1fr;
 			gap: 1.5rem;
-		}
-
-		.info-section__content {
-			padding: 0;
 		}
 	}
 </style>

@@ -33,7 +33,7 @@
 		<div class="gallery__track">
 			{#each track as img, i (i)}
 				<figure class="gallery__item">
-					<img src={img.src} alt={img.alt} class="gallery__img" loading="eager" />
+					<img src={img.src} alt={img.alt} class="gallery__img" loading="lazy" decoding="async" />
 				</figure>
 			{/each}
 		</div>
@@ -43,7 +43,7 @@
 		<div class="gallery__track gallery__track--reverse">
 			{#each track as img, i (i)}
 				<figure class="gallery__item">
-					<img src={img.src} alt={img.alt} class="gallery__img" loading="eager" />
+					<img src={img.src} alt={img.alt} class="gallery__img" loading="lazy" decoding="async" />
 				</figure>
 			{/each}
 		</div>

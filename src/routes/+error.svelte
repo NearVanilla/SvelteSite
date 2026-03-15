@@ -8,16 +8,16 @@
 	</title>
 </svelte:head>
 
-<main class="error-page">
+<section class="error-page" aria-labelledby="error-code">
 	<div class="error-page__content">
 		{#if $page.status === 404}
-			<h1 class="error-page__code">404</h1>
+			<h1 id="error-code" class="error-page__code">404</h1>
 			<h2 class="error-page__title">Page Not Found</h2>
 			<p class="error-page__message">
 				The page you're looking for doesn't exist or has been moved.
 			</p>
 		{:else}
-			<h1 class="error-page__code">{$page.status}</h1>
+			<h1 id="error-code" class="error-page__code">{$page.status}</h1>
 			<h2 class="error-page__title">Something Went Wrong</h2>
 			<p class="error-page__message">
 				{$page.error?.message || 'An unexpected error occurred.'}
@@ -25,7 +25,7 @@
 		{/if}
 		<a href="/" class="error-page__cta">Return Home</a>
 	</div>
-</main>
+</section>
 
 <style>
 	.error-page {
