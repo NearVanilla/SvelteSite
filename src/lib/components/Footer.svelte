@@ -8,7 +8,12 @@
 			&copy; {currentYear} NearVanilla. Not affiliated with Mojang or Microsoft.
 		</p>
 		<nav class="footer__links" aria-label="Footer navigation">
-			<a href="https://discord.com/invite/KHAuj5F" class="footer__link" target="_blank" rel="noopener">
+			<a
+				href="https://discord.com/invite/KHAuj5F"
+				class="footer__link"
+				target="_blank"
+				rel="noopener"
+			>
 				Discord
 			</a>
 		</nav>

@@ -9,7 +9,6 @@
 	import season6Img from '$lib/assets/screenshots/world_downloads/s6.webp';
 	import season6CreativeImg from '$lib/assets/screenshots/world_downloads/s6_c.webp';
 
-
 	interface WorldDownload {
 		name: string;
 		versionRange: string;
@@ -75,7 +74,6 @@
 			downloadHref: 'https://files.nearvanilla.com/worlds/NearVanillaS6Creative.7z',
 			seasonDates: '8th January 2022 - 22nd July 2024',
 			imageSrc: season6CreativeImg
-
 		}
 	];
 </script>
@@ -92,10 +90,12 @@
 <section class="downloads-hero">
 	<div class="downloads-hero__inner">
 		<p class="downloads-hero__eyebrow">Archive</p>
-		<h1 class="downloads-hero__title">World <span class="downloads-hero__title-accent">Downloads</span></h1>
+		<h1 class="downloads-hero__title">
+			World <span class="downloads-hero__title-accent">Downloads</span>
+		</h1>
 		<p class="downloads-hero__desc">
-			Every previous NearVanilla world is preserved and made available to the community.
-			Download any season's world save and explore it in single-player or on your own server.
+			Every previous NearVanilla world is preserved and made available to the community. Download
+			any season's world save and explore it in single-player or on your own server.
 		</p>
 	</div>
 </section>

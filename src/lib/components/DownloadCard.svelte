@@ -9,13 +9,27 @@
 		imageAlt?: string;
 	}
 
-	let { name, versionRange, fileSize, downloadHref, seasonDates, imageSrc, imageAlt = name }: Props = $props();
+	let {
+		name,
+		versionRange,
+		fileSize,
+		downloadHref,
+		seasonDates,
+		imageSrc,
+		imageAlt = name
+	}: Props = $props();
 </script>
 
 <article class="download-card">
 	{#if imageSrc}
 		<figure class="download-card__thumbnail">
-			<img src={imageSrc} alt={imageAlt} class="download-card__img" loading="lazy" decoding="async" />
+			<img
+				src={imageSrc}
+				alt={imageAlt}
+				class="download-card__img"
+				loading="lazy"
+				decoding="async"
+			/>
 		</figure>
 	{/if}
 	<header class="download-card__header">

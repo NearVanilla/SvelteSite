@@ -71,12 +71,7 @@
 		in:fly={{ x: -360, duration: 400, easing: cubicOut }}
 		out:fly={{ x: -360, duration: 400, easing: cubicOut }}
 	>
-		<img
-			class="mc-toast__icon"
-			src={diamond}
-			alt=""
-			aria-hidden="true"
-		/>
+		<img class="mc-toast__icon" src={diamond} alt="" aria-hidden="true" />
 		<div class="mc-toast__content">
 			<p class="mc-toast__title">Achievement Get!</p>
 			<p class="mc-toast__lore">You found the easter egg!</p>

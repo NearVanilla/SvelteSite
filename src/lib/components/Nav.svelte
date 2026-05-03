@@ -6,7 +6,8 @@
 		{ label: 'About', href: '#about' },
 		{ label: 'Plugins', href: '#plugins' },
 		{ label: 'Specs', href: '#specs' },
-		{ label: 'Downloads', href: '/downloads' }
+		{ label: 'Downloads', href: '/downloads' },
+		{ label: 'Staff', href: '/staff' }
 	];
 
 	function toggleMenu() {
@@ -47,7 +48,8 @@
 			{#each navLinks as link (link.label)}
 				<a href={link.href} class="nav__link" onclick={closeMenu}>{link.label}</a>
 			{/each}
-			<a href="https://discord.com/invite/KHAuj5F" class="nav__cta" onclick={closeMenu}>Apply Now</a>
+			<a href="https://discord.com/invite/KHAuj5F" class="nav__cta" onclick={closeMenu}>Apply Now</a
+			>
 		</nav>
 	</div>
 </header>
