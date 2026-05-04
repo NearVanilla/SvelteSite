@@ -4,8 +4,8 @@
 		since: string;
 		badge: string;
 		tagline?: string;
-		favoriteBlock?: string;
-		favoriteActivity?: string;
+		location?: string;
+		timezone?: string;
 		responsibilities?: string[];
 		quote?: string;
 	}
@@ -17,8 +17,8 @@
 				since: '2018-08-13',
 				badge: 'Admin',
 				tagline: 'Server Owner',
-				favoriteBlock: 'Redstone Block',
-				favoriteActivity: 'Mentoring the Tech Team',
+				location: 'Poland',
+				timezone: 'CEST',
 				responsibilities: ['Server Ownership', 'Plugin Development', 'Tech Mentoring'],
 				quote: 'Consider yourself lucky… or cursed.'
 			},
@@ -27,8 +27,8 @@
 				since: '2024-09-23',
 				badge: 'Admin',
 				tagline: 'Tech Lead & Server Manager',
-				favoriteBlock: 'Command Block',
-				favoriteActivity: 'Fighting server fires',
+				location: 'United Kingdom',
+				timezone: 'BST',
 				responsibilities: ['Server Infrastructure', 'Configuration', 'Troubleshooting'],
 				quote: 'Most of what happens behind the scenes passes through here.'
 			},
@@ -37,8 +37,8 @@
 				since: '2020-07-04',
 				badge: 'Admin',
 				tagline: 'Community Leader',
-				favoriteBlock: 'Oak Leaves',
-				favoriteActivity: 'Building yet another tree',
+				location: 'Canada',
+				timezone: 'EST',
 				responsibilities: ['Community Events', 'Staff Meetings', 'Player Support'],
 				quote: 'Jack of All Trades, master of… well, a few.'
 			},
@@ -47,8 +47,8 @@
 				since: '2024-10-02',
 				badge: 'Admin',
 				tagline: 'Events Manager',
-				favoriteBlock: 'Firework Rocket',
-				favoriteActivity: 'Organising server events',
+				location: 'Wales',
+				timezone: 'BST',
 				responsibilities: ['Event Coordination', 'Community Engagement'],
 				quote: 'Every great event starts with a spark.'
 			}
@@ -58,9 +58,9 @@
 				name: 'Biz_Block',
 				since: '2022-01-08',
 				badge: 'Moderator',
-				tagline: 'Keeping peace on the server',
-				favoriteBlock: 'Obsidian',
-				favoriteActivity: 'Patrolling spawn',
+				tagline: 'Shopping District Maintainer',
+				location: 'United States',
+				timezone: 'EST',
 				responsibilities: ['Player Moderation', 'Conflict Resolution'],
 				quote: 'Fairness is a block best placed carefully.'
 			},
@@ -68,9 +68,9 @@
 				name: 'Demonstrations',
 				since: '2022-01-08',
 				badge: 'Moderator',
-				tagline: 'Helpful and fair',
-				favoriteBlock: 'Bookshelf',
-				favoriteActivity: 'Helping new players',
+				tagline: 'Tech Team Member',
+				location: 'Wales',
+				timezone: 'BST',
 				responsibilities: ['New Player Guidance', 'Rule Enforcement'],
 				quote: 'Show, do not just tell.'
 			},
@@ -78,9 +78,9 @@
 				name: 'Dynant',
 				since: '2022-01-08',
 				badge: 'Moderator',
-				tagline: 'Explorer of worlds',
-				favoriteBlock: 'Grass Block',
-				favoriteActivity: 'Exploring new terrain',
+				tagline: 'Tech Team Member',
+				location: 'Netherlands',
+				timezone: 'CET',
 				responsibilities: ['World Exploration', 'Community Building'],
 				quote: 'There is always more to discover.'
 			},
@@ -88,9 +88,9 @@
 				name: 'kNaLLx',
 				since: '2022-01-08',
 				badge: 'Moderator',
-				tagline: 'Redstone enthusiast',
-				favoriteBlock: 'Redstone Dust',
-				favoriteActivity: 'Building redstone contraptions',
+				tagline: 'Shopping District Maintainer & Community Moderator',
+				location: 'Norway',
+				timezone: 'CEST',
 				responsibilities: ['Technical Support', 'Redstone Community'],
 				quote: 'With enough redstone, anything is possible.'
 			},
@@ -98,9 +98,9 @@
 				name: 'Lego_monkeyman',
 				since: '2022-01-08',
 				badge: 'Moderator',
-				tagline: 'Builder of epic structures',
-				favoriteBlock: 'Stone Bricks',
-				favoriteActivity: 'Mega-base construction',
+				tagline: 'Shopping District Maintainer & Community Moderator',
+				location: 'United Kingdom',
+				timezone: 'BST',
 				responsibilities: ['Build Oversight', 'Creative Support'],
 				quote: 'Every block is a step toward something epic.'
 			},
@@ -108,9 +108,9 @@
 				name: 'SuprGamr',
 				since: '2022-01-08',
 				badge: 'Moderator',
-				tagline: 'PvP champion',
-				favoriteBlock: 'Diamond Sword',
-				favoriteActivity: 'PvP tournaments',
+				tagline: 'Events Organiser',
+				location: 'Sweden',
+				timezone: 'CEST',
 				responsibilities: ['PvP Events', 'Competitive Moderation'],
 				quote: 'May the best crafter win.'
 			},
@@ -118,9 +118,9 @@
 				name: 'Muffinz',
 				since: '2022-01-08',
 				badge: 'Moderator',
-				tagline: 'Cat lover',
-				favoriteBlock: 'Ocelot Spawn Egg',
-				favoriteActivity: 'Taming every cat in sight',
+				tagline: 'All-Rounder',
+				location: 'Canada',
+				timezone: 'EST',
 				responsibilities: ['Community Fun', 'Player Engagement'],
 				quote: 'Cats make everything better.'
 			},
@@ -128,9 +128,9 @@
 				name: 'Toystory2wasok',
 				since: '2022-01-08',
 				badge: 'Moderator',
-				tagline: 'Storyteller',
-				favoriteBlock: 'Writable Book',
-				favoriteActivity: 'Writing server lore',
+				tagline: 'Community Moderator',
+				location: 'United States',
+				timezone: 'EST',
 				responsibilities: ['Lore & Storytelling', 'Community Content'],
 				quote: 'Every player has a story worth telling.'
 			},
@@ -138,11 +138,11 @@
 				name: 'VividLilyBug949',
 				since: '2022-01-08',
 				badge: 'Moderator',
-				tagline: 'Bug fixer',
-				favoriteBlock: 'Debug Stick',
-				favoriteActivity: 'Squashing bugs and helping players',
+				tagline: 'Onboarding & Community Moderator',
+				location: 'United States',
+				timezone: 'EDT',
 				responsibilities: ['Issue Resolution', 'Player Support'],
-				quote: 'No bug too small, no player left behind.'
+				quote: 'I didn’t fail, I just found 100 ways that don’t work.'
 			}
 		] as StaffMember[],
 		helper: [
@@ -150,9 +150,9 @@
 				name: 'HaakonASH',
 				since: '2026-01-08',
 				badge: 'Helper',
-				tagline: 'New but eager',
-				favoriteBlock: 'Dirt',
-				favoriteActivity: 'Learning the ropes',
+				tagline: 'Community Helper',
+				location: 'Norway',
+				timezone: 'CEST',
 				responsibilities: ['New Player Help', 'General Support'],
 				quote: 'Every expert was once a beginner.'
 			},
@@ -160,9 +160,9 @@
 				name: 'Nollita',
 				since: '2026-01-08',
 				badge: 'Helper',
-				tagline: 'Friendly helper',
-				favoriteBlock: 'Pink Wool',
-				favoriteActivity: 'Welcoming newcomers',
+				tagline: 'Community Helper',
+				location: 'Netherlands',
+				timezone: 'CEST',
 				responsibilities: ['Player Welcoming', 'Community Support'],
 				quote: 'A friendly hello goes a long way.'
 			},
@@ -170,9 +170,9 @@
 				name: 'TaintedBird',
 				since: '2026-01-08',
 				badge: 'Helper',
-				tagline: 'Bird enthusiast',
-				favoriteBlock: 'Feather',
-				favoriteActivity: 'Building aviaries',
+				tagline: 'Community Helper',
+				location: 'United Kingdom',
+				timezone: 'BST',
 				responsibilities: ['Creative Support', 'Community Building'],
 				quote: 'Free as a bird, helpful as a helper.'
 			},
@@ -181,8 +181,8 @@
 				since: '2026-01-08',
 				badge: 'Helper',
 				tagline: 'Sippin through life',
-				favoriteBlock: 'Water Bucket',
-				favoriteActivity: 'Chilling by the river',
+				location: 'United States',
+				timezone: 'CST',
 				responsibilities: ['Relaxed Support', 'Community Vibes'],
 				quote: 'Take it one sip at a time.'
 			}
@@ -190,9 +190,82 @@
 	};
 
 	let selectedMember = $state<StaffMember | null>(null);
+	let isClosing = $state(false);
+	let localTime = $state('');
+
+	const tzMap: Record<string, string> = {
+		GMT: 'Europe/London',
+		BST: 'Europe/London',
+		EST: 'America/New_York',
+		EDT: 'America/New_York',
+		PST: 'America/Los_Angeles',
+		CST: 'America/Chicago',
+		MST: 'America/Denver',
+		CET: 'Europe/Paris',
+		CEST: 'Europe/Paris',
+		AEST: 'Australia/Sydney'
+	};
+
+	const flagMap: Record<string, string> = {
+		Poland: '🇵🇱',
+		'United Kingdom': '🇬🇧',
+		Canada: '🇨🇦',
+		Wales: '🏴󠁧󠁢󠁷󠁬󠁳󠁿',
+		'United States': '🇺🇸',
+		Netherlands: '🇳🇱',
+		Norway: '🇳🇴',
+		Sweden: '🇸🇪'
+	};
 
 	function openModal(member: StaffMember) {
 		selectedMember = member;
+		isClosing = false;
+		updateLocalTime();
+	}
+
+	function updateLocalTime() {
+		if (!selectedMember?.timezone) {
+			localTime = '';
+			return;
+		}
+		const iana = tzMap[selectedMember.timezone];
+		if (!iana) {
+			localTime = '';
+			return;
+		}
+		localTime = new Date().toLocaleTimeString('en-US', {
+			hour: '2-digit',
+			minute: '2-digit',
+			timeZone: iana
+		});
+	}
+
+	$effect(() => {
+		if (selectedMember?.timezone) {
+			updateLocalTime();
+			const interval = setInterval(updateLocalTime, 1000);
+			return () => clearInterval(interval);
+		}
+	});
+
+	function closeModal() {
+		isClosing = true;
+		setTimeout(() => {
+			selectedMember = null;
+			isClosing = false;
+		}, 200);
+	}
+
+	function handleKeydown(e: KeyboardEvent) {
+		if (e.key === 'Escape') {
+			closeModal();
+		}
+	}
+
+	function handleBackdropClick(e: MouseEvent) {
+		if (e.target === e.currentTarget) {
+			closeModal();
+		}
 	}
 
 	function formatSinceDate(date: string) {
@@ -214,22 +287,6 @@
 		if (months > 0) parts.push(`${months} month${months === 1 ? '' : 's'}`);
 		if (parts.length === 0) return 'Just joined';
 		return parts.join(', ');
-	}
-
-	function closeModal() {
-		selectedMember = null;
-	}
-
-	function handleKeydown(e: KeyboardEvent) {
-		if (e.key === 'Escape') {
-			closeModal();
-		}
-	}
-
-	function handleBackdropClick(e: MouseEvent) {
-		if (e.target === e.currentTarget) {
-			closeModal();
-		}
 	}
 </script>
 
@@ -336,7 +393,7 @@
 
 {#if selectedMember}
 	<div
-		class="modal-backdrop"
+		class="modal-backdrop{isClosing ? ' modal-backdrop--closing' : ''}"
 		onclick={handleBackdropClick}
 		onkeydown={handleKeydown}
 		role="dialog"
@@ -344,7 +401,7 @@
 		aria-labelledby="modal-title"
 		tabindex="-1"
 	>
-		<article class="modal" role="document">
+		<article class="modal{isClosing ? ' modal--closing' : ''}" role="document">
 			<button class="modal__close" onclick={closeModal} aria-label="Close profile">✕</button>
 			<section class="modal__card" aria-label="Staff profile">
 				<div class="modal__skin-col">
@@ -357,7 +414,12 @@
 				<div class="modal__info-col">
 					<header class="modal__header">
 						<div class="modal__header-text">
-							<h2 id="modal-title" class="modal__name">{selectedMember.name}</h2>
+							<h2
+								id="modal-title"
+								class="modal__name modal__name--{selectedMember.badge.toLowerCase()}"
+							>
+								{selectedMember.name}
+							</h2>
 							{#if selectedMember.tagline}
 								<p class="modal__tagline">{selectedMember.tagline}</p>
 							{/if}
@@ -370,21 +432,26 @@
 						</div>
 					</header>
 
-					{#if selectedMember.favoriteBlock || selectedMember.favoriteActivity}
-						<dl class="modal__favorites">
-							{#if selectedMember.favoriteBlock}
-								<div class="modal__fav-item">
-									<dt class="modal__fav-label">Favorite Block</dt>
-									<dd class="modal__fav-value">{selectedMember.favoriteBlock}</dd>
-								</div>
+					{#if selectedMember.location || selectedMember.timezone}
+						<div class="modal__location">
+							{#if selectedMember.location}
+								<span class="modal__location-item">
+									<span class="modal__location-icon" aria-hidden="true"
+										>{flagMap[selectedMember.location] ?? '🌍'}</span
+									>
+									{selectedMember.location}
+								</span>
 							{/if}
-							{#if selectedMember.favoriteActivity}
-								<div class="modal__fav-item">
-									<dt class="modal__fav-label">Favorite Activity</dt>
-									<dd class="modal__fav-value">{selectedMember.favoriteActivity}</dd>
-								</div>
+							{#if selectedMember.timezone}
+								<span class="modal__location-item">
+									<span class="modal__location-icon" aria-hidden="true">🕐</span>
+									{selectedMember.timezone}
+									{#if localTime}
+										<span class="modal__local-time">({localTime})</span>
+									{/if}
+								</span>
 							{/if}
-						</dl>
+						</div>
 					{/if}
 
 					{#if selectedMember.quote}
@@ -539,14 +606,35 @@
 
 	.modal-backdrop {
 		position: fixed;
-		inset: 0;
-		background-color: rgba(0, 0, 0, 0.8);
 		backdrop-filter: blur(4px);
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		z-index: 1000;
 		padding: 1.5rem;
+		animation: backdrop-in 0.2s ease-out forwards;
+	}
+
+	.modal-backdrop--closing {
+		animation: backdrop-out 0.2s ease-in forwards;
+	}
+
+	@keyframes backdrop-in {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+
+	@keyframes backdrop-out {
+		from {
+			opacity: 1;
+		}
+		to {
+			opacity: 0;
+		}
 	}
 
 	.modal {
@@ -560,8 +648,69 @@
 		position: relative;
 		overflow: hidden;
 		box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+		animation: modal-in 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 	}
 
+	.modal--closing {
+		animation: modal-out 0.2s ease-in forwards;
+	}
+
+	@keyframes modal-in {
+		from {
+			opacity: 0;
+			transform: scale(0.92);
+		}
+		to {
+			opacity: 1;
+			transform: scale(1);
+		}
+	}
+
+	@keyframes modal-out {
+		from {
+			opacity: 1;
+			transform: scale(1);
+		}
+		to {
+			opacity: 0;
+			transform: scale(0.92);
+		}
+	}
+
+	.modal-backdrop {
+		position: fixed;
+		inset: 0;
+		background-color: rgba(0, 0, 0, 0.8);
+		backdrop-filter: blur(4px);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		z-index: 1000;
+		padding: 1.5rem;
+		animation: backdrop-in 0.2s ease-out forwards;
+	}
+
+	.modal-backdrop--closing {
+		animation: backdrop-out 0.2s ease-in forwards;
+	}
+
+	@keyframes backdrop-in {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+
+	@keyframes backdrop-out {
+		from {
+			opacity: 1;
+		}
+		to {
+			opacity: 0;
+		}
+	}
 	.modal__card {
 		display: flex;
 		gap: 0;
@@ -634,6 +783,18 @@
 		margin-bottom: 0.5rem;
 	}
 
+	.modal__name--admin {
+		color: #22c55e;
+	}
+
+	.modal__name--moderator {
+		color: #3b82f6;
+	}
+
+	.modal__name--helper {
+		color: #f97316;
+	}
+
 	.modal__tagline {
 		font-size: 1.05rem;
 		color: var(--color-text-muted);
@@ -663,33 +824,27 @@
 		opacity: 0.9;
 	}
 
-	.modal__favorites {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-		gap: 0.75rem 1.25rem;
-		width: 100%;
-		margin: 0;
-	}
-
-	.modal__fav-item {
+	.modal__location {
 		display: flex;
-		flex-direction: column;
-		gap: 0.15rem;
+		flex-wrap: wrap;
+		gap: 0.75rem 1.5rem;
 	}
 
-	.modal__fav-label {
-		font-size: 0.65rem;
-		font-weight: 600;
-		letter-spacing: 0.1em;
-		text-transform: uppercase;
+	.modal__location-item {
+		display: flex;
+		align-items: center;
+		gap: 0.35rem;
+		font-size: 0.85rem;
 		color: var(--color-text-muted);
-		opacity: 0.6;
 	}
 
-	.modal__fav-value {
+	.modal__location-icon {
 		font-size: 0.9rem;
-		font-weight: 500;
+	}
+
+	.modal__local-time {
 		color: var(--color-brand-lime);
+		font-weight: 500;
 	}
 
 	.modal__quote {
@@ -759,10 +914,6 @@
 			flex-direction: column;
 			padding-right: 1.5rem;
 			align-items: flex-start;
-		}
-
-		.modal__favorites {
-			grid-template-columns: 1fr;
 		}
 	}
 </style>
