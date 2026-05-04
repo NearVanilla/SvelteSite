@@ -1,137 +1,223 @@
 <script lang="ts">
-	import { SvelteMap } from 'svelte/reactivity';
-
 	interface StaffMember {
 		name: string;
-		bio?: string;
 		since: string;
 		badge: string;
 		tagline?: string;
-		funFact?: string;
-	}
-
-	const bioCache = new SvelteMap<string, string>();
-
-	async function loadBio(path: string): Promise<string | null> {
-		if (bioCache.has(path)) return bioCache.get(path)!;
-		try {
-			const res = await fetch(path);
-			if (!res.ok) return null;
-			const text = await res.text();
-			bioCache.set(path, text);
-			return text;
-		} catch {
-			return null;
-		}
+		favoriteBlock?: string;
+		favoriteActivity?: string;
+		responsibilities?: string[];
+		quote?: string;
 	}
 
 	const staff = {
 		admin: [
 			{
 				name: 'Prof_Bloodstone',
-				bio: '/staff/bios/Prof_Bloodstone.txt',
 				since: '2018-08-13',
 				badge: 'Admin',
 				tagline: 'Server Owner',
-				funFact: 'Has been playing Minecraft since 2010'
+				favoriteBlock: 'Redstone Block',
+				favoriteActivity: 'Mentoring the Tech Team',
+				responsibilities: ['Server Ownership', 'Plugin Development', 'Tech Mentoring'],
+				quote: 'Consider yourself lucky… or cursed.'
 			},
 			{
 				name: '105hua',
-				bio: '/staff/bios/105hua.txt',
 				since: '2024-09-23',
 				badge: 'Admin',
 				tagline: 'Tech Lead & Server Manager',
-				funFact: 'Has built over 500 redstone contraptions'
+				favoriteBlock: 'Command Block',
+				favoriteActivity: 'Fighting server fires',
+				responsibilities: ['Server Infrastructure', 'Configuration', 'Troubleshooting'],
+				quote: 'Most of what happens behind the scenes passes through here.'
 			},
-			{ name: 'LoquaciousFox_', bio: '/staff/bios/Loqi.txt', since: '2020-07-04', badge: 'Admin', tagline: 'Community Leader' },
-			{ name: 'Sblod', since: '2024-10-02', badge: 'Admin', tagline: 'Events Manager' }
+			{
+				name: 'LoquaciousFox_',
+				since: '2020-07-04',
+				badge: 'Admin',
+				tagline: 'Community Leader',
+				favoriteBlock: 'Oak Leaves',
+				favoriteActivity: 'Building yet another tree',
+				responsibilities: ['Community Events', 'Staff Meetings', 'Player Support'],
+				quote: 'Jack of All Trades, master of… well, a few.'
+			},
+			{
+				name: 'Sblod',
+				since: '2024-10-02',
+				badge: 'Admin',
+				tagline: 'Events Manager',
+				favoriteBlock: 'Firework Rocket',
+				favoriteActivity: 'Organising server events',
+				responsibilities: ['Event Coordination', 'Community Engagement'],
+				quote: 'Every great event starts with a spark.'
+			}
 		] as StaffMember[],
 		moderator: [
 			{
 				name: 'Biz_Block',
 				since: '2022-01-08',
 				badge: 'Moderator',
-				tagline: 'Keeping peace on the server'
+				tagline: 'Keeping peace on the server',
+				favoriteBlock: 'Obsidian',
+				favoriteActivity: 'Patrolling spawn',
+				responsibilities: ['Player Moderation', 'Conflict Resolution'],
+				quote: 'Fairness is a block best placed carefully.'
 			},
 			{
 				name: 'Demonstrations',
 				since: '2022-01-08',
 				badge: 'Moderator',
-				tagline: 'Helpful and fair'
+				tagline: 'Helpful and fair',
+				favoriteBlock: 'Bookshelf',
+				favoriteActivity: 'Helping new players',
+				responsibilities: ['New Player Guidance', 'Rule Enforcement'],
+				quote: 'Show, do not just tell.'
 			},
 			{
 				name: 'Dynant',
 				since: '2022-01-08',
 				badge: 'Moderator',
-				tagline: 'Explorer of worlds'
+				tagline: 'Explorer of worlds',
+				favoriteBlock: 'Grass Block',
+				favoriteActivity: 'Exploring new terrain',
+				responsibilities: ['World Exploration', 'Community Building'],
+				quote: 'There is always more to discover.'
 			},
-			{ name: 'kNaLLx', since: '2022-01-08', badge: 'Moderator', tagline: 'Redstone enthusiast' },
+			{
+				name: 'kNaLLx',
+				since: '2022-01-08',
+				badge: 'Moderator',
+				tagline: 'Redstone enthusiast',
+				favoriteBlock: 'Redstone Dust',
+				favoriteActivity: 'Building redstone contraptions',
+				responsibilities: ['Technical Support', 'Redstone Community'],
+				quote: 'With enough redstone, anything is possible.'
+			},
 			{
 				name: 'Lego_monkeyman',
 				since: '2022-01-08',
 				badge: 'Moderator',
-				tagline: 'Builder of epic structures'
+				tagline: 'Builder of epic structures',
+				favoriteBlock: 'Stone Bricks',
+				favoriteActivity: 'Mega-base construction',
+				responsibilities: ['Build Oversight', 'Creative Support'],
+				quote: 'Every block is a step toward something epic.'
 			},
-			{ name: 'SuprGamr', since: '2022-01-08', badge: 'Moderator', tagline: 'PvP champion' },
-			{ name: 'Muffinz', since: '2022-01-08', badge: 'Moderator', tagline: 'Cat lover' },
-			{ name: 'Toystory2wasok', since: '2022-01-08', badge: 'Moderator', tagline: 'Storyteller' },
-			{ name: 'VividLilyBug949', since: '2022-01-08', badge: 'Moderator', tagline: 'Bug fixer' }
+			{
+				name: 'SuprGamr',
+				since: '2022-01-08',
+				badge: 'Moderator',
+				tagline: 'PvP champion',
+				favoriteBlock: 'Diamond Sword',
+				favoriteActivity: 'PvP tournaments',
+				responsibilities: ['PvP Events', 'Competitive Moderation'],
+				quote: 'May the best crafter win.'
+			},
+			{
+				name: 'Muffinz',
+				since: '2022-01-08',
+				badge: 'Moderator',
+				tagline: 'Cat lover',
+				favoriteBlock: 'Ocelot Spawn Egg',
+				favoriteActivity: 'Taming every cat in sight',
+				responsibilities: ['Community Fun', 'Player Engagement'],
+				quote: 'Cats make everything better.'
+			},
+			{
+				name: 'Toystory2wasok',
+				since: '2022-01-08',
+				badge: 'Moderator',
+				tagline: 'Storyteller',
+				favoriteBlock: 'Writable Book',
+				favoriteActivity: 'Writing server lore',
+				responsibilities: ['Lore & Storytelling', 'Community Content'],
+				quote: 'Every player has a story worth telling.'
+			},
+			{
+				name: 'VividLilyBug949',
+				since: '2022-01-08',
+				badge: 'Moderator',
+				tagline: 'Bug fixer',
+				favoriteBlock: 'Debug Stick',
+				favoriteActivity: 'Squashing bugs and helping players',
+				responsibilities: ['Issue Resolution', 'Player Support'],
+				quote: 'No bug too small, no player left behind.'
+			}
 		] as StaffMember[],
 		helper: [
-			{ name: 'HaakonASH', since: '2026-01-08', badge: 'Helper', tagline: 'New but eager' },
-			{ name: 'Nollita', since: '2026-01-08', badge: 'Helper', tagline: 'Friendly helper' },
-			{ name: 'TaintedBird', since: '2026-01-08', badge: 'Helper', tagline: 'Bird enthusiast' },
-			{ name: 'WiscoSippi', since: '2026-01-08', badge: 'Helper', tagline: 'Sippin through life' }
+			{
+				name: 'HaakonASH',
+				since: '2026-01-08',
+				badge: 'Helper',
+				tagline: 'New but eager',
+				favoriteBlock: 'Dirt',
+				favoriteActivity: 'Learning the ropes',
+				responsibilities: ['New Player Help', 'General Support'],
+				quote: 'Every expert was once a beginner.'
+			},
+			{
+				name: 'Nollita',
+				since: '2026-01-08',
+				badge: 'Helper',
+				tagline: 'Friendly helper',
+				favoriteBlock: 'Pink Wool',
+				favoriteActivity: 'Welcoming newcomers',
+				responsibilities: ['Player Welcoming', 'Community Support'],
+				quote: 'A friendly hello goes a long way.'
+			},
+			{
+				name: 'TaintedBird',
+				since: '2026-01-08',
+				badge: 'Helper',
+				tagline: 'Bird enthusiast',
+				favoriteBlock: 'Feather',
+				favoriteActivity: 'Building aviaries',
+				responsibilities: ['Creative Support', 'Community Building'],
+				quote: 'Free as a bird, helpful as a helper.'
+			},
+			{
+				name: 'WiscoSippi',
+				since: '2026-01-08',
+				badge: 'Helper',
+				tagline: 'Sippin through life',
+				favoriteBlock: 'Water Bucket',
+				favoriteActivity: 'Chilling by the river',
+				responsibilities: ['Relaxed Support', 'Community Vibes'],
+				quote: 'Take it one sip at a time.'
+			}
 		] as StaffMember[]
 	};
 
 	let selectedMember = $state<StaffMember | null>(null);
-	let selectedMemberBio = $state<string | null>(null);
-	let tick = $state(Date.now());
 
-	$effect(() => {
-		const id = setInterval(() => (tick = Date.now()), 1000);
-		return () => clearInterval(id);
-	});
-
-	async function openModal(member: StaffMember) {
+	function openModal(member: StaffMember) {
 		selectedMember = member;
-		selectedMemberBio = null;
-		if (member.bio) {
-			const bio = await loadBio(member.bio);
-			if (selectedMember?.name === member.name) {
-				selectedMemberBio = bio;
-			}
-		}
 	}
 
-	function formatStaffSince(date: string, _tick: number) {
-		void _tick;
-		const start = new Date(`${date}T00:00:00Z`).getTime();
-		const now = Date.now();
-		const diff = Math.max(0, now - start);
+	function formatSinceDate(date: string) {
+		const d = new Date(`${date}T00:00:00Z`);
+		return d.toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' });
+	}
 
-		const seconds = Math.floor((diff / 1000) % 60);
-		const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-		const days = Math.floor((diff / (1000 * 60 * 60 * 24)) % 7);
-		const weeks = Math.floor((diff / (1000 * 60 * 60 * 24 * 7)) % 4);
-		const months = Math.floor((diff / (1000 * 60 * 60 * 24 * 30)) % 12);
-		const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
-
-		const parts = [];
-		if (years > 0) parts.push(`${years}y`);
-		if (months > 0) parts.push(`${months}mo`);
-		if (weeks > 0) parts.push(`${weeks}w`);
-		if (days > 0) parts.push(`${days}d`);
-		if (hours > 0) parts.push(`${hours}h`);
-		parts.push(`${seconds}s`);
-
-		return parts.join(' ') || '0s';
+	function getTimeServed(since: string): string {
+		const start = new Date(`${since}T00:00:00Z`);
+		const now = new Date();
+		let years = now.getUTCFullYear() - start.getUTCFullYear();
+		let months = now.getUTCMonth() - start.getUTCMonth();
+		if (months < 0) {
+			years--;
+			months += 12;
+		}
+		const parts: string[] = [];
+		if (years > 0) parts.push(`${years} year${years === 1 ? '' : 's'}`);
+		if (months > 0) parts.push(`${months} month${months === 1 ? '' : 's'}`);
+		if (parts.length === 0) return 'Just joined';
+		return parts.join(', ');
 	}
 
 	function closeModal() {
 		selectedMember = null;
-		selectedMemberBio = null;
 	}
 
 	function handleKeydown(e: KeyboardEvent) {
@@ -261,41 +347,53 @@
 		<article class="modal" role="document">
 			<button class="modal__close" onclick={closeModal} aria-label="Close profile">✕</button>
 			<section class="modal__card" aria-label="Staff profile">
-				<span class="modal__badge modal__badge--{selectedMember.badge.toLowerCase()}"
-					>{selectedMember.badge}</span
-				>
-				<div class="modal__header">
+				<div class="modal__skin-col">
 					<img
-						class="modal__avatar"
-						src="https://mc-heads.net/head/{selectedMember.name}"
-						alt="{selectedMember.name}'s Minecraft head"
+						class="modal__body"
+						src="https://mc-heads.net/body/{selectedMember.name}"
+						alt="{selectedMember.name}'s Minecraft skin"
 					/>
-					<div class="modal__header-text">
-						<h2 id="modal-title" class="modal__name">{selectedMember.name}</h2>
-						{#if selectedMember.tagline}
-							<p class="modal__tagline">{selectedMember.tagline}</p>
-						{/if}
-					</div>
 				</div>
-
-				<dl class="modal__details">
-					<div class="modal__detail">
-						<dt>Staff Since</dt>
-						<dd>{formatStaffSince(selectedMember.since, tick)}</dd>
-					</div>
-					{#if selectedMember.funFact}
-						<div class="modal__detail">
-							<dt>Fun Fact</dt>
-							<dd>{selectedMember.funFact}</dd>
+				<div class="modal__info-col">
+					<header class="modal__header">
+						<div class="modal__header-text">
+							<h2 id="modal-title" class="modal__name">{selectedMember.name}</h2>
+							{#if selectedMember.tagline}
+								<p class="modal__tagline">{selectedMember.tagline}</p>
+							{/if}
+							<p class="modal__since">
+								<span class="modal__since-label">Joined</span>
+								{formatSinceDate(selectedMember.since)}
+								<span class="modal__since-sep">·</span>
+								<span class="modal__time-served">{getTimeServed(selectedMember.since)}</span>
+							</p>
 						</div>
-					{/if}
-				</dl>
+					</header>
 
-				{#if selectedMemberBio}
-					<p class="modal__bio">{selectedMemberBio}</p>
-				{:else if selectedMember.bio}
-					<p class="modal__bio modal__bio--empty">No bio yet.</p>
-				{/if}
+					{#if selectedMember.favoriteBlock || selectedMember.favoriteActivity}
+						<dl class="modal__favorites">
+							{#if selectedMember.favoriteBlock}
+								<div class="modal__fav-item">
+									<dt class="modal__fav-label">Favorite Block</dt>
+									<dd class="modal__fav-value">{selectedMember.favoriteBlock}</dd>
+								</div>
+							{/if}
+							{#if selectedMember.favoriteActivity}
+								<div class="modal__fav-item">
+									<dt class="modal__fav-label">Favorite Activity</dt>
+									<dd class="modal__fav-value">{selectedMember.favoriteActivity}</dd>
+								</div>
+							{/if}
+						</dl>
+					{/if}
+
+					{#if selectedMember.quote}
+						<blockquote class="modal__quote">
+							<span class="modal__quote-mark" aria-hidden="true">&ldquo;</span>
+							<p class="modal__quote-text">{selectedMember.quote}</p>
+						</blockquote>
+					{/if}
+				</div>
 			</section>
 		</article>
 	</div>
@@ -466,51 +564,36 @@
 
 	.modal__card {
 		display: flex;
+		gap: 0;
+	}
+
+	.modal__skin-col {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: flex-start;
+		gap: 1rem;
+		padding: clamp(1.75rem, 4vw, 2.75rem);
+		padding-right: 0;
+		flex-shrink: 0;
+	}
+
+	.modal__body {
+		width: 120px;
+		height: auto;
+		image-rendering: pixelated;
+		flex-shrink: 0;
+	}
+
+	.modal__info-col {
+		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
 		gap: 1.25rem;
-		min-height: 360px;
-		padding: clamp(1.5rem, 4vw, 2.5rem);
-		text-align: left;
-	}
-
-	.modal__header {
-		display: flex;
-		align-items: flex-start;
-		gap: 1.25rem;
-		padding-right: 2rem;
-	}
-
-	.modal__header-text {
-		text-align: left;
-		padding-top: 0.25rem;
-	}
-
-	.modal__badge {
-		display: inline-flex;
-		align-items: center;
-		width: fit-content;
-		padding: 0.25rem 0.75rem;
-		border-radius: 999px;
-		font-size: 0.75rem;
-		font-weight: 600;
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-	}
-
-	.modal__badge--admin {
-		background-color: rgba(34, 197, 94, 0.2);
-		color: #22c55e;
-	}
-
-	.modal__badge--moderator {
-		background-color: rgba(59, 130, 246, 0.2);
-		color: #3b82f6;
-	}
-
-	.modal__badge--helper {
-		background-color: rgba(249, 115, 22, 0.2);
-		color: #f97316;
+		padding: clamp(1.75rem, 4vw, 2.75rem);
+		padding-left: 1.5rem;
+		flex: 1;
+		min-width: 0;
 	}
 
 	.modal__close {
@@ -531,20 +614,21 @@
 		color: var(--color-text);
 	}
 
-	.modal__avatar {
-		width: 112px;
-		height: 112px;
-		flex-shrink: 0;
-		border-radius: 14px;
-		background-color: rgba(255, 255, 255, 0.04);
-		border: 1px solid var(--color-border);
-		padding: 0.5rem;
+	.modal__header {
+		display: flex;
+		align-items: center;
+		gap: 1.5rem;
+		padding-right: 2rem;
+	}
+
+	.modal__header-text {
+		text-align: left;
 	}
 
 	.modal__name {
 		font-family: var(--font-display);
 		font-weight: 800;
-		font-size: clamp(2rem, 5vw, 3rem);
+		font-size: clamp(1.75rem, 4vw, 2.5rem);
 		letter-spacing: 0.05em;
 		line-height: 0.95;
 		margin-bottom: 0.5rem;
@@ -555,46 +639,87 @@
 		color: var(--color-text-muted);
 	}
 
-	.modal__details {
+	.modal__since {
+		font-size: 0.8rem;
+		color: var(--color-text-muted);
+		opacity: 0.5;
+		margin-top: 0.35rem;
+	}
+
+	.modal__since-label {
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		font-size: 0.7rem;
+		font-weight: 600;
+		margin-right: 0.35rem;
+	}
+
+	.modal__since-sep {
+		margin: 0 0.35rem;
+	}
+
+	.modal__time-served {
+		color: var(--color-brand-sky);
+		opacity: 0.9;
+	}
+
+	.modal__favorites {
 		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 0.75rem;
+		grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+		gap: 0.75rem 1.25rem;
+		width: 100%;
+		margin: 0;
+	}
+
+	.modal__fav-item {
+		display: flex;
+		flex-direction: column;
+		gap: 0.15rem;
+	}
+
+	.modal__fav-label {
+		font-size: 0.65rem;
+		font-weight: 600;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--color-text-muted);
+		opacity: 0.6;
+	}
+
+	.modal__fav-value {
+		font-size: 0.9rem;
+		font-weight: 500;
+		color: var(--color-brand-lime);
+	}
+
+	.modal__quote {
+		position: relative;
+		padding: 0.75rem 1rem;
+		background-color: rgba(59, 130, 246, 0.08);
+		border-left: 3px solid var(--color-accent);
+		border-radius: 0 6px 6px 0;
+		margin: 0;
 		width: 100%;
 	}
 
-	.modal__detail {
-		background-color: rgba(255, 255, 255, 0.035);
-		border: 1px solid var(--color-border);
-		border-radius: 10px;
-		padding: 0.75rem 0.9rem;
+	.modal__quote-mark {
+		position: absolute;
+		top: -0.1rem;
+		left: 0.5rem;
+		font-size: 2rem;
+		font-family: Georgia, serif;
+		color: var(--color-accent);
+		opacity: 0.35;
+		line-height: 1;
+		pointer-events: none;
 	}
 
-	.modal__detail dt {
-		font-size: 0.7rem;
-		font-weight: 700;
-		letter-spacing: 0.12em;
-		text-transform: uppercase;
-		color: var(--color-text-muted);
-		margin-bottom: 0.25rem;
-	}
-
-	.modal__detail dd {
-		font-size: 0.95rem;
-		font-weight: 600;
-		color: var(--color-text);
-	}
-
-	.modal__bio {
-		font-size: 0.95rem;
-		color: var(--color-text-muted);
-		line-height: 1.6;
-		max-width: 620px;
-		border-left: 3px solid var(--color-accent);
-		padding-left: 1rem;
-	}
-
-	.modal__bio--empty {
+	.modal__quote-text {
+		font-size: 0.9rem;
 		font-style: italic;
+		color: var(--color-text-muted);
+		line-height: 1.5;
+		padding-left: 0.5rem;
 	}
 
 	@media (max-width: 600px) {
@@ -609,20 +734,34 @@
 		}
 
 		.modal__card {
+			flex-direction: column;
 			min-height: 0;
+			align-items: center;
+		}
+
+		.modal__skin-col {
+			padding: 1.5rem 1.5rem 0;
+			align-items: center;
+			width: 100%;
+		}
+
+		.modal__body {
+			width: 100px;
+		}
+
+		.modal__info-col {
+			padding: 1.25rem 1.5rem 1.5rem;
+			width: 100%;
+			align-items: stretch;
 		}
 
 		.modal__header {
 			flex-direction: column;
 			padding-right: 1.5rem;
+			align-items: flex-start;
 		}
 
-		.modal__avatar {
-			width: 88px;
-			height: 88px;
-		}
-
-		.modal__details {
+		.modal__favorites {
 			grid-template-columns: 1fr;
 		}
 	}

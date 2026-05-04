@@ -1,3 +1,0 @@
-105hua is NearVanilla's Tech Lead and Server Manager, responsible for most, if not all of the goings on under the hood for the server.
-From the maintenance of NearVanilla's configuration to fighting fires when it decides to take on a mind of its own, most of what happens
-behind the scenes passes through their hands, in one way or another.
