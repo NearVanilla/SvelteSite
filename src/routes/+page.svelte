@@ -55,7 +55,7 @@
 		player, you'll find a welcoming atmosphere and a space where everyone's input is valued."
 	image={communityImg}
 	imageAlt="NearVanilla community"
-	alt
+	alternateBackground
 />
 <Gallery />
 <PluginsSection />

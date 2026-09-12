@@ -4,7 +4,8 @@
 	--color-surface-alt: #141414;
 	--color-placeholder: #2a2f3a;
 	--color-accent: #3b82f6;
-	--color-accent-hover: #2563eb;
+	--color-accent-surface: #2563eb;
+	--color-accent-surface-hover: #1d4ed8;
 	--color-accent-dim: rgba(59, 130, 246, 0.15);
 	--color-text: #ffffff;
 	--color-text-muted: #9ca3af;
@@ -26,7 +27,12 @@
 
 html {
 	scroll-behavior: smooth;
+	scroll-padding-top: var(--nav-height);
 	overflow-x: hidden;
+}
+
+html:has(dialog:modal) {
+	overflow: hidden;
 }
 
 body {
@@ -70,4 +76,10 @@ button {
 
 .accent {
 	color: var(--color-accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
 }

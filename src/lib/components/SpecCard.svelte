@@ -22,7 +22,7 @@
 
 <style>
 	.spec-card {
-		background-color: var(--color-accent);
+		background-color: var(--color-accent-surface);
 		border-radius: 6px;
 		padding: 1.25rem 0.75rem;
 		display: flex;
@@ -59,7 +59,6 @@
 
 	.spec-card__sub {
 		font-size: 0.75rem;
-		opacity: 0.8;
 		line-height: 1.4;
 	}
 

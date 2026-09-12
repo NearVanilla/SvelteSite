@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { ComponentProps } from 'svelte';
 	import DownloadCard from '$lib/components/DownloadCard.svelte';
 
 	import season1Img from '$lib/assets/screenshots/world_downloads/s1.webp';
@@ -9,14 +10,7 @@
 	import season6Img from '$lib/assets/screenshots/world_downloads/s6.webp';
 	import season6CreativeImg from '$lib/assets/screenshots/world_downloads/s6_c.webp';
 
-	interface WorldDownload {
-		name: string;
-		versionRange: string;
-		fileSize: string;
-		downloadHref: string;
-		seasonDates: string;
-		imageSrc: string;
-	}
+	type WorldDownload = ComponentProps<typeof DownloadCard> & { imageSrc: string };
 
 	const worlds: WorldDownload[] = [
 		{
@@ -105,14 +99,7 @@
 		<ul class="downloads-grid" role="list">
 			{#each worlds as world (world.name)}
 				<li>
-					<DownloadCard
-						name={world.name}
-						versionRange={world.versionRange}
-						fileSize={world.fileSize}
-						downloadHref={world.downloadHref}
-						seasonDates={world.seasonDates}
-						imageSrc={world.imageSrc}
-					/>
+					<DownloadCard {...world} />
 				</li>
 			{/each}
 		</ul>
@@ -179,6 +166,14 @@
 		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 		gap: 1.25rem;
 		list-style: none;
+	}
+
+	.downloads-grid > li {
+		display: flex;
+	}
+
+	.downloads-grid > li > :global(.download-card) {
+		width: 100%;
 	}
 
 	@media (max-width: 480px) {

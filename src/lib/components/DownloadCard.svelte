@@ -33,7 +33,7 @@
 		</figure>
 	{/if}
 	<header class="download-card__header">
-		<h3 class="download-card__name">{name}</h3>
+		<h2 class="download-card__name">{name}</h2>
 	</header>
 	<dl class="download-card__meta">
 		<div class="download-card__meta-item">
@@ -164,7 +164,7 @@
 		font-size: 0.8rem;
 		letter-spacing: 0.08em;
 		text-transform: uppercase;
-		background-color: var(--color-accent);
+		background-color: var(--color-accent-surface);
 		color: var(--color-text);
 		padding: 0.55rem 1rem;
 		border-radius: 4px;
@@ -174,12 +174,21 @@
 	}
 
 	.download-card__btn:hover {
-		background-color: var(--color-accent-hover);
+		background-color: var(--color-accent-surface-hover);
 	}
 
 	.download-card__btn-icon {
 		width: 1rem;
 		height: 1rem;
 		flex-shrink: 0;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.download-card__img {
+			transition: none;
+		}
+		.download-card:hover .download-card__img {
+			transform: none;
+		}
 	}
 </style>

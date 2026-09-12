@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
-	import { tick } from 'svelte';
+	import { onDestroy, tick } from 'svelte';
+	import { prefersReducedMotion } from 'svelte/motion';
 	import diamond from '$lib/assets/diamond.webp';
 	import toastSound from '$lib/assets/audio/toast_in.mp3';
 	import toastOutSound from '$lib/assets/audio/toast_out.mp3';
@@ -20,9 +21,38 @@
 		'Enter'
 	] as const;
 
-	let progress = $state(0);
+	let progress = 0;
 	let visible = $state(false);
 	let dismissTimer: ReturnType<typeof setTimeout> | null = null;
+	let entryAudio: HTMLAudioElement | undefined;
+	let exitAudio: HTMLAudioElement | undefined;
+	let generation = 0;
+	let alive = true;
+
+	function stopSounds(): void {
+		if (entryAudio) {
+			entryAudio.pause();
+			entryAudio.currentTime = 0;
+		}
+		if (exitAudio) {
+			exitAudio.pause();
+			exitAudio.currentTime = 0;
+		}
+	}
+
+	function playSound(audio: HTMLAudioElement): void {
+		void audio.play().catch((error: unknown) => {
+			console.warn('Unable to play achievement sound', error);
+		});
+	}
+
+	onDestroy(() => {
+		alive = false;
+		generation += 1;
+		if (dismissTimer !== null) clearTimeout(dismissTimer);
+		dismissTimer = null;
+		stopSounds();
+	});
 
 	function handleKeydown(event: KeyboardEvent) {
 		const key = event.key;
@@ -40,13 +70,20 @@
 	}
 
 	async function activate() {
-		if (dismissTimer) clearTimeout(dismissTimer);
+		const activation = ++generation;
+		if (dismissTimer !== null) clearTimeout(dismissTimer);
+		dismissTimer = null;
+		stopSounds();
 		visible = false;
 		await tick();
+		if (!alive || activation !== generation) return;
+		entryAudio ??= new Audio(toastSound);
+		const outgoing = (exitAudio ??= new Audio(toastOutSound));
 		visible = true;
-		new Audio(toastSound).play();
+		playSound(entryAudio);
 		dismissTimer = setTimeout(() => {
-			new Audio(toastOutSound).play();
+			dismissTimer = null;
+			playSound(outgoing);
 			visible = false;
 		}, 5000);
 	}
@@ -68,8 +105,16 @@
 		role="status"
 		aria-live="polite"
 		aria-label="Achievement Get: You found the easter egg!"
-		in:fly={{ x: -360, duration: 400, easing: cubicOut }}
-		out:fly={{ x: -360, duration: 400, easing: cubicOut }}
+		in:fly={{
+			x: prefersReducedMotion.current ? 0 : -360,
+			duration: prefersReducedMotion.current ? 0 : 400,
+			easing: cubicOut
+		}}
+		out:fly={{
+			x: prefersReducedMotion.current ? 0 : -360,
+			duration: prefersReducedMotion.current ? 0 : 400,
+			easing: cubicOut
+		}}
 	>
 		<img class="mc-toast__icon" src={diamond} alt="" aria-hidden="true" />
 		<div class="mc-toast__content">
@@ -88,8 +133,8 @@
 		display: flex;
 		align-items: center;
 		gap: 10px;
-		width: 312px;
-		height: 54px;
+		width: min(312px, calc(100vw - 2rem - 6px));
+		min-height: 54px;
 		padding: 0 16px;
 		box-sizing: border-box;
 		background-color: #3c3c3c;
@@ -120,6 +165,8 @@
 		display: flex;
 		flex-direction: column;
 		gap: 6px;
+		min-width: 0;
+		overflow-wrap: anywhere;
 	}
 
 	/* Minecraft §e yellow = #FFFF55, shadow = 25% brightness = #3F3F15 */

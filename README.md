@@ -1,42 +1,37 @@
-# sv
+# NearVanilla website
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Community information, staff profiles and world downloads, built with Svelte 5, SvelteKit 2 and TypeScript. Bun manages dependencies and scripts.
 
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
+## Development
 
 ```sh
-# create a new project
-npx sv create my-app
+bun install --frozen-lockfile
+bun run dev
 ```
 
-To recreate this project with the same configuration:
+## Quality checks
 
 ```sh
-# recreate this project
-bun x sv@0.12.5 create --template minimal --types ts --add prettier eslint mcp="ide:cursor,claude-code+setup:remote" --install bun sveltesite
+bun run check
+bun run lint
+bun run build
 ```
 
-## Developing
+Use `bun run format` to apply the repository's tab, quote and LF formatting conventions. Internal route and fragment failures stop prerendering.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Static deployment
+
+`adapter-static` prerenders `/`, `/staff` and `/downloads` into `build/`. There is no runtime application server or SPA fallback. The site is hosted at the domain root.
+
+`bun run preview` previews the build locally, but does not verify Nginx routing. The container's `nginx.conf` resolves extensionless routes to their generated `.html` files and returns HTTP 404 for unknown routes and missing assets.
 
 ```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+docker build -t nearvanilla-site .
+docker run --rm -p 8080:80 nearvanilla-site
 ```
 
-## Building
+Alternatively, `docker compose up --build -d` starts the configured service on port 80 with its healthcheck and restart policy. Use `docker compose down` to stop that deployment.
 
-To create a production version of your app:
+## Crawler policy
 
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+`static/robots.txt` requests that all crawlers, including search engines, avoid the entire site. The build publishes it at `/robots.txt`. Robots directives are advisory; they are not authentication or access control.

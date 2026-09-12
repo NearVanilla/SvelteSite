@@ -27,7 +27,7 @@
 		top: -100px;
 		left: 50%;
 		transform: translateX(-50%);
-		background-color: var(--color-accent);
+		background-color: var(--color-accent-surface);
 		color: var(--color-text);
 		padding: 0.75rem 1.5rem;
 		border-radius: 0 0 4px 4px;
@@ -48,5 +48,11 @@
 	main {
 		flex: 1;
 		padding-top: var(--nav-height);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.skip-link {
+			transition: none;
+		}
 	}
 </style>

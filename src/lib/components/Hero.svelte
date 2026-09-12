@@ -39,7 +39,10 @@
 	.hero__figure {
 		position: relative;
 		width: 100%;
-		height: 100vh;
+		display: grid;
+		place-items: center;
+		min-height: 100svh;
+		height: auto;
 		margin: 0;
 		overflow: hidden;
 	}
@@ -59,6 +62,8 @@
 	}
 
 	.hero__img {
+		position: absolute;
+		inset: 0;
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
@@ -66,14 +71,12 @@
 	}
 
 	.hero__content {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
+		position: relative;
 		z-index: 2;
 		width: 100%;
+		min-width: 0;
 		max-width: 900px;
-		padding: 0 1.5rem;
+		padding: 3rem 1.5rem;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -91,6 +94,8 @@
 	}
 
 	.hero__title {
+		max-width: 100%;
+		overflow-wrap: anywhere;
 		font-family: var(--font-display);
 		font-weight: 900;
 		font-size: clamp(3.5rem, 10vw, 7rem);
@@ -127,7 +132,7 @@
 		font-size: 0.85rem;
 		letter-spacing: 0.08em;
 		text-transform: uppercase;
-		background-color: var(--color-accent);
+		background-color: var(--color-accent-surface);
 		color: var(--color-text);
 		padding: 0.7rem 1.75rem;
 		border-radius: 4px;
@@ -135,7 +140,7 @@
 	}
 
 	.hero__cta:hover {
-		background-color: var(--color-accent-hover);
+		background-color: var(--color-accent-surface-hover);
 	}
 
 	.hero__secondary {

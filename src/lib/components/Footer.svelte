@@ -63,9 +63,4 @@
 	.footer__link:hover {
 		color: var(--color-accent);
 	}
-
-	.footer__divider {
-		color: var(--color-border);
-		font-size: 0.8rem;
-	}
 </style>

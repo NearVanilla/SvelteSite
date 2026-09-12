@@ -1,10 +1,10 @@
 <script lang="ts">
+	import type { Snippet } from 'svelte';
+
 	interface Plugin {
 		name: string;
 		description: string;
-		iconPaths: string;
-		href?: string;
-		hrefLabel?: string;
+		icon: Snippet;
 	}
 
 	const plugins: Plugin[] = [
@@ -12,43 +12,74 @@
 			name: 'CoreProtect',
 			description:
 				'A high-performance data logging and anti-griefing plugin. All player actions are logged and can be viewed and rolled back by our Staff Team.',
-			iconPaths: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/>'
+			icon: protectionIcon
 		},
 		{
 			name: 'LuckPerms',
 			description:
 				'Handling all player ranks, groups and fine-grained permission nodes across our server. This is used to manage player permissions and roles.',
-			iconPaths:
-				'<circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/>'
+			icon: permissionsIcon
 		},
 		{
 			name: 'DiscordSRV',
 			description:
-				'Bridging our in-game chat to our Discord server, so the community can stay in sync and you dont need to load up Minecraft just to chat.',
-			iconPaths: '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>'
+				"Bridging our in-game chat to our Discord server, so the community can stay in sync and you don't need to load up Minecraft just to chat.",
+			icon: chatIcon
 		},
 		{
 			name: 'One Player Sleep',
 			description:
 				'No more waiting until everyone is asleep. Sleeping in a bed now fast-forwards the night until sunrise.',
-			iconPaths: '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>'
+			icon: sleepIcon
 		},
 		{
 			name: 'DeathDB',
 			description:
 				'Died to a bug? No problem, we log your inventory upon each death, making it easily recoverable.',
-			iconPaths:
-				'<path d="M12 2c-4 0-7 3-7 7 0 2.5 1.5 4.5 3 5.5V19h8v-4.5c1.5-1 3-3 3-5.5 0-4-3-7-7-7z"/><path d="M9 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/><path d="M15 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/><path d="M12 14c-1 0-2 1-2 2h4c0-1-1-2-2-2z"/>'
+			icon: deathIcon
 		},
 		{
 			name: 'Crafting Recipes',
 			description:
 				'Recipes requested by our community that make more sense, or improve the quality of life around the server.',
-			iconPaths:
-				'<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="10.5" y="10.5" width="3" height="3" fill="currentColor"/>'
+			icon: craftingIcon
 		}
 	];
 </script>
+
+{#snippet protectionIcon()}
+	<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+	<path d="m9 12 2 2 4-4" />
+{/snippet}
+
+{#snippet permissionsIcon()}
+	<circle cx="7.5" cy="15.5" r="5.5" />
+	<path d="m21 2-9.6 9.6" />
+	<path d="m15.5 7.5 3 3L22 7l-3-3" />
+{/snippet}
+
+{#snippet chatIcon()}
+	<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+{/snippet}
+
+{#snippet sleepIcon()}
+	<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+{/snippet}
+
+{#snippet deathIcon()}
+	<path d="M12 2c-4 0-7 3-7 7 0 2.5 1.5 4.5 3 5.5V19h8v-4.5c1.5-1 3-3 3-5.5 0-4-3-7-7-7z" />
+	<path d="M9 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+	<path d="M15 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+	<path d="M12 14c-1 0-2 1-2 2h4c0-1-1-2-2-2z" />
+{/snippet}
+
+{#snippet craftingIcon()}
+	<rect x="3" y="3" width="7" height="7" />
+	<rect x="14" y="3" width="7" height="7" />
+	<rect x="3" y="14" width="7" height="7" />
+	<rect x="14" y="14" width="7" height="7" />
+	<rect x="10.5" y="10.5" width="3" height="3" fill="currentColor" />
+{/snippet}
 
 <section id="plugins" class="plugins-section">
 	<div class="plugins-section__inner">
@@ -111,15 +142,11 @@
 								stroke-linecap="round"
 								stroke-linejoin="round"
 							>
-								<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-								{@html plugin.iconPaths}
+								{@render plugin.icon()}
 							</svg>
 						</div>
 						<h3 class="plugin-card__name">{plugin.name}</h3>
 						<p class="plugin-card__desc">{plugin.description}</p>
-						{#if plugin.href}
-							<a href={plugin.href} class="plugin-btn">{plugin.hrefLabel ?? 'Learn more'}</a>
-						{/if}
 					</article>
 				</li>
 			{/each}
@@ -165,7 +192,7 @@
 	/* Featured Dynmap card */
 
 	.dynmap-card {
-		background-color: var(--color-accent);
+		background-color: var(--color-accent-surface);
 		border-radius: 6px;
 		padding: 1.75rem 2rem;
 		display: flex;
@@ -204,7 +231,6 @@
 	.dynmap-card__desc {
 		font-size: 0.875rem;
 		line-height: 1.65;
-		opacity: 0.9;
 	}
 
 	.dynmap-card__link {
@@ -272,30 +298,6 @@
 		color: var(--color-text-muted);
 		line-height: 1.65;
 		flex: 1;
-	}
-
-	.plugin-btn {
-		display: inline-block;
-		font-family: var(--font-display);
-		font-weight: 700;
-		font-size: 0.72rem;
-		letter-spacing: 0.06em;
-		text-transform: uppercase;
-		color: var(--color-accent);
-		background-color: transparent;
-		border: 1px solid var(--color-accent);
-		border-radius: 3px;
-		padding: 0.4rem 0.75rem;
-		align-self: flex-start;
-		margin-top: 0.25rem;
-		transition:
-			background-color 0.15s ease,
-			color 0.15s ease;
-	}
-
-	.plugin-btn:hover {
-		background-color: var(--color-accent);
-		color: var(--color-text);
 	}
 
 	@media (max-width: 900px) {

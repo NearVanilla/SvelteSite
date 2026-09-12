@@ -23,8 +23,8 @@ export default defineConfig(
 			// typescript-eslint strongly recommend that you do not use the no-undef lint rule on TypeScript projects.
 			// see: https://typescript-eslint.io/troubleshooting/faqs/eslint/#i-get-errors-from-the-no-undef-rule-about-global-variables-not-being-defined-even-though-there-are-no-typescript-errors
 			'no-undef': 'off',
-			// Ignore <a href> link checks — placeholder routes don't exist yet.
-			// Still enforces resolve() on goto() / pushState() / replaceState() calls.
+			// Root-hosted static links are checked for target existence by strict prerendering.
+			// Programmatic navigation still requires resolve().
 			'svelte/no-navigation-without-resolve': ['error', { ignoreLinks: true }]
 		}
 	},

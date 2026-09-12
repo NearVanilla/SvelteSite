@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+	import { MediaQuery } from 'svelte/reactivity';
+	import { prefersReducedMotion } from 'svelte/motion';
 	import { getMeta, type ScreenshotMeta } from '$lib/data/gallery';
 
 	interface GalleryImage {
@@ -15,69 +18,78 @@
 		import: 'default'
 	}) as Record<string, string>;
 
-	const images: GalleryImage[] = Object.entries(modules).map(([path, src]) => {
-		const filename = path.split('/').pop()?.replace('.webp', '') ?? 'screenshot';
-		return { src, alt: `NearVanilla community — ${filename}`, meta: getMeta(filename) };
+	const images: GalleryImage[] = Object.entries(modules)
+		.sort(([a], [b]) => a.localeCompare(b))
+		.map(([path, src]) => {
+			const filename = path.split('/').pop()?.replace('.webp', '') ?? '';
+			const meta = getMeta(filename);
+			return { src, alt: meta?.alt ?? 'Minecraft community build on NearVanilla', meta };
+		});
+
+	const tilesNeeded = images.length ? Math.max(1, Math.ceil(12 / images.length)) : 0;
+	const group = Array.from({ length: tilesNeeded }, () => images).flat();
+	const noHover = new MediaQuery('(hover: none)', true);
+	let mounted = $state(false);
+	const motionAllowed = $derived(mounted && !noHover.current && !prefersReducedMotion.current);
+
+	onMount(() => {
+		mounted = true;
 	});
-
-	function tile<T>(arr: T[], n: number): T[] {
-		return Array.from({ length: n }, () => arr).flat();
-	}
-
-	// Repeat enough times so each half is at least ~4000px wide (covers 4K screens).
-	// Each image is roughly 340px; with many images one repeat is already sufficient.
-	const tilesNeeded = Math.max(1, Math.ceil(12 / images.length));
-	const half = tile(images, tilesNeeded);
-	const track = [...half, ...half];
 </script>
 
-<section class="gallery" aria-label="Server screenshot gallery">
-	<div class="gallery__viewport">
-		<div class="gallery__track">
-			{#each track as img, i (i)}
-				<figure class="gallery__item">
-					<img src={img.src} alt={img.alt} class="gallery__img" loading="lazy" decoding="async" />
-					{#if img.meta}
-						<figcaption class="gallery__caption">
-							<p class="gallery__caption-build">{img.meta.buildName}</p>
-							<ul class="gallery__caption-builders">
-								{#each img.meta.builders as builder (builder.name)}
-									<li>
-										<span class="gallery__flag" aria-hidden="true">{builder.flag ?? '🇺🇳'}</span>
-										{builder.name}
-									</li>
-								{/each}
-							</ul>
-						</figcaption>
-					{/if}
-				</figure>
-			{/each}
-		</div>
-	</div>
+{#snippet imageItem(image: GalleryImage)}
+	<figure class="gallery__item">
+		<img src={image.src} alt={image.alt} class="gallery__img" loading="lazy" decoding="async" />
+		{#if image.meta?.buildName || image.meta?.builders?.length}
+			<figcaption class="gallery__caption">
+				{#if image.meta.buildName}
+					<p class="gallery__caption-build">{image.meta.buildName}</p>
+				{/if}
+				{#if image.meta.builders?.length}
+					<ul class="gallery__caption-builders">
+						{#each image.meta.builders as builder (builder.name)}
+							<li>
+								{#if builder.flag}
+									<span class="gallery__flag" aria-hidden="true">{builder.flag}</span>
+								{/if}
+								{builder.name}
+							</li>
+						{/each}
+					</ul>
+				{/if}
+			</figcaption>
+		{/if}
+	</figure>
+{/snippet}
 
-	<div class="gallery__viewport">
-		<div class="gallery__track gallery__track--reverse">
-			{#each track as img, i (i)}
-				<figure class="gallery__item">
-					<img src={img.src} alt={img.alt} class="gallery__img" loading="lazy" decoding="async" />
-					{#if img.meta}
-						<figcaption class="gallery__caption">
-							<p class="gallery__caption-build">{img.meta.buildName}</p>
-							<ul class="gallery__caption-builders">
-								{#each img.meta.builders as builder (builder.name)}
-									<li>
-										<span class="gallery__flag" aria-hidden="true">{builder.flag ?? '🇺🇳'}</span>
-										{builder.name}
-									</li>
-								{/each}
-							</ul>
-						</figcaption>
-					{/if}
-				</figure>
+{#snippet marquee(reverse: boolean)}
+	<div class="gallery__viewport" aria-hidden="true">
+		<div class="gallery__track" class:gallery__track--reverse={reverse}>
+			{#each [0, 1] as copy (copy)}
+				<div class="gallery__group">
+					{#each group as image, index (index)}
+						{@render imageItem(image)}
+					{/each}
+				</div>
 			{/each}
 		</div>
 	</div>
-</section>
+{/snippet}
+
+{#if images.length}
+	<section class="gallery" aria-label="Server screenshot gallery">
+		{#if !motionAllowed}
+			<div class="gallery__grid">
+				{#each images as image (image.src)}
+					{@render imageItem(image)}
+				{/each}
+			</div>
+		{:else}
+			{@render marquee(false)}
+			{@render marquee(true)}
+		{/if}
+	</section>
+{/if}
 
 <style>
 	.gallery {
@@ -86,6 +98,24 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.625rem;
+	}
+
+	.gallery__grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+		gap: 1rem;
+		padding: 0 1.5rem;
+	}
+
+	.gallery__grid .gallery__img {
+		width: 100%;
+	}
+
+	.gallery__grid .gallery__caption {
+		position: static;
+		opacity: 1;
+		padding: 0.625rem;
+		background: var(--color-surface);
 	}
 
 	.gallery__viewport {
@@ -120,9 +150,15 @@
 
 	.gallery__track {
 		display: flex;
-		gap: 6px;
 		width: max-content;
 		animation: gallery-scroll 50s linear infinite;
+	}
+
+	.gallery__group {
+		display: flex;
+		flex-shrink: 0;
+		gap: 6px;
+		padding-right: 6px;
 	}
 
 	.gallery__track--reverse {
@@ -146,12 +182,15 @@
 		margin: 0;
 		position: relative;
 		border-radius: 4px;
+	}
+
+	.gallery__viewport .gallery__item {
 		transition:
 			transform 0.25s ease,
 			box-shadow 0.25s ease;
 	}
 
-	.gallery__item:hover {
+	.gallery__viewport .gallery__item:hover {
 		transform: scale(1.04);
 		box-shadow:
 			0 0 0 2px var(--color-accent),
@@ -182,9 +221,7 @@
 		font-size: 0.8rem;
 		font-weight: 600;
 		color: #fff;
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
+		overflow-wrap: anywhere;
 	}
 
 	.gallery__caption-builders {
@@ -198,10 +235,8 @@
 
 	.gallery__caption-builders li {
 		font-size: 0.7rem;
-		color: rgba(255, 255, 255, 0.85);
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
+		color: var(--color-text);
+		overflow-wrap: anywhere;
 	}
 
 	.gallery__flag {
@@ -218,8 +253,9 @@
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		.gallery__track {
-			animation: none;
+		.gallery__item,
+		.gallery__caption {
+			transition: none;
 		}
 	}
 
