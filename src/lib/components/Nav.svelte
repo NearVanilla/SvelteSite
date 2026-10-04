@@ -132,6 +132,7 @@
 		background-color: var(--color-accent);
 		color: var(--color-text);
 		padding: 0.35rem 0.9rem;
+		margin-left: 1rem;
 		border-radius: 4px;
 		white-space: nowrap;
 		transition: background-color 0.15s ease;
@@ -218,6 +219,7 @@
 		.nav__cta {
 			font-size: 0.9rem;
 			padding: 0.6rem 1.25rem;
+			margin-left: 0;
 		}
 	}
 </style>
