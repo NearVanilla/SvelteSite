@@ -3,11 +3,8 @@
 		name: string;
 		since: string;
 		badge: string;
-		tagline?: string;
 		location?: string;
-		timezone?: string;
 		responsibilities?: string[];
-		quote?: string;
 	}
 
 	const staff = {
@@ -16,41 +13,36 @@
 				name: 'Prof_Bloodstone',
 				since: '2018-08-13',
 				badge: 'Admin',
-				tagline: 'Server Owner',
 				location: 'Poland',
-				timezone: 'CEST',
-				responsibilities: ['Server Ownership', 'Plugin Development', 'Tech Mentoring'],
-				quote: 'Consider yourself lucky… or cursed.'
+				responsibilities: ['Server Ownership', 'Plugin Development', 'Tech Mentoring']
 			},
 			{
 				name: '105hua',
 				since: '2024-09-23',
 				badge: 'Admin',
-				tagline: 'Tech Lead & Server Manager',
 				location: 'United Kingdom',
-				timezone: 'BST',
-				responsibilities: ['Server Infrastructure', 'Configuration', 'Troubleshooting'],
-				quote: 'Most of what happens behind the scenes passes through here.'
+				responsibilities: ['Server Infrastructure', 'Configuration', 'Troubleshooting']
 			},
 			{
 				name: 'LoquaciousFox_',
 				since: '2020-07-04',
 				badge: 'Admin',
-				tagline: 'Community Leader',
 				location: 'Canada',
-				timezone: 'EST',
-				responsibilities: ['Community Events', 'Staff Meetings', 'Player Support'],
-				quote: 'Jack of All Trades, master of… well, a few.'
+				responsibilities: ['Community Events', 'Staff Meetings', 'Player Support']
 			},
 			{
 				name: 'Sblod',
 				since: '2024-10-02',
 				badge: 'Admin',
-				tagline: 'Events Manager',
 				location: 'Wales',
-				timezone: 'BST',
-				responsibilities: ['Event Coordination', 'Community Engagement'],
-				quote: 'Every great event starts with a spark.'
+				responsibilities: ['Event Coordination', 'Community Engagement']
+			},
+			{
+				name: 'Mufffinz',
+				since: '2022-01-08',
+				badge: 'Moderator',
+				location: 'Canada',
+				responsibilities: ['Community Fun', 'Player Engagement']
 			}
 		] as StaffMember[],
 		moderator: [
@@ -58,91 +50,50 @@
 				name: 'Biz_Block',
 				since: '2022-01-08',
 				badge: 'Moderator',
-				tagline: 'Shopping District Maintainer',
 				location: 'United States',
-				timezone: 'EST',
-				responsibilities: ['Player Moderation', 'Conflict Resolution'],
-				quote: 'Fairness is a block best placed carefully.'
+				responsibilities: ['Player Moderation', 'Conflict Resolution']
 			},
 			{
 				name: 'Demonstrations',
 				since: '2022-01-08',
 				badge: 'Moderator',
-				tagline: 'Tech Team Member',
 				location: 'Wales',
-				timezone: 'BST',
-				responsibilities: ['New Player Guidance', 'Rule Enforcement'],
-				quote: 'Show, do not just tell.'
+				responsibilities: ['New Player Guidance', 'Rule Enforcement']
 			},
 			{
 				name: 'Dynant',
 				since: '2022-01-08',
 				badge: 'Moderator',
-				tagline: 'Tech Team Member',
 				location: 'Netherlands',
-				timezone: 'CET',
-				responsibilities: ['World Exploration', 'Community Building'],
-				quote: 'There is always more to discover.'
+				responsibilities: ['World Exploration', 'Community Building']
 			},
 			{
 				name: 'kNaLLx',
 				since: '2022-01-08',
 				badge: 'Moderator',
-				tagline: 'Shopping District Maintainer & Community Moderator',
 				location: 'Norway',
-				timezone: 'CEST',
-				responsibilities: ['Technical Support', 'Redstone Community'],
-				quote: 'With enough redstone, anything is possible.'
+				responsibilities: ['Technical Support', 'Redstone Community']
 			},
 			{
 				name: 'Lego_monkeyman',
 				since: '2022-01-08',
 				badge: 'Moderator',
-				tagline: 'Shopping District Maintainer & Community Moderator',
 				location: 'United Kingdom',
-				timezone: 'BST',
-				responsibilities: ['Build Oversight', 'Creative Support'],
-				quote: 'Every block is a step toward something epic.'
-			},
-			{
-				name: 'SuprGamr',
-				since: '2022-01-08',
-				badge: 'Moderator',
-				tagline: 'Events Organiser',
-				location: 'Sweden',
-				timezone: 'CEST',
-				responsibilities: ['PvP Events', 'Competitive Moderation'],
-				quote: 'May the best crafter win.'
-			},
-			{
-				name: 'Muffinz',
-				since: '2022-01-08',
-				badge: 'Moderator',
-				tagline: 'All-Rounder',
-				location: 'Canada',
-				timezone: 'EST',
-				responsibilities: ['Community Fun', 'Player Engagement'],
-				quote: 'Cats make everything better.'
+				responsibilities: ['Build Oversight', 'Creative Support']
 			},
 			{
 				name: 'Toystory2wasok',
 				since: '2022-01-08',
 				badge: 'Moderator',
-				tagline: 'Community Moderator',
 				location: 'United States',
-				timezone: 'EST',
-				responsibilities: ['Lore & Storytelling', 'Community Content'],
-				quote: 'Every player has a story worth telling.'
+				responsibilities: ['Lore & Storytelling', 'Community Content']
 			},
 			{
 				name: 'VividLilyBug949',
 				since: '2022-01-08',
 				badge: 'Moderator',
-				tagline: 'Onboarding & Community Moderator',
 				location: 'United States',
-				timezone: 'EDT',
-				responsibilities: ['Issue Resolution', 'Player Support'],
-				quote: 'I didn’t fail, I just found 100 ways that don’t work.'
+				responsibilities: ['Issue Resolution', 'Player Support']
 			}
 		] as StaffMember[],
 		helper: [
@@ -150,62 +101,35 @@
 				name: 'HaakonASH',
 				since: '2026-01-08',
 				badge: 'Helper',
-				tagline: 'Community Helper',
 				location: 'Norway',
-				timezone: 'CEST',
-				responsibilities: ['New Player Help', 'General Support'],
-				quote: 'Every expert was once a beginner.'
+				responsibilities: ['New Player Help', 'General Support']
 			},
 			{
 				name: 'Nollita',
 				since: '2026-01-08',
 				badge: 'Helper',
-				tagline: 'Community Helper',
 				location: 'Netherlands',
-				timezone: 'CEST',
-				responsibilities: ['Player Welcoming', 'Community Support'],
-				quote: 'A friendly hello goes a long way.'
+				responsibilities: ['Player Welcoming', 'Community Support']
 			},
 			{
 				name: 'TaintedBird',
 				since: '2026-01-08',
 				badge: 'Helper',
-				tagline: 'Community Helper',
 				location: 'United Kingdom',
-				timezone: 'BST',
-				responsibilities: ['Creative Support', 'Community Building'],
-				quote: 'Free as a bird, helpful as a helper.'
+				responsibilities: ['Creative Support', 'Community Building']
 			},
 			{
 				name: 'WiscoSippi',
 				since: '2026-01-08',
 				badge: 'Helper',
-				tagline: 'Sippin through life',
 				location: 'United States',
-				timezone: 'CST',
-				responsibilities: ['Relaxed Support', 'Community Vibes'],
-				quote: 'Take it one sip at a time.'
+				responsibilities: ['Relaxed Support', 'Community Vibes']
 			}
 		] as StaffMember[]
 	};
 
 	let selectedMember = $state<StaffMember | null>(null);
 	let isClosing = $state(false);
-	let localTime = $state('');
-
-	const tzMap: Record<string, string> = {
-		GMT: 'Europe/London',
-		BST: 'Europe/London',
-		EST: 'America/New_York',
-		EDT: 'America/New_York',
-		PST: 'America/Los_Angeles',
-		CST: 'America/Chicago',
-		MST: 'America/Denver',
-		CET: 'Europe/Paris',
-		CEST: 'Europe/Paris',
-		AEST: 'Australia/Sydney'
-	};
-
 	const flagMap: Record<string, string> = {
 		Poland: '🇵🇱',
 		'United Kingdom': '🇬🇧',
@@ -220,33 +144,7 @@
 	function openModal(member: StaffMember) {
 		selectedMember = member;
 		isClosing = false;
-		updateLocalTime();
 	}
-
-	function updateLocalTime() {
-		if (!selectedMember?.timezone) {
-			localTime = '';
-			return;
-		}
-		const iana = tzMap[selectedMember.timezone];
-		if (!iana) {
-			localTime = '';
-			return;
-		}
-		localTime = new Date().toLocaleTimeString('en-US', {
-			hour: '2-digit',
-			minute: '2-digit',
-			timeZone: iana
-		});
-	}
-
-	$effect(() => {
-		if (selectedMember?.timezone) {
-			updateLocalTime();
-			const interval = setInterval(updateLocalTime, 1000);
-			return () => clearInterval(interval);
-		}
-	});
 
 	function closeModal() {
 		isClosing = true;
@@ -420,45 +318,23 @@
 							>
 								{selectedMember.name}
 							</h2>
-							{#if selectedMember.tagline}
-								<p class="modal__tagline">{selectedMember.tagline}</p>
-							{/if}
 							<p class="modal__since">
 								<span class="modal__since-label">Joined</span>
 								{formatSinceDate(selectedMember.since)}
-								<span class="modal__since-sep">·</span>
 								<span class="modal__time-served">{getTimeServed(selectedMember.since)}</span>
 							</p>
 						</div>
 					</header>
 
-					{#if selectedMember.location || selectedMember.timezone}
+					{#if selectedMember.location}
 						<div class="modal__location">
-							{#if selectedMember.location}
-								<span class="modal__location-item">
-									<span class="modal__location-icon" aria-hidden="true"
-										>{flagMap[selectedMember.location] ?? '🌍'}</span
-									>
-									{selectedMember.location}
-								</span>
-							{/if}
-							{#if selectedMember.timezone}
-								<span class="modal__location-item">
-									<span class="modal__location-icon" aria-hidden="true">🕐</span>
-									{selectedMember.timezone}
-									{#if localTime}
-										<span class="modal__local-time">({localTime})</span>
-									{/if}
-								</span>
-							{/if}
+							<span class="modal__location-item">
+								<span class="modal__location-icon" aria-hidden="true"
+									>{flagMap[selectedMember.location] ?? '🌍'}</span
+								>
+								{selectedMember.location}
+							</span>
 						</div>
-					{/if}
-
-					{#if selectedMember.quote}
-						<blockquote class="modal__quote">
-							<span class="modal__quote-mark" aria-hidden="true">&ldquo;</span>
-							<p class="modal__quote-text">{selectedMember.quote}</p>
-						</blockquote>
 					{/if}
 				</div>
 			</section>
@@ -604,49 +480,17 @@
 		text-overflow: ellipsis;
 	}
 
-	.modal-backdrop {
-		position: fixed;
-		backdrop-filter: blur(4px);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		z-index: 1000;
-		padding: 1.5rem;
-		animation: backdrop-in 0.2s ease-out forwards;
-	}
-
-	.modal-backdrop--closing {
-		animation: backdrop-out 0.2s ease-in forwards;
-	}
-
-	@keyframes backdrop-in {
-		from {
-			opacity: 0;
-		}
-		to {
-			opacity: 1;
-		}
-	}
-
-	@keyframes backdrop-out {
-		from {
-			opacity: 1;
-		}
-		to {
-			opacity: 0;
-		}
-	}
-
 	.modal {
 		background:
 			linear-gradient(135deg, rgba(59, 130, 246, 0.08), transparent 42%), var(--color-surface);
 		border: 1px solid var(--color-border);
 		border-radius: 16px;
 		padding: 0;
-		max-width: 720px;
+		max-width: 480px;
 		width: 100%;
+		max-height: calc(100svh - 2rem);
 		position: relative;
-		overflow: hidden;
+		overflow: auto;
 		box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
 		animation: modal-in 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 	}
@@ -686,7 +530,7 @@
 		align-items: center;
 		justify-content: center;
 		z-index: 1000;
-		padding: 1.5rem;
+		padding: 1rem;
 		animation: backdrop-in 0.2s ease-out forwards;
 	}
 
@@ -712,43 +556,40 @@
 		}
 	}
 	.modal__card {
-		display: flex;
-		gap: 0;
+		display: grid;
+		grid-template-columns: 72px minmax(0, 1fr);
+		align-items: center;
+		gap: 1.5rem;
+		padding: 1.5rem;
 	}
 
 	.modal__skin-col {
 		display: flex;
-		flex-direction: column;
 		align-items: center;
-		justify-content: flex-start;
-		gap: 1rem;
-		padding: clamp(1.75rem, 4vw, 2.75rem);
-		padding-right: 0;
-		flex-shrink: 0;
+		justify-content: center;
 	}
 
 	.modal__body {
-		width: 120px;
+		display: block;
+		width: 100%;
 		height: auto;
 		image-rendering: pixelated;
-		flex-shrink: 0;
 	}
 
 	.modal__info-col {
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
-		gap: 1.25rem;
-		padding: clamp(1.75rem, 4vw, 2.75rem);
-		padding-left: 1.5rem;
-		flex: 1;
+		gap: 0.75rem;
 		min-width: 0;
 	}
 
 	.modal__close {
 		position: absolute;
-		top: 1rem;
-		right: 1rem;
+		top: 0.25rem;
+		right: 0.25rem;
+		width: 44px;
+		height: 44px;
 		background: none;
 		border: none;
 		color: var(--color-text-muted);
@@ -764,10 +605,7 @@
 	}
 
 	.modal__header {
-		display: flex;
-		align-items: center;
-		gap: 1.5rem;
-		padding-right: 2rem;
+		padding-right: 0.75rem;
 	}
 
 	.modal__header-text {
@@ -777,9 +615,10 @@
 	.modal__name {
 		font-family: var(--font-display);
 		font-weight: 800;
-		font-size: clamp(1.75rem, 4vw, 2.5rem);
-		letter-spacing: 0.05em;
-		line-height: 0.95;
+		font-size: 1.5rem;
+		letter-spacing: 0.01em;
+		line-height: 1.2;
+		overflow-wrap: anywhere;
 		margin-bottom: 0.5rem;
 	}
 
@@ -795,15 +634,10 @@
 		color: #f97316;
 	}
 
-	.modal__tagline {
-		font-size: 1.05rem;
-		color: var(--color-text-muted);
-	}
-
 	.modal__since {
 		font-size: 0.8rem;
 		color: var(--color-text-muted);
-		opacity: 0.5;
+		line-height: 1.6;
 		margin-top: 0.35rem;
 	}
 
@@ -815,11 +649,8 @@
 		margin-right: 0.35rem;
 	}
 
-	.modal__since-sep {
-		margin: 0 0.35rem;
-	}
-
 	.modal__time-served {
+		display: block;
 		color: var(--color-brand-sky);
 		opacity: 0.9;
 	}
@@ -842,78 +673,25 @@
 		font-size: 0.9rem;
 	}
 
-	.modal__local-time {
-		color: var(--color-brand-lime);
-		font-weight: 500;
-	}
-
-	.modal__quote {
-		position: relative;
-		padding: 0.75rem 1rem;
-		background-color: rgba(59, 130, 246, 0.08);
-		border-left: 3px solid var(--color-accent);
-		border-radius: 0 6px 6px 0;
-		margin: 0;
-		width: 100%;
-	}
-
-	.modal__quote-mark {
-		position: absolute;
-		top: -0.1rem;
-		left: 0.5rem;
-		font-size: 2rem;
-		font-family: Georgia, serif;
-		color: var(--color-accent);
-		opacity: 0.35;
-		line-height: 1;
-		pointer-events: none;
-	}
-
-	.modal__quote-text {
-		font-size: 0.9rem;
-		font-style: italic;
-		color: var(--color-text-muted);
-		line-height: 1.5;
-		padding-left: 0.5rem;
-	}
-
 	@media (max-width: 600px) {
 		.staff-list {
 			grid-template-columns: 1fr;
 		}
+	}
 
-		.modal {
-			max-width: 100%;
-			max-height: calc(100svh - 3rem);
-			overflow-y: auto;
-		}
-
+	@media (max-width: 400px) {
 		.modal__card {
-			flex-direction: column;
-			min-height: 0;
-			align-items: center;
-		}
-
-		.modal__skin-col {
-			padding: 1.5rem 1.5rem 0;
-			align-items: center;
-			width: 100%;
-		}
-
-		.modal__body {
-			width: 100px;
-		}
-
-		.modal__info-col {
-			padding: 1.25rem 1.5rem 1.5rem;
-			width: 100%;
-			align-items: stretch;
+			grid-template-columns: 56px minmax(0, 1fr);
+			gap: 1rem;
+			padding: 2.5rem 1rem 1.25rem;
 		}
 
 		.modal__header {
-			flex-direction: column;
-			padding-right: 1.5rem;
-			align-items: flex-start;
+			padding-right: 0;
+		}
+
+		.modal__name {
+			font-size: 1.25rem;
 		}
 	}
 </style>

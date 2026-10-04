@@ -2,10 +2,10 @@
 	let isMenuOpen = $state(false);
 
 	const navLinks = [
-		{ label: 'Home', href: '#home' },
-		{ label: 'About', href: '#about' },
-		{ label: 'Plugins', href: '#plugins' },
-		{ label: 'Specs', href: '#specs' },
+		{ label: 'Home', href: '/#home' },
+		{ label: 'About', href: '/#about' },
+		{ label: 'Plugins', href: '/#plugins' },
+		{ label: 'Specs', href: '/#specs' },
 		{ label: 'Downloads', href: '/downloads' },
 		{ label: 'Staff', href: '/staff' }
 	];

@@ -29,6 +29,22 @@ npm run dev
 npm run dev -- --open
 ```
 
+### Community gallery
+
+The two screenshot rows in `src/lib/components/Gallery.svelte` use a 150-second
+scroll loop. Each row pauses on hover, and reduced-motion preferences disable scrolling.
+
+### Site navigation
+
+Home, About, Plugins, and Specs link to sections on the homepage using `/#...` URLs.
+Keep the leading `/` so these links also work from the Downloads and Staff pages.
+
+### Staff profiles
+
+Staff cards open compact, responsive profiles with a small Minecraft skin beside the player's
+name, join date, time served, and location. Profiles stay side-by-side on mobile and are capped
+at 480px wide on desktop. Taglines, timezones, local clocks, and quotes are not displayed.
+
 ## Building
 
 To create a production version of your app:
