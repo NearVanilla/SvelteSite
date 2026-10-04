@@ -8,6 +8,7 @@
 	import season5Img from '$lib/assets/screenshots/world_downloads/s5.webp';
 	import season6Img from '$lib/assets/screenshots/world_downloads/s6.webp';
 	import season6CreativeImg from '$lib/assets/screenshots/world_downloads/s6_c.webp';
+	import season7Img from '$lib/assets/screenshots/world_downloads/s7.webp';
 
 	interface WorldDownload {
 		name: string;
@@ -74,6 +75,14 @@
 			downloadHref: 'https://files.nearvanilla.com/worlds/NearVanillaS6Creative.7z',
 			seasonDates: '8th January 2022 - 22nd July 2024',
 			imageSrc: season6CreativeImg
+		},
+		{
+			name: 'Season 7',
+			versionRange: '26.1.2',
+			fileSize: '43.6 GB',
+			downloadHref: 'https://files.nearvanilla.com/worlds/NearVanillaS7.7z',
+			seasonDates: '24th August 2024 - 28th September 2026',
+			imageSrc: season7Img
 		}
 	];
 </script>
