@@ -189,7 +189,7 @@
 </script>
 
 <svelte:head>
-	<title>Staff — NearVanilla</title>
+	<title>NearVanilla SMP - Staff</title>
 	<meta
 		name="description"
 		content="Meet the NearVanilla staff team. Our admins, moderators, and helpers keep the server running smoothly."

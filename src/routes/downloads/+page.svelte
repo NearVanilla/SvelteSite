@@ -88,7 +88,7 @@
 </script>
 
 <svelte:head>
-	<title>World Downloads — NearVanilla</title>
+	<title>NearVanilla SMP - Worlds</title>
 	<meta
 		name="description"
 		content="Download previous NearVanilla world saves. Each world archive includes the full map from its active season."
