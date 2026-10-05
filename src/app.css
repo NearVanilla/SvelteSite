@@ -14,6 +14,8 @@
 	--font-display: 'Barlow Condensed', sans-serif;
 	--font-body: 'Barlow', sans-serif;
 	--nav-height: 48px;
+	/* Horizontal padding that centres content in a 1100px column, with a 1.5rem minimum gutter */
+	--content-gutter: max(1.5rem, calc((100% - 1100px) / 2));
 }
 
 *,

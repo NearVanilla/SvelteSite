@@ -1,26 +1,25 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
+	import { pageTitle } from '$lib/title';
 </script>
 
 <svelte:head>
-	<title>
-		{$page.status === 404 ? 'Page Not Found' : 'Error'} — NearVanilla
-	</title>
+	<title>{pageTitle(page.status === 404 ? 'Page Not Found' : 'Error')}</title>
 </svelte:head>
 
 <section class="error-page" aria-labelledby="error-code">
 	<div class="error-page__content">
-		{#if $page.status === 404}
+		{#if page.status === 404}
 			<h1 id="error-code" class="error-page__code">404</h1>
 			<h2 class="error-page__title">Page Not Found</h2>
 			<p class="error-page__message">
 				The page you're looking for doesn't exist or has been moved.
 			</p>
 		{:else}
-			<h1 id="error-code" class="error-page__code">{$page.status}</h1>
+			<h1 id="error-code" class="error-page__code">{page.status}</h1>
 			<h2 class="error-page__title">Something Went Wrong</h2>
 			<p class="error-page__message">
-				{$page.error?.message || 'An unexpected error occurred.'}
+				{page.error?.message || 'An unexpected error occurred.'}
 			</p>
 		{/if}
 		<a href="/" class="error-page__cta">Return Home</a>

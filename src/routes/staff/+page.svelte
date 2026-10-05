@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { flushSync } from 'svelte';
+	import { pageTitle } from '$lib/title';
+
 	interface StaffMember {
 		name: string;
 		since: string;
@@ -40,7 +43,7 @@
 			{
 				name: 'Mufffinz',
 				since: '2022-01-08',
-				badge: 'Moderator',
+				badge: 'Admin',
 				location: 'Canada',
 				responsibilities: ['Community Fun', 'Player Engagement']
 			}
@@ -128,8 +131,12 @@
 		] as StaffMember[]
 	};
 
-	let selectedMember = $state<StaffMember | null>(null);
-	let isClosing = $state(false);
+	const tiers = [
+		{ key: 'admin', label: 'Admins', members: staff.admin },
+		{ key: 'moderator', label: 'Moderators', members: staff.moderator },
+		{ key: 'helper', label: 'Helpers', members: staff.helper }
+	];
+
 	const flagMap: Record<string, string> = {
 		Poland: '🇵🇱',
 		'United Kingdom': '🇬🇧',
@@ -141,23 +148,39 @@
 		Sweden: '🇸🇪'
 	};
 
+	// Matches the modal-out / backdrop-out animation duration
+	const CLOSE_ANIMATION_MS = 200;
+
+	let dialog: HTMLDialogElement;
+	let selectedMember = $state<StaffMember | null>(null);
+	let isClosing = $state(false);
+	let closeTimer: ReturnType<typeof setTimeout> | undefined;
+
 	function openModal(member: StaffMember) {
+		clearTimeout(closeTimer);
 		selectedMember = member;
 		isClosing = false;
+		// Render the profile before opening so showModal() can focus the close button
+		flushSync();
+		if (!dialog.open) dialog.showModal();
 	}
 
 	function closeModal() {
+		if (!dialog.open || isClosing) return;
 		isClosing = true;
-		setTimeout(() => {
-			selectedMember = null;
-			isClosing = false;
-		}, 200);
+		closeTimer = setTimeout(() => dialog.close(), CLOSE_ANIMATION_MS);
 	}
 
-	function handleKeydown(e: KeyboardEvent) {
-		if (e.key === 'Escape') {
-			closeModal();
-		}
+	function handleCancel(e: Event) {
+		// Play the close animation instead of letting Escape close the dialog instantly
+		e.preventDefault();
+		closeModal();
+	}
+
+	function handleClose() {
+		clearTimeout(closeTimer);
+		selectedMember = null;
+		isClosing = false;
 	}
 
 	function handleBackdropClick(e: MouseEvent) {
@@ -174,12 +197,13 @@
 	function getTimeServed(since: string): string {
 		const start = new Date(`${since}T00:00:00Z`);
 		const now = new Date();
-		let years = now.getUTCFullYear() - start.getUTCFullYear();
-		let months = now.getUTCMonth() - start.getUTCMonth();
-		if (months < 0) {
-			years--;
-			months += 12;
-		}
+		let months =
+			(now.getUTCFullYear() - start.getUTCFullYear()) * 12 +
+			(now.getUTCMonth() - start.getUTCMonth());
+		// Don't count the current month until its anniversary day has been reached
+		if (now.getUTCDate() < start.getUTCDate()) months--;
+		const years = Math.floor(months / 12);
+		months %= 12;
 		const parts: string[] = [];
 		if (years > 0) parts.push(`${years} year${years === 1 ? '' : 's'}`);
 		if (months > 0) parts.push(`${months} month${months === 1 ? '' : 's'}`);
@@ -189,7 +213,7 @@
 </script>
 
 <svelte:head>
-	<title>NearVanilla SMP - Staff</title>
+	<title>{pageTitle('Staff')}</title>
 	<meta
 		name="description"
 		content="Meet the NearVanilla staff team. Our admins, moderators, and helpers keep the server running smoothly."
@@ -197,161 +221,97 @@
 	<link rel="canonical" href="https://nearvanilla.com/staff" />
 </svelte:head>
 
-<section class="staff-hero">
-	<div class="staff-hero__inner">
-		<p class="staff-hero__eyebrow">Team</p>
-		<h1 class="staff-hero__title">Our <span class="staff-hero__title-accent">Staff</span></h1>
-		<p class="staff-hero__desc">
-			The dedicated team that keeps NearVanilla running smoothly and maintains a welcoming community
-			for all players.
-		</p>
-	</div>
+<header class="staff-hero">
+	<p class="staff-hero__eyebrow">Team</p>
+	<h1 class="staff-hero__title">Our <span class="staff-hero__title-accent">Staff</span></h1>
+	<p class="staff-hero__desc">
+		The dedicated team that keeps NearVanilla running smoothly and maintains a welcoming community
+		for all players.
+	</p>
+</header>
+
+<section class="staff-section" aria-label="Staff team">
+	{#each tiers as tier (tier.key)}
+		<section class="staff-tier" aria-labelledby="staff-tier-{tier.key}">
+			<h2 id="staff-tier-{tier.key}" class="staff-tier__title staff-tier__title--{tier.key}">
+				{tier.label}
+			</h2>
+			<ul class="staff-list" role="list">
+				{#each tier.members as member (member.name)}
+					<li>
+						<button
+							type="button"
+							class="staff-card staff-card--{tier.key}"
+							onclick={() => openModal(member)}
+							aria-label="View profile for {member.name}"
+						>
+							<img
+								class="staff-card__avatar"
+								src="https://mc-heads.net/head/{member.name}"
+								alt="{member.name}'s Minecraft head"
+								loading="lazy"
+							/>
+							<span class="staff-card__name">{member.name}</span>
+						</button>
+					</li>
+				{/each}
+			</ul>
+		</section>
+	{/each}
 </section>
 
-<section class="staff-section">
-	<div class="staff-section__inner">
-		<div class="staff-tier">
-			<h2 class="staff-tier__title staff-tier__title--admin">Admins</h2>
-			<ul class="staff-list" role="list">
-				{#each staff.admin as member (member.name)}
-					<li>
-						<button
-							class="staff-card staff-card--admin"
-							onclick={() => openModal(member)}
-							aria-label="View profile for {member.name}"
-						>
-							<img
-								class="staff-card__avatar"
-								src="https://mc-heads.net/head/{member.name}"
-								alt="{member.name}'s Minecraft head"
-								loading="lazy"
-							/>
-							<div class="staff-card__info">
-								<span class="staff-card__name">{member.name}</span>
-							</div>
-						</button>
-					</li>
-				{/each}
-			</ul>
-		</div>
-
-		<div class="staff-tier">
-			<h2 class="staff-tier__title staff-tier__title--moderator">Moderators</h2>
-			<ul class="staff-list" role="list">
-				{#each staff.moderator as member (member.name)}
-					<li>
-						<button
-							class="staff-card staff-card--moderator"
-							onclick={() => openModal(member)}
-							aria-label="View profile for {member.name}"
-						>
-							<img
-								class="staff-card__avatar"
-								src="https://mc-heads.net/head/{member.name}"
-								alt="{member.name}'s Minecraft head"
-								loading="lazy"
-							/>
-							<div class="staff-card__info">
-								<span class="staff-card__name">{member.name}</span>
-							</div>
-						</button>
-					</li>
-				{/each}
-			</ul>
-		</div>
-
-		<div class="staff-tier">
-			<h2 class="staff-tier__title staff-tier__title--helper">Helpers</h2>
-			<ul class="staff-list" role="list">
-				{#each staff.helper as member (member.name)}
-					<li>
-						<button
-							class="staff-card staff-card--helper"
-							onclick={() => openModal(member)}
-							aria-label="View profile for {member.name}"
-						>
-							<img
-								class="staff-card__avatar"
-								src="https://mc-heads.net/head/{member.name}"
-								alt="{member.name}'s Minecraft head"
-								loading="lazy"
-							/>
-							<div class="staff-card__info">
-								<span class="staff-card__name">{member.name}</span>
-							</div>
-						</button>
-					</li>
-				{/each}
-			</ul>
-		</div>
-	</div>
-</section>
-
-<svelte:window onkeydown={handleKeydown} />
-
-{#if selectedMember}
-	<div
-		class="modal-backdrop{isClosing ? ' modal-backdrop--closing' : ''}"
-		onclick={handleBackdropClick}
-		onkeydown={handleKeydown}
-		role="dialog"
-		aria-modal="true"
-		aria-labelledby="modal-title"
-		tabindex="-1"
-	>
-		<article class="modal{isClosing ? ' modal--closing' : ''}" role="document">
-			<button class="modal__close" onclick={closeModal} aria-label="Close profile">✕</button>
+<dialog
+	bind:this={dialog}
+	class={['modal-backdrop', isClosing && 'modal-backdrop--closing']}
+	aria-labelledby="modal-title"
+	onclick={handleBackdropClick}
+	oncancel={handleCancel}
+	onclose={handleClose}
+>
+	{#if selectedMember}
+		<article class={['modal', isClosing && 'modal--closing']}>
+			<button type="button" class="modal__close" onclick={closeModal} aria-label="Close profile">
+				✕
+			</button>
 			<section class="modal__card" aria-label="Staff profile">
-				<div class="modal__skin-col">
+				<figure class="modal__skin">
 					<img
 						class="modal__body"
 						src="https://mc-heads.net/body/{selectedMember.name}"
 						alt="{selectedMember.name}'s Minecraft skin"
 					/>
-				</div>
-				<div class="modal__info-col">
-					<header class="modal__header">
-						<div class="modal__header-text">
-							<h2
-								id="modal-title"
-								class="modal__name modal__name--{selectedMember.badge.toLowerCase()}"
-							>
-								{selectedMember.name}
-							</h2>
-							<p class="modal__since">
-								<span class="modal__since-label">Joined</span>
-								{formatSinceDate(selectedMember.since)}
-								<span class="modal__time-served">{getTimeServed(selectedMember.since)}</span>
-							</p>
-						</div>
-					</header>
-
+				</figure>
+				<header class="modal__info">
+					<h2
+						id="modal-title"
+						class="modal__name modal__name--{selectedMember.badge.toLowerCase()}"
+					>
+						{selectedMember.name}
+					</h2>
+					<p class="modal__since">
+						<span class="modal__since-label">Joined</span>
+						{formatSinceDate(selectedMember.since)}
+						<span class="modal__time-served">{getTimeServed(selectedMember.since)}</span>
+					</p>
 					{#if selectedMember.location}
-						<div class="modal__location">
-							<span class="modal__location-item">
-								<span class="modal__location-icon" aria-hidden="true"
-									>{flagMap[selectedMember.location] ?? '🌍'}</span
-								>
-								{selectedMember.location}
+						<p class="modal__location">
+							<span class="modal__location-icon" aria-hidden="true">
+								{flagMap[selectedMember.location] ?? '🌍'}
 							</span>
-						</div>
+							{selectedMember.location}
+						</p>
 					{/if}
-				</div>
+				</header>
 			</section>
 		</article>
-	</div>
-{/if}
+	{/if}
+</dialog>
 
 <style>
 	.staff-hero {
 		background-color: var(--color-surface-alt);
 		border-bottom: 1px solid var(--color-border);
-		padding: clamp(2.5rem, 5vw, 4rem) 1.5rem;
-	}
-
-	.staff-hero__inner {
-		max-width: 1100px;
-		margin: 0 auto;
+		padding: clamp(2.5rem, 5vw, 4rem) var(--content-gutter);
 		text-align: center;
 	}
 
@@ -389,12 +349,7 @@
 	}
 
 	.staff-section {
-		padding: clamp(2.5rem, 5vw, 5rem) 1.5rem;
-	}
-
-	.staff-section__inner {
-		max-width: 1100px;
-		margin: 0 auto;
+		padding: clamp(2.5rem, 5vw, 5rem) var(--content-gutter);
 		display: flex;
 		flex-direction: column;
 		gap: 3rem;
@@ -465,14 +420,8 @@
 		flex-shrink: 0;
 	}
 
-	.staff-card__info {
-		display: flex;
-		flex-direction: column;
-		gap: 0.1rem;
-		min-width: 0;
-	}
-
 	.staff-card__name {
+		min-width: 0;
 		font-weight: 500;
 		font-size: 0.9rem;
 		white-space: nowrap;
@@ -521,17 +470,31 @@
 		}
 	}
 
+	/* The <dialog> itself is the full-screen backdrop, so reset the UA dialog box styles */
 	.modal-backdrop {
 		position: fixed;
 		inset: 0;
+		width: 100%;
+		height: 100%;
+		max-width: none;
+		max-height: none;
+		margin: 0;
+		border: none;
+		color: inherit;
 		background-color: rgba(0, 0, 0, 0.8);
 		backdrop-filter: blur(4px);
-		display: flex;
 		align-items: center;
 		justify-content: center;
-		z-index: 1000;
 		padding: 1rem;
 		animation: backdrop-in 0.2s ease-out forwards;
+	}
+
+	.modal-backdrop[open] {
+		display: flex;
+	}
+
+	.modal-backdrop::backdrop {
+		background: transparent;
 	}
 
 	.modal-backdrop--closing {
@@ -563,7 +526,7 @@
 		padding: 1.5rem;
 	}
 
-	.modal__skin-col {
+	.modal__skin {
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -576,12 +539,13 @@
 		image-rendering: pixelated;
 	}
 
-	.modal__info-col {
+	.modal__info {
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
-		gap: 0.75rem;
+		gap: 0.5rem;
 		min-width: 0;
+		padding-right: 0.75rem;
 	}
 
 	.modal__close {
@@ -604,14 +568,6 @@
 		color: var(--color-text);
 	}
 
-	.modal__header {
-		padding-right: 0.75rem;
-	}
-
-	.modal__header-text {
-		text-align: left;
-	}
-
 	.modal__name {
 		font-family: var(--font-display);
 		font-weight: 800;
@@ -619,7 +575,6 @@
 		letter-spacing: 0.01em;
 		line-height: 1.2;
 		overflow-wrap: anywhere;
-		margin-bottom: 0.5rem;
 	}
 
 	.modal__name--admin {
@@ -638,7 +593,6 @@
 		font-size: 0.8rem;
 		color: var(--color-text-muted);
 		line-height: 1.6;
-		margin-top: 0.35rem;
 	}
 
 	.modal__since-label {
@@ -657,14 +611,9 @@
 
 	.modal__location {
 		display: flex;
-		flex-wrap: wrap;
-		gap: 0.75rem 1.5rem;
-	}
-
-	.modal__location-item {
-		display: flex;
 		align-items: center;
 		gap: 0.35rem;
+		margin-top: 0.25rem;
 		font-size: 0.85rem;
 		color: var(--color-text-muted);
 	}
@@ -686,7 +635,7 @@
 			padding: 2.5rem 1rem 1.25rem;
 		}
 
-		.modal__header {
+		.modal__info {
 			padding-right: 0;
 		}
 

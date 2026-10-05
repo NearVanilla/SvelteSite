@@ -6,10 +6,11 @@
 	import SpecsSection from '$lib/components/SpecsSection.svelte';
 	import aboutImg from '$lib/assets/screenshots/about.webp';
 	import communityImg from '$lib/assets/screenshots/community.webp';
+	import { pageTitle } from '$lib/title';
 </script>
 
 <svelte:head>
-	<title>NearVanilla SMP</title>
+	<title>{pageTitle()}</title>
 	<meta
 		name="description"
 		content="Join NearVanilla, a semi-vanilla Minecraft survival server designed to stay close to the original experience while providing a welcoming community. Explore, build, and connect."

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import DownloadCard from '$lib/components/DownloadCard.svelte';
+	import { pageTitle } from '$lib/title';
 
 	import season1Img from '$lib/assets/screenshots/world_downloads/s1.webp';
 	import season2Img from '$lib/assets/screenshots/world_downloads/s2.webp';
@@ -88,7 +89,7 @@
 </script>
 
 <svelte:head>
-	<title>NearVanilla SMP - Worlds</title>
+	<title>{pageTitle('Worlds')}</title>
 	<meta
 		name="description"
 		content="Download previous NearVanilla world saves. Each world archive includes the full map from its active season."
@@ -96,48 +97,39 @@
 	<link rel="canonical" href="https://nearvanilla.com/downloads" />
 </svelte:head>
 
-<section class="downloads-hero">
-	<div class="downloads-hero__inner">
-		<p class="downloads-hero__eyebrow">Archive</p>
-		<h1 class="downloads-hero__title">
-			World <span class="downloads-hero__title-accent">Downloads</span>
-		</h1>
-		<p class="downloads-hero__desc">
-			Every previous NearVanilla world is preserved and made available to the community. Download
-			any season's world save and explore it in single-player or on your own server.
-		</p>
-	</div>
-</section>
+<header class="downloads-hero">
+	<p class="downloads-hero__eyebrow">Archive</p>
+	<h1 class="downloads-hero__title">
+		World <span class="downloads-hero__title-accent">Downloads</span>
+	</h1>
+	<p class="downloads-hero__desc">
+		Every previous NearVanilla world is preserved and made available to the community. Download any
+		season's world save and explore it in single-player or on your own server.
+	</p>
+</header>
 
-<section class="downloads-section">
-	<div class="downloads-section__inner">
-		<ul class="downloads-grid" role="list">
-			{#each worlds as world (world.name)}
-				<li>
-					<DownloadCard
-						name={world.name}
-						versionRange={world.versionRange}
-						fileSize={world.fileSize}
-						downloadHref={world.downloadHref}
-						seasonDates={world.seasonDates}
-						imageSrc={world.imageSrc}
-					/>
-				</li>
-			{/each}
-		</ul>
-	</div>
+<section class="downloads-section" aria-label="World saves">
+	<ul class="downloads-grid" role="list">
+		{#each worlds as world (world.name)}
+			<li>
+				<DownloadCard
+					name={world.name}
+					versionRange={world.versionRange}
+					fileSize={world.fileSize}
+					downloadHref={world.downloadHref}
+					seasonDates={world.seasonDates}
+					imageSrc={world.imageSrc}
+				/>
+			</li>
+		{/each}
+	</ul>
 </section>
 
 <style>
 	.downloads-hero {
 		background-color: var(--color-surface-alt);
 		border-bottom: 1px solid var(--color-border);
-		padding: clamp(2.5rem, 5vw, 4rem) 1.5rem;
-	}
-
-	.downloads-hero__inner {
-		max-width: 1100px;
-		margin: 0 auto;
+		padding: clamp(2.5rem, 5vw, 4rem) var(--content-gutter);
 		text-align: center;
 	}
 
@@ -175,12 +167,7 @@
 	}
 
 	.downloads-section {
-		padding: clamp(2.5rem, 5vw, 5rem) 1.5rem;
-	}
-
-	.downloads-section__inner {
-		max-width: 1100px;
-		margin: 0 auto;
+		padding: clamp(2.5rem, 5vw, 5rem) var(--content-gutter);
 	}
 
 	.downloads-grid {
