@@ -122,7 +122,7 @@
 		display: flex;
 		gap: 6px;
 		width: max-content;
-		animation: gallery-scroll 150s linear infinite;
+		animation: gallery-scroll 300s linear infinite;
 	}
 
 	.gallery__track--reverse {

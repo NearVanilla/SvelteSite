@@ -71,7 +71,7 @@
 				name: 'kNaLLx',
 				since: 2019,
 				badge: 'Moderator',
-				location: 'Norway',
+				location: 'Sweden',
 				responsibilities: ['Technical Support', 'Redstone Community']
 			},
 			{
@@ -122,7 +122,7 @@
 				name: 'femb0y3',
 				since: 2025,
 				badge: 'Helper',
-				location: 'USA'
+				location: 'United States'
 			}
 		] as StaffMember[]
 	};
