@@ -1,7 +1,7 @@
 <script lang="ts">
 	interface StaffMember {
 		name: string;
-		since: string;
+		since: number;
 		badge: string;
 		location?: string;
 		responsibilities?: string[];
@@ -11,36 +11,36 @@
 		admin: [
 			{
 				name: 'Prof_Bloodstone',
-				since: '2018-08-13',
+				since: 2016,
 				badge: 'Admin',
 				location: 'Poland',
 				responsibilities: ['Server Ownership', 'Plugin Development', 'Tech Mentoring']
 			},
 			{
 				name: '105hua',
-				since: '2024-09-23',
+				since: 2024,
 				badge: 'Admin',
 				location: 'United Kingdom',
 				responsibilities: ['Server Infrastructure', 'Configuration', 'Troubleshooting']
 			},
 			{
 				name: 'LoquaciousFox_',
-				since: '2020-07-04',
+				since: 2020,
 				badge: 'Admin',
 				location: 'Canada',
 				responsibilities: ['Community Events', 'Staff Meetings', 'Player Support']
 			},
 			{
 				name: 'Sblod',
-				since: '2024-10-02',
+				since: 2022,
 				badge: 'Admin',
 				location: 'Wales',
 				responsibilities: ['Event Coordination', 'Community Engagement']
 			},
 			{
 				name: 'Mufffinz',
-				since: '2022-01-08',
-				badge: 'Moderator',
+				since: 2022,
+				badge: 'Admin',
 				location: 'Canada',
 				responsibilities: ['Community Fun', 'Player Engagement']
 			}
@@ -48,49 +48,49 @@
 		moderator: [
 			{
 				name: 'Biz_Block',
-				since: '2022-01-08',
+				since: 2023,
 				badge: 'Moderator',
 				location: 'United States',
 				responsibilities: ['Player Moderation', 'Conflict Resolution']
 			},
 			{
 				name: 'Demonstrations',
-				since: '2022-01-08',
+				since: 2022,
 				badge: 'Moderator',
 				location: 'Wales',
 				responsibilities: ['New Player Guidance', 'Rule Enforcement']
 			},
 			{
 				name: 'Dynant',
-				since: '2022-01-08',
+				since: 2022,
 				badge: 'Moderator',
 				location: 'Netherlands',
 				responsibilities: ['World Exploration', 'Community Building']
 			},
 			{
 				name: 'kNaLLx',
-				since: '2022-01-08',
+				since: 2019,
 				badge: 'Moderator',
 				location: 'Norway',
 				responsibilities: ['Technical Support', 'Redstone Community']
 			},
 			{
 				name: 'Lego_monkeyman',
-				since: '2022-01-08',
+				since: 2025,
 				badge: 'Moderator',
 				location: 'United Kingdom',
 				responsibilities: ['Build Oversight', 'Creative Support']
 			},
 			{
 				name: 'Toystory2wasok',
-				since: '2022-01-08',
+				since: 2022,
 				badge: 'Moderator',
 				location: 'United States',
 				responsibilities: ['Lore & Storytelling', 'Community Content']
 			},
 			{
 				name: 'VividLilyBug949',
-				since: '2022-01-08',
+				since: 2025,
 				badge: 'Moderator',
 				location: 'United States',
 				responsibilities: ['Issue Resolution', 'Player Support']
@@ -99,31 +99,30 @@
 		helper: [
 			{
 				name: 'HaakonASH',
-				since: '2026-01-08',
+				since: 2021,
 				badge: 'Helper',
 				location: 'Norway',
 				responsibilities: ['New Player Help', 'General Support']
 			},
 			{
 				name: 'Nollita',
-				since: '2026-01-08',
+				since: 2022,
 				badge: 'Helper',
 				location: 'Netherlands',
 				responsibilities: ['Player Welcoming', 'Community Support']
 			},
 			{
 				name: 'TaintedBird',
-				since: '2026-01-08',
+				since: 2023,
 				badge: 'Helper',
 				location: 'United Kingdom',
 				responsibilities: ['Creative Support', 'Community Building']
 			},
 			{
-				name: 'WiscoSippi',
-				since: '2026-01-08',
+				name: 'femb0y3',
+				since: 2025,
 				badge: 'Helper',
-				location: 'United States',
-				responsibilities: ['Relaxed Support', 'Community Vibes']
+				location: 'USA'
 			}
 		] as StaffMember[]
 	};
@@ -166,25 +165,10 @@
 		}
 	}
 
-	function formatSinceDate(date: string) {
-		const d = new Date(`${date}T00:00:00Z`);
-		return d.toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' });
-	}
-
-	function getTimeServed(since: string): string {
-		const start = new Date(`${since}T00:00:00Z`);
-		const now = new Date();
-		let years = now.getUTCFullYear() - start.getUTCFullYear();
-		let months = now.getUTCMonth() - start.getUTCMonth();
-		if (months < 0) {
-			years--;
-			months += 12;
-		}
-		const parts: string[] = [];
-		if (years > 0) parts.push(`${years} year${years === 1 ? '' : 's'}`);
-		if (months > 0) parts.push(`${months} month${months === 1 ? '' : 's'}`);
-		if (parts.length === 0) return 'Just joined';
-		return parts.join(', ');
+	function getTimeServed(since: number): string {
+		const years = new Date().getUTCFullYear() - since;
+		if (years <= 0) return 'Less than a year';
+		return `${years} year${years === 1 ? '' : 's'}`;
 	}
 </script>
 
@@ -320,7 +304,7 @@
 							</h2>
 							<p class="modal__since">
 								<span class="modal__since-label">Joined</span>
-								{formatSinceDate(selectedMember.since)}
+								{selectedMember.since}
 								<span class="modal__time-served">{getTimeServed(selectedMember.since)}</span>
 							</p>
 						</div>
