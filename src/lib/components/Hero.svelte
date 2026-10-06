@@ -83,11 +83,14 @@
 
 	.hero__eyebrow {
 		font-family: var(--font-display);
-		font-weight: 600;
-		font-size: 0.9rem;
+		font-weight: 700;
+		font-size: clamp(1.1rem, 2.6vw, 1.6rem);
 		letter-spacing: 0.3em;
 		text-transform: uppercase;
-		color: var(--color-accent);
+		color: var(--color-text);
+		text-shadow:
+			0 2px 4px rgba(0, 0, 0, 0.8),
+			0 2px 16px rgba(0, 0, 0, 0.6);
 	}
 
 	.hero__title {

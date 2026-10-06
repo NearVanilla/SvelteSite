@@ -1,23 +1,63 @@
 <script lang="ts">
-	let isMenuOpen = $state(false);
+	type NavLink = { label: string; href: string };
+	type NavGroup = { label: string; children: NavLink[] };
 
-	const navLinks = [
+	let isMenuOpen = $state(false);
+	let openGroup = $state<string | null>(null);
+
+	const navItems: (NavLink | NavGroup)[] = [
 		{ label: 'Home', href: '/#home' },
-		{ label: 'About', href: '/#about' },
-		{ label: 'Plugins', href: '/#plugins' },
-		{ label: 'Specs', href: '/#specs' },
 		{ label: 'Downloads', href: '/downloads' },
-		{ label: 'Staff', href: '/staff' }
+		{ label: 'Map', href: 'https://map.nearvanilla.com' },
+		{
+			label: 'Server',
+			children: [
+				{ label: 'About', href: '/#about' },
+				{ label: 'Plugins', href: '/#plugins' },
+				{ label: 'Specs', href: '/#specs' },
+				{ label: 'Staff', href: '/staff' }
+			]
+		}
 	];
+
+	const groupId = (label: string) => `nav-group-${label.toLowerCase()}`;
 
 	function toggleMenu() {
 		isMenuOpen = !isMenuOpen;
+		openGroup = null;
 	}
 
 	function closeMenu() {
 		isMenuOpen = false;
+		openGroup = null;
+	}
+
+	function toggleGroup(label: string) {
+		openGroup = openGroup === label ? null : label;
+	}
+
+	function handleWindowClick(event: MouseEvent) {
+		if (openGroup && !(event.target as Element).closest('.nav__dropdown')) {
+			openGroup = null;
+		}
+	}
+
+	function handleWindowKeydown(event: KeyboardEvent) {
+		if (event.key === 'Escape' && openGroup) {
+			document.getElementById(`${groupId(openGroup)}-toggle`)?.focus();
+			openGroup = null;
+		}
+	}
+
+	function handleGroupFocusout(event: FocusEvent) {
+		const next = event.relatedTarget as Node | null;
+		if (next && !(event.currentTarget as Element).contains(next)) {
+			openGroup = null;
+		}
 	}
 </script>
+
+<svelte:window onclick={handleWindowClick} onkeydown={handleWindowKeydown} />
 
 <header class="nav" class:nav--open={isMenuOpen}>
 	<div class="nav__inner">
@@ -45,8 +85,32 @@
 			class:nav__links--open={isMenuOpen}
 			aria-label="Main navigation"
 		>
-			{#each navLinks as link (link.label)}
-				<a href={link.href} class="nav__link" onclick={closeMenu}>{link.label}</a>
+			{#each navItems as item (item.label)}
+				{#if 'children' in item}
+					{@const id = groupId(item.label)}
+					{@const isOpen = openGroup === item.label}
+					<div class="nav__dropdown" onfocusout={handleGroupFocusout}>
+						<button
+							id="{id}-toggle"
+							class="nav__link nav__dropdown-toggle"
+							onclick={() => toggleGroup(item.label)}
+							aria-expanded={isOpen}
+							aria-controls="{id}-menu"
+						>
+							{item.label}
+							<span class="nav__caret" class:nav__caret--open={isOpen} aria-hidden="true"></span>
+						</button>
+						<div id="{id}-menu" class="nav__dropdown-menu" hidden={!isOpen}>
+							{#each item.children as child (child.label)}
+								<a href={child.href} class="nav__link nav__dropdown-link" onclick={closeMenu}
+									>{child.label}</a
+								>
+							{/each}
+						</div>
+					</div>
+				{:else}
+					<a href={item.href} class="nav__link" onclick={closeMenu}>{item.label}</a>
+				{/if}
 			{/each}
 			<a href="https://discord.com/invite/KHAuj5F" class="nav__cta" onclick={closeMenu}>Apply Now</a
 			>
@@ -89,18 +153,20 @@
 	.nav__logo {
 		font-family: var(--font-display);
 		font-weight: 800;
-		font-size: 1.1rem;
-		letter-spacing: 0.15em;
+		font-size: 1.4rem;
+		letter-spacing: 0.1em;
 		text-transform: uppercase;
 		white-space: nowrap;
 	}
 
 	.nav__logo-near {
 		color: var(--color-brand-lime);
+		text-shadow: 0 0 14px rgb(163 230 53 / 0.35);
 	}
 
 	.nav__logo-vanilla {
 		color: var(--color-brand-sky);
+		text-shadow: 0 0 14px rgb(56 189 248 / 0.35);
 	}
 
 	.nav__links {
@@ -121,6 +187,63 @@
 
 	.nav__link:hover {
 		color: var(--color-text);
+	}
+
+	/* Dropdown group */
+	.nav__dropdown {
+		position: relative;
+	}
+
+	.nav__dropdown-toggle {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		background: none;
+		border: none;
+		cursor: pointer;
+	}
+
+	.nav__dropdown-toggle[aria-expanded='true'] {
+		color: var(--color-text);
+	}
+
+	.nav__caret {
+		width: 0.4rem;
+		height: 0.4rem;
+		border-right: 1.5px solid currentColor;
+		border-bottom: 1.5px solid currentColor;
+		transform: translateY(-2px) rotate(45deg);
+		transition: transform 0.15s ease;
+	}
+
+	.nav__caret--open {
+		transform: translateY(1px) rotate(-135deg);
+	}
+
+	.nav__dropdown-menu {
+		position: absolute;
+		top: calc(100% + 0.6rem);
+		left: 0;
+		display: flex;
+		flex-direction: column;
+		min-width: 10rem;
+		padding: 0.35rem;
+		background-color: rgba(10, 10, 10, 0.95);
+		border: 1px solid var(--color-border);
+		border-radius: 6px;
+		box-shadow: 0 8px 24px rgb(0 0 0 / 0.4);
+	}
+
+	.nav__dropdown-menu[hidden] {
+		display: none;
+	}
+
+	.nav__dropdown-link {
+		padding: 0.5rem 0.75rem;
+	}
+
+	.nav__dropdown-link:hover {
+		background-color: rgb(255 255 255 / 0.05);
 	}
 
 	.nav__cta {
@@ -214,6 +337,31 @@
 		.nav__link {
 			font-size: 1.25rem;
 			padding: 0.75rem 1.5rem;
+		}
+
+		.nav__dropdown {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.nav__dropdown-menu {
+			position: static;
+			align-items: center;
+			min-width: 0;
+			padding: 0;
+			background: none;
+			border: none;
+			box-shadow: none;
+		}
+
+		.nav__dropdown-link {
+			font-size: 1.05rem;
+			padding: 0.5rem 1.5rem;
+		}
+
+		.nav__dropdown-link:hover {
+			background: none;
 		}
 
 		.nav__cta {
