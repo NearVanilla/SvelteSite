@@ -18,7 +18,7 @@
 			},
 			{
 				name: '105hua',
-				since: 2024,
+				since: 2022,
 				badge: 'Admin',
 				location: 'United Kingdom',
 				responsibilities: ['Server Infrastructure', 'Configuration', 'Troubleshooting']
