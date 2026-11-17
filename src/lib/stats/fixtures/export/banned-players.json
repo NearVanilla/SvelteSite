@@ -1,0 +1,10 @@
+[
+	{
+		"uuid": "f6a5c8d7-6666-4fb0-8b6c-000000000006",
+		"name": "Frank",
+		"created": "2026-11-12 10:00:00 +0000",
+		"source": "Server",
+		"expires": "forever",
+		"reason": "Griefing"
+	}
+]

@@ -1,0 +1,30 @@
+{
+	"stats": {
+		"minecraft:killed": {
+			"minecraft:breeze": 12,
+			"minecraft:zombie": 45
+		},
+		"minecraft:mined": {
+			"minecraft:deepslate_diamond_ore": 40,
+			"minecraft:stone": 4000,
+			"minecraft:wheat": 3100,
+			"minecraft:pale_oak_log": 320
+		},
+		"minecraft:used": {
+			"minecraft:brush": 900
+		},
+		"minecraft:crafted": {
+			"minecraft:torch": 64
+		},
+		"minecraft:custom": {
+			"minecraft:walk_one_cm": 5200000,
+			"minecraft:jump": 9000,
+			"minecraft:deaths": 4,
+			"minecraft:damage_dealt": 30000,
+			"minecraft:mob_kills": 95,
+			"minecraft:nautilus_one_cm": 120000,
+			"minecraft:play_time": 800000
+		}
+	},
+	"DataVersion": 4786
+}

@@ -9,6 +9,7 @@
 		{ label: 'Home', href: '/#home' },
 		{ label: 'Downloads', href: '/downloads' },
 		{ label: 'Map', href: 'https://map.nearvanilla.com' },
+		{ label: 'Leaderboards', href: '/stats' },
 		{
 			label: 'Server',
 			children: [

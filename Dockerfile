@@ -12,11 +12,19 @@ RUN bun install --frozen-lockfile
 # Copy source code
 COPY . .
 
+# Leaderboards stats export, passed in as the named build context "stats"
+# (see docker-compose.yml and scripts/refresh-stats.sh)
+COPY --from=stats . /stats
+ENV STATS_DIR=/stats
+
 # Build the application
 RUN bun run build
 
 # Production stage
 FROM nginx:alpine AS runner
+
+# Clean URLs (/stats → stats.html) and gzip
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Copy built static files from builder
 COPY --from=builder /app/build /usr/share/nginx/html

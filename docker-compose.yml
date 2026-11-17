@@ -3,6 +3,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      # Leaderboards stats export (see scripts/refresh-stats.sh). Required: building without it
+      # fails rather than publishing empty or sample leaderboards.
+      additional_contexts:
+        stats: ${STATS_EXPORT_DIR:?Set STATS_EXPORT_DIR to the stats export folder}
     ports:
       - '80:80'
     restart: unless-stopped

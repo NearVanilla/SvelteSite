@@ -1,0 +1,20 @@
+{
+	"stats": {
+		"minecraft:killed": {
+			"minecraft:breeze": 99,
+			"minecraft:zombie": 900
+		},
+		"minecraft:mined": {
+			"minecraft:deepslate_diamond_ore": 300,
+			"minecraft:stone": 30000
+		},
+		"minecraft:custom": {
+			"minecraft:walk_one_cm": 20000000,
+			"minecraft:jump": 30000,
+			"minecraft:deaths": 50,
+			"minecraft:mob_kills": 1500,
+			"minecraft:play_time": 2000000
+		}
+	},
+	"DataVersion": 4786
+}

@@ -1,0 +1,13 @@
+{
+	"stats": {
+		"minecraft:killed": {
+			"minecraft:zombie": 999
+		},
+		"minecraft:custom": {
+			"minecraft:player_kills": 40,
+			"minecraft:walk_one_cm": 900000,
+			"minecraft:play_time": 500000
+		}
+	},
+	"DataVersion": 4786
+}

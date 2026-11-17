@@ -11,6 +11,9 @@
 	--color-border: rgba(255, 255, 255, 0.08);
 	--color-brand-lime: #a3e635;
 	--color-brand-sky: #38bdf8;
+	--color-medal-gold: #f5c542;
+	--color-medal-silver: #c0c7d0;
+	--color-medal-bronze: #cd7f32;
 	--font-display: 'Barlow Condensed', sans-serif;
 	--font-body: 'Barlow', sans-serif;
 	--nav-height: 48px;
