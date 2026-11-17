@@ -133,6 +133,7 @@ Plain TypeScript, no `$app`/`$env`/Svelte imports, so it's unit-testable with `b
   usercache copies, ops and bans. Uses Node `fs`. A malformed or unreadable player file is skipped with a build warning
   (a file caught mid-write by the server is the likely cause), not a build failure.
 - **`awards.ts`** — the catalogue. Each award:
+
   ```ts
   {
   	id: string;
@@ -155,6 +156,7 @@ Plain TypeScript, no `$app`/`$env`/Svelte imports, so it's unit-testable with `b
     grouping on the overview and for the category glyph.
   - Breadth: comparable to the original (~150–200 awards), names and descriptions written fresh in
     NearVanilla's voice. The exact list is the builder's to draft; the user reviews it.
+
 - **`config.ts`** — tunables with defaults:
   - `inactiveDays: 7`
   - `minPlaytimeMinutes: 60`
