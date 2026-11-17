@@ -7,3 +7,6 @@ bun.lockb
 
 # Miscellaneous
 /static/
+
+# Superpowers scratch workspaces
+.superpowers/

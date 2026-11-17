@@ -69,11 +69,11 @@ last export; what happens for Season 9 is out of scope.
 
 ## Approaches considered
 
-| Approach | Trade-offs |
-| --- | --- |
-| **A. Build-time generation (chosen)** | Daily cron rebuilds the image; SvelteKit reads the export during prerender and emits static HTML for every page. Keeps the deployment unchanged, every page is a real shareable URL, no loading states. Stats only change on rebuild — fine for daily. Measured current build: ~6 s; stats add an estimated few seconds. |
-| B. Separate updater + client-side fetch | No rebuilds, but player/award pages can't be prerendered (unknown params), so SPA fallback, loading states, poor link previews; two moving parts — the shape that made the original fragile. |
-| C. Switch to a Node/Bun server reading files live | Always fresh, but changes the whole site's deployment for one section with only daily data. |
+| Approach                                          | Trade-offs                                                                                                                                                                                                                                                                                                               |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **A. Build-time generation (chosen)**             | Daily cron rebuilds the image; SvelteKit reads the export during prerender and emits static HTML for every page. Keeps the deployment unchanged, every page is a real shareable URL, no loading states. Stats only change on rebuild — fine for daily. Measured current build: ~6 s; stats add an estimated few seconds. |
+| B. Separate updater + client-side fetch           | No rebuilds, but player/award pages can't be prerendered (unknown params), so SPA fallback, loading states, poor link previews; two moving parts — the shape that made the original fragile.                                                                                                                             |
+| C. Switch to a Node/Bun server reading files live | Always fresh, but changes the whole site's deployment for one section with only daily data.                                                                                                                                                                                                                              |
 
 Chosen by the user: **A**. The stats engine is written as plain TypeScript with no SvelteKit
 imports, so it can later move into B or C unchanged.
@@ -134,9 +134,16 @@ Plain TypeScript, no `$app`/`$env`/Svelte imports, so it's unit-testable with `b
   (a file caught mid-write by the server is the likely cause), not a build failure.
 - **`awards.ts`** — the catalogue. Each award:
   ```ts
-  { id: string; name: string; description: string; category: AwardCategory; unit: Unit;
-    read: Reader }
+  {
+  	id: string;
+  	name: string;
+  	description: string;
+  	category: AwardCategory;
+  	unit: Unit;
+  	read: Reader;
+  }
   ```
+
   - `Unit`: `count` | `distance` (cm) | `duration` (ticks) | `health` (tenths of a heart).
   - `Reader` (three kinds, as in the original concept):
     - `stat(category, key)` — single value, e.g. `('minecraft:killed', 'minecraft:breeze')`.
@@ -164,8 +171,8 @@ Plain TypeScript, no `$app`/`$env`/Svelte imports, so it's unit-testable with `b
     "now"), so the frozen end-of-season board keeps its final rankings. Only active players are ranked;
     inactive players still have a player page showing their values, without ranks or medals.
   - Per award: ranking of active players with value > 0, descending. **Ties share a rank**
-    (competition ranking: 1, 1, 3), so tied players share the medal. *(Deviation from original,
-    which broke ties by name.)*
+    (competition ranking: 1, 1, 3), so tied players share the medal. _(Deviation from original,
+    which broke ties by name.)_
   - Awards with no ranked players are hidden from the overview (replaces the original's
     DataVersion gating — no version table to maintain).
   - Hall of Fame: medal points = Σ medal weights; ranked descending, ties share rank, players with
@@ -235,13 +242,13 @@ Sketch of the overview:
 
 ### 7. Failure behaviour
 
-| Situation | Behaviour |
-| --- | --- |
-| `STATS_DIR` unset, `bun run dev` | Use a small committed fixture export (`src/lib/stats/fixtures/`) so the pages can be developed; pages show a "Sample data" notice. |
-| `STATS_DIR` unset, production build | Build succeeds; `/stats` renders an "Leaderboards aren't available yet" empty state; build prints a clear warning. No fixture data in production. |
-| `STATS_DIR` set but missing/unreadable, or contains no player files | **Build fails** with a clear error — the cron job keeps the previous container running. |
-| Individual player file malformed | Skipped with a warning. |
-| Player missing from usercache | Dropped with a warning. |
+| Situation                                                           | Behaviour                                                                                                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `STATS_DIR` unset, `bun run dev`                                    | Use a small committed fixture export (`src/lib/stats/fixtures/`) so the pages can be developed; pages show a "Sample data" notice.                |
+| `STATS_DIR` unset, production build                                 | Build succeeds; `/stats` renders an "Leaderboards aren't available yet" empty state; build prints a clear warning. No fixture data in production. |
+| `STATS_DIR` set but missing/unreadable, or contains no player files | **Build fails** with a clear error — the cron job keeps the previous container running.                                                           |
+| Individual player file malformed                                    | Skipped with a warning.                                                                                                                           |
+| Player missing from usercache                                       | Dropped with a warning.                                                                                                                           |
 
 ### 8. Testing
 
