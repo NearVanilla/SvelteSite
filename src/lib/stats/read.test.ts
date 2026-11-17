@@ -70,6 +70,19 @@ describe('readExport', () => {
 		expect(raw.names.get(BOB)).toBe('Bob');
 	});
 
+	test('corrupt usercache copy is skipped with a warning', () => {
+		const dir = makeExport();
+		writeStats(dir, ALICE, {});
+		write(dir, 'usercache/2026-11-01.json', [{ name: 'Alice', uuid: ALICE, expiresOn: 'x' }]);
+		write(dir, 'usercache/2026-11-02.json', '[{"name":"Al');
+
+		const raw = readExport(dir);
+
+		expect(raw.names.get(ALICE)).toBe('Alice');
+		expect(raw.warnings).toHaveLength(1);
+		expect(raw.warnings[0]).toContain('2026-11-02.json');
+	});
+
 	test('last-seen.json overrides mtime', () => {
 		const dir = makeExport();
 		const file = writeStats(dir, ALICE, {});

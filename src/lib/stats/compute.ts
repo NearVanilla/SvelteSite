@@ -66,7 +66,9 @@ export function computeLeaderboard(
 	const eligible = raw.players.flatMap((player) => {
 		const name = raw.names.get(player.uuid);
 		if (name === undefined) {
-			warnings.push(`Dropped player ${player.uuid}: no name in any usercache copy`);
+			const warning = `Dropped player ${player.uuid}: no name in any usercache copy`;
+			warnings.push(warning);
+			console.warn(`[stats] ${warning}`);
 			return [];
 		}
 		if (playtimeOf(player) < minTicks) return [];

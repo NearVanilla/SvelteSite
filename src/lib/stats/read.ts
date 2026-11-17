@@ -34,11 +34,26 @@ function readUuidSet(path: string): Set<string> {
 	);
 }
 
-/** Merges every usercache copy in file-name (date) order, so newer copies win per UUID. */
-function readNames(dir: string): Map<string, string> {
+function warn(warnings: string[], message: string): void {
+	warnings.push(message);
+	console.warn(`[stats] ${message}`);
+}
+
+/**
+ * Merges every usercache copy in file-name (date) order, so newer copies win per UUID. A copy
+ * that can't be parsed (e.g. caught mid-write) is skipped: the other copies still supply names.
+ */
+function readNames(dir: string, warnings: string[]): Map<string, string> {
 	const names = new Map<string, string>();
 	for (const file of jsonFiles(dir)) {
-		const entries = readJson(join(dir, file));
+		let entries: unknown;
+		try {
+			entries = readJson(join(dir, file));
+		} catch (error) {
+			const reason = error instanceof Error ? error.message : String(error);
+			warn(warnings, `Skipped unreadable usercache copy ${join(dir, file)} (${reason})`);
+			continue;
+		}
 		if (!Array.isArray(entries)) continue;
 		for (const entry of entries as ProfileEntry[]) {
 			if (typeof entry.uuid === 'string' && typeof entry.name === 'string') {
@@ -117,7 +132,7 @@ export function readExport(dir: string): RawExport {
 
 	return {
 		players,
-		names: readNames(join(dir, 'usercache')),
+		names: readNames(join(dir, 'usercache'), warnings),
 		ops: readUuidSet(join(dir, 'ops.json')),
 		banned: readUuidSet(join(dir, 'banned-players.json')),
 		warnings

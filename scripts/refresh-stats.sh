@@ -45,7 +45,7 @@ cp -p "$SERVER_DIR/usercache.json" "$STATS_EXPORT_DIR/usercache/$(date -u +%F).j
 # the Docker build.
 find "$stats_src" -maxdepth 1 -name '*.json' -printf '%f %T@\n' |
 	awk 'BEGIN { printf "{" }
-		{ sub(/\.json$/, "", $1); printf "%s\"%s\":%d", (NR > 1 ? "," : ""), $1, $2 * 1000 }
+		{ sub(/\.json$/, "", $1); printf "%s\"%s\":%.0f", (NR > 1 ? "," : ""), $1, $2 * 1000 }
 		END { print "}" }' >"$STATS_EXPORT_DIR/last-seen.json.tmp"
 mv "$STATS_EXPORT_DIR/last-seen.json.tmp" "$STATS_EXPORT_DIR/last-seen.json"
 
@@ -58,4 +58,6 @@ fi
 cd "$(dirname "$0")/.."
 docker compose build web
 docker compose up -d web
+# Each daily build leaves the previous image dangling; clear them so the disk doesn't fill.
+docker image prune -f >/dev/null
 echo "refresh-stats: site rebuilt and restarted"

@@ -1,4 +1,4 @@
-import { describe, expect, test } from 'bun:test';
+import { describe, expect, spyOn, test } from 'bun:test';
 import { computeLeaderboard } from './compute';
 import { defaultConfig } from './config';
 import { stat } from './readers';
@@ -129,6 +129,18 @@ describe('computeLeaderboard', () => {
 		const board = computeLeaderboard(data, awards, defaultConfig);
 		expect(board.players.map((p) => p.uuid)).not.toContain('carol');
 		expect(board.warnings.some((w) => w.includes('carol'))).toBe(true);
+	});
+
+	test('dropped-player warnings are printed to the build log', () => {
+		const warn = spyOn(console, 'warn').mockImplementation(() => {});
+		try {
+			const data = fixture();
+			data.names.delete('carol');
+			computeLeaderboard(data, awards, defaultConfig);
+			expect(warn.mock.calls.some(([msg]) => String(msg).includes('carol'))).toBe(true);
+		} finally {
+			warn.mockRestore();
+		}
 	});
 
 	test('awards nobody active scored are hidden', () => {

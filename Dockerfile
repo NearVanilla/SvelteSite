@@ -23,6 +23,9 @@ RUN bun run build
 # Production stage
 FROM nginx:alpine AS runner
 
+# Clean URLs (/stats → stats.html) and gzip
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 # Copy built static files from builder
 COPY --from=builder /app/build /usr/share/nginx/html
 
