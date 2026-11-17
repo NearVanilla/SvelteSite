@@ -1,0 +1,123 @@
+/* Shared styles for the Leaderboards pages (imported by src/routes/stats/+layout.svelte). */
+
+.stats-page {
+	max-width: 1100px;
+	margin: 0 auto;
+	padding: clamp(2rem, 4vw, 3rem) 1.5rem clamp(3rem, 6vw, 5rem);
+}
+
+.stats-page--narrow {
+	max-width: 860px;
+}
+
+.stats-page__header {
+	text-align: center;
+	margin-bottom: 2.5rem;
+}
+
+.stats-page__title {
+	font-family: var(--font-display);
+	font-weight: 900;
+	font-size: clamp(2rem, 5vw, 3rem);
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	line-height: 1;
+	color: var(--color-brand-lime);
+	margin-bottom: 0.75rem;
+	overflow-wrap: anywhere;
+}
+
+.stats-page__desc {
+	color: var(--color-text-muted);
+}
+
+.stats-page__back {
+	display: inline-block;
+	margin-top: 2rem;
+	color: var(--color-brand-sky);
+	text-decoration: none;
+}
+
+.stats-page__back:hover,
+.stats-page__back:focus-visible {
+	text-decoration: underline;
+}
+
+.stats-table-wrap {
+	overflow-x: auto;
+	border: 1px solid var(--color-border);
+	border-radius: 6px;
+	background-color: var(--color-surface);
+}
+
+.stats-table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 0.95rem;
+}
+
+.stats-table caption {
+	padding: 0.75rem 1rem;
+	text-align: left;
+	font-family: var(--font-display);
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--color-text-muted);
+}
+
+.stats-table th,
+.stats-table td {
+	padding: 0.6rem 1rem;
+	text-align: left;
+	border-top: 1px solid var(--color-border);
+	white-space: nowrap;
+}
+
+.stats-table thead th {
+	font-family: var(--font-display);
+	font-weight: 600;
+	font-size: 0.8rem;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: var(--color-text-muted);
+	background-color: var(--color-surface-alt);
+}
+
+.stats-table tbody tr:hover {
+	background-color: var(--color-accent-dim);
+}
+
+.stats-table .stats-table__num {
+	text-align: right;
+	font-variant-numeric: tabular-nums;
+}
+
+.stats-table__rank {
+	width: 4.5rem;
+	font-variant-numeric: tabular-nums;
+}
+
+.stats-rank {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.45rem;
+}
+
+.stats-player {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.6rem;
+	color: var(--color-text);
+	text-decoration: none;
+}
+
+.stats-player:hover,
+.stats-player:focus-visible {
+	color: var(--color-brand-sky);
+}
+
+.stats-player:hover .stats-player__name,
+.stats-player:focus-visible .stats-player__name {
+	text-decoration: underline;
+}

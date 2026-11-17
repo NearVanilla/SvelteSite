@@ -1,4 +1,5 @@
 <script lang="ts">
+	import '$lib/styles/stats.css';
 	import StatsNav from '$lib/components/stats/StatsNav.svelte';
 	import { formatDate } from '$lib/stats/format';
 

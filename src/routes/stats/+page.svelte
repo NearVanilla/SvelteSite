@@ -56,32 +56,6 @@
 </article>
 
 <style>
-	.stats-page {
-		max-width: 1100px;
-		margin: 0 auto;
-		padding: clamp(2rem, 4vw, 3rem) 1.5rem clamp(3rem, 6vw, 5rem);
-	}
-
-	.stats-page__header {
-		text-align: center;
-		margin-bottom: 2.5rem;
-	}
-
-	.stats-page__title {
-		font-family: var(--font-display);
-		font-weight: 900;
-		font-size: clamp(2rem, 5vw, 3rem);
-		letter-spacing: 0.06em;
-		text-transform: uppercase;
-		line-height: 1;
-		color: var(--color-brand-lime);
-		margin-bottom: 0.75rem;
-	}
-
-	.stats-page__desc {
-		color: var(--color-text-muted);
-	}
-
 	.award-group {
 		margin-bottom: 3rem;
 	}
