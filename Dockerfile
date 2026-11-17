@@ -12,6 +12,11 @@ RUN bun install --frozen-lockfile
 # Copy source code
 COPY . .
 
+# Leaderboards stats export, passed in as the named build context "stats"
+# (see docker-compose.yml and scripts/refresh-stats.sh)
+COPY --from=stats . /stats
+ENV STATS_DIR=/stats
+
 # Build the application
 RUN bun run build
 

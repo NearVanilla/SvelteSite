@@ -56,3 +56,35 @@ npm run build
 You can preview the production build with `npm run preview`.
 
 > To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+
+## Leaderboards stats
+
+The Leaderboards section (`/stats`) is generated at build time from a stats export folder. The
+build reads it from `STATS_DIR`; Docker gets it through the `stats` build context set by
+`STATS_EXPORT_DIR`.
+
+- `bun run dev` with no `STATS_DIR` uses the sample export in `src/lib/stats/fixtures/export` and
+  shows a "Sample data" notice.
+- `bun run build` with no `STATS_DIR` builds the empty "coming soon" state.
+- A `STATS_DIR` that is missing or has no player stats fails the build.
+- `docker compose build` requires `STATS_EXPORT_DIR` (Docker Compose v2.17+ for
+  `additional_contexts`). To try it locally:
+  `STATS_EXPORT_DIR=./src/lib/stats/fixtures/export docker compose build web`.
+
+### Daily refresh on the VPS
+
+`scripts/refresh-stats.sh` copies the world's player stats into the export folder, records each
+player's last-seen time, keeps a dated copy of `usercache.json`, then rebuilds and restarts the
+container. Example cron entry (04:15 daily):
+
+```cron
+15 4 * * * WORLD_DIR=/srv/minecraft/world SERVER_DIR=/srv/minecraft STATS_EXPORT_DIR=/srv/nearvanilla/stats-export /srv/nearvanilla/SvelteSite/scripts/refresh-stats.sh >> /var/log/nv-stats.log 2>&1
+```
+
+Put `STATS_EXPORT_DIR` in the compose project's `.env` too, so manual `docker compose` commands
+work. If a build fails, the previous container keeps serving and the script exits non-zero.
+
+At the end of the season, remove the cron entry: the board stays frozen at its last export.
+
+Award definitions live in `src/lib/stats/awards.ts`; ranking rules and defaults (7-day active
+window, 60-minute minimum playtime, medal points 4/2/1) in `src/lib/stats/config.ts`.
