@@ -24,3 +24,5 @@ vite.config.ts.timestamp-*
 
 # Cursor-specific stuff
 .cursor/*.log
+.superpowers/
+__pycache__/
