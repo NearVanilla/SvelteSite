@@ -32,7 +32,7 @@
 	.player-avatar {
 		display: block;
 		flex-shrink: 0;
-		border-radius: 3px;
+		border-radius: var(--stats-avatar-radius, 3px);
 		background-color: var(--color-placeholder);
 		image-rendering: pixelated;
 	}

@@ -54,3 +54,11 @@ export function formatValue(value: number, unit: Unit): string {
 export function formatDate(ms: number): string {
 	return dateFormat.format(ms);
 }
+
+/**
+ * Short label for an award's value, from its description: the first sentence without its full
+ * stop ("Deaths. It happens to everyone." becomes "Deaths").
+ */
+export function statLabel(description: string): string {
+	return description.split('.')[0].trim();
+}

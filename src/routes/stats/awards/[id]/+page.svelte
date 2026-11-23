@@ -1,7 +1,8 @@
 <script lang="ts">
-	import CategoryGlyph from '$lib/components/stats/CategoryGlyph.svelte';
-	import Medal from '$lib/components/stats/Medal.svelte';
+	import AwardIcon from '$lib/components/stats/AwardIcon.svelte';
 	import PlayerAvatar from '$lib/components/stats/PlayerAvatar.svelte';
+	import RankBadge from '$lib/components/stats/RankBadge.svelte';
+	import { statLabel } from '$lib/stats/format';
 
 	let { data } = $props();
 </script>
@@ -12,62 +13,41 @@
 	<link rel="canonical" href="https://nearvanilla.com/stats/awards/{data.award.id}" />
 </svelte:head>
 
-<article class="stats-page stats-page--narrow">
-	<header class="stats-page__header">
-		<p class="award-category">
-			<CategoryGlyph category={data.award.category} />
-			{data.award.label}
-		</p>
-		<h1 class="stats-page__title">{data.award.name}</h1>
-		<p class="stats-page__desc">{data.award.description}</p>
+<article class="stats-view stats-view--narrow">
+	<header class="stats-view__header">
+		<h1 class="stats-view__title">
+			<AwardIcon id={data.award.id} />
+			<span class="stats-view__title-text">{data.award.name}</span>
+		</h1>
+		<p class="stats-view__subtitle">{data.award.label} award ranking</p>
+		<p class="stats-view__desc">{data.award.description}</p>
 	</header>
 
-	<section class="stats-table-wrap">
-		<table class="stats-table">
-			<caption>Ranking · {data.rows.length} players</caption>
-			<thead>
-				<tr>
-					<th scope="col" class="stats-table__rank">Rank</th>
-					<th scope="col">Player</th>
-					<th scope="col" class="stats-table__num">Value</th>
-				</tr>
-			</thead>
-			<tbody>
-				{#each data.rows as row (row.uuid)}
+	<section class="mc-entry" aria-label="Ranking">
+		<div class="mc-box mc-table-scroll">
+			<table class="mc-table">
+				<thead>
 					<tr>
-						<td class="stats-table__rank">
-							<span class="stats-rank">
-								{row.rank}
-								{#if row.medal}<Medal medal={row.medal} />{/if}
-							</span>
-						</td>
-						<td>
-							<a class="stats-player" href="/stats/players/{row.slug}">
-								<PlayerAvatar uuid={row.uuid} size={28} />
-								<span class="stats-player__name">{row.name}</span>
-							</a>
-						</td>
-						<td class="stats-table__num">{row.value}</td>
+						<th scope="col" class="mc-table__end">Rank</th>
+						<th scope="col">Player</th>
+						<th scope="col" class="mc-table__end">{statLabel(data.award.description)}</th>
 					</tr>
-				{/each}
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					{#each data.rows as row (row.uuid)}
+						<tr>
+							<td class="mc-table__end"><RankBadge rank={row.rank} /></td>
+							<td>
+								<a class="mc-player mc-link" href="/stats/players/{row.slug}">
+									<PlayerAvatar uuid={row.uuid} size={32} />
+									{row.name}
+								</a>
+							</td>
+							<td class="mc-table__end mc-data">{row.value}</td>
+						</tr>
+					{/each}
+				</tbody>
+			</table>
+		</div>
 	</section>
-
-	<a class="stats-page__back" href="/stats">← All awards</a>
 </article>
-
-<style>
-	.award-category {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.4rem;
-		margin-bottom: 0.75rem;
-		font-family: var(--font-display);
-		font-weight: 600;
-		font-size: 0.85rem;
-		letter-spacing: 0.15em;
-		text-transform: uppercase;
-		color: var(--color-text-muted);
-	}
-</style>

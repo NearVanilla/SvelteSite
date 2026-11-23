@@ -28,6 +28,7 @@ export const load: PageServerLoad = ({ params }) => {
 			{
 				awardId: result.award.id,
 				name: result.award.name,
+				description: result.award.description,
 				category: result.award.category,
 				value: formatValue(standing.value, result.award.unit),
 				rank: standing.rank,

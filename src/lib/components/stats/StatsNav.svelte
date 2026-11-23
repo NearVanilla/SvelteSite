@@ -8,14 +8,14 @@
 			matches: (path: string) => path === '/stats' || path.startsWith('/stats/awards')
 		},
 		{
-			label: 'Players',
-			href: '/stats/players',
-			matches: (path: string) => path.startsWith('/stats/players')
-		},
-		{
 			label: 'Hall of Fame',
 			href: '/stats/hall-of-fame',
 			matches: (path: string) => path.startsWith('/stats/hall-of-fame')
+		},
+		{
+			label: 'Players',
+			href: '/stats/players',
+			matches: (path: string) => path.startsWith('/stats/players')
 		}
 	];
 </script>
@@ -38,41 +38,57 @@
 </nav>
 
 <style>
+	/* Colours, sizes and bevels come from the look's --nav-* tokens in stats.css. */
+	.stats-nav {
+		padding: var(--px);
+		background-color: var(--nav-box);
+		border-radius: var(--stats-box-radius);
+		clip-path: var(--stats-corners);
+	}
+
 	.stats-nav__list {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
-		gap: 0.5rem;
+		gap: var(--nav-gap);
 		list-style: none;
 	}
 
 	.stats-nav__link {
 		display: inline-block;
-		padding: 0.45rem 1.1rem;
-		border: 1px solid var(--color-border);
-		border-radius: 999px;
-		font-family: var(--font-display);
-		font-weight: 600;
-		font-size: 0.85rem;
-		letter-spacing: 0.12em;
-		text-transform: uppercase;
-		color: var(--color-text-muted);
+		min-width: var(--nav-min-width);
+		padding: var(--nav-padding);
+		border: var(--px) solid var(--nav-border);
+		background-color: var(--nav-bg);
+		box-shadow: var(--nav-bevel);
+		font-family: var(--nav-font);
+		font-weight: var(--nav-weight);
+		font-size: var(--nav-size);
+		line-height: var(--stats-leading);
+		text-align: center;
+		color: var(--nav-text);
+		text-shadow: var(--nav-text-shadow);
 		text-decoration: none;
-		transition:
-			color 0.2s ease,
-			border-color 0.2s ease,
-			background-color 0.2s ease;
 	}
 
 	.stats-nav__link:hover,
 	.stats-nav__link:focus-visible {
-		color: var(--color-text);
-		border-color: var(--color-accent);
+		background-color: var(--nav-hover-bg);
+		box-shadow: var(--nav-hover-bevel);
+		color: var(--nav-hover-text);
+		text-decoration: var(--nav-hover-decoration);
+		outline: var(--nav-hover-outline);
+		outline-offset: 0;
+	}
+
+	.stats-nav__link:focus-visible {
+		outline: var(--px) solid currentColor;
 	}
 
 	.stats-nav__link--current {
-		color: var(--color-text);
-		background-color: var(--color-accent-dim);
-		border-color: var(--color-accent);
+		background-color: var(--nav-current-bg);
+		box-shadow: var(--nav-current-bevel);
+		color: var(--nav-current-text);
+		text-shadow: var(--nav-current-text-shadow, var(--nav-text-shadow));
 	}
 </style>
