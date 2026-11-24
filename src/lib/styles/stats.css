@@ -1,0 +1,457 @@
+/* Shared styles for the Leaderboards pages (imported by src/routes/stats/+layout.svelte). */
+
+/*
+ * The default ("classic") look recreates the old MinecraftStats site: grass and dirt strips over
+ * stone, dark rounded boxes inside stone-brick entries, pale blue links and yellow values.
+ * Textures and award icons are Minecraft's own (Mojang), taken from MinecraftStats and the vanilla
+ * client; the grass strip is a dappled forest grass side (scripts/stats-grass.py). Medals and
+ * crowns are FatCow icons; the font is NV Pixel, a re-spaced Monocraft (OFL).
+ * Credits and licences: ASSETS.md.
+ *
+ * Pixel art is only ever drawn at whole-number scales with image-rendering: pixelated:
+ *   - textures: MinecraftStats' 64px tiles (16 texels at 4px), shown at their own size;
+ *   - award icons: 18x18 at 2x (36px); player faces: 8x8 at 4x (32px);
+ *   - NV Pixel draws 1 font pixel as 1/9 em: 18px text has 2px font pixels, 36px titles 4px.
+ * FatCow medals and crowns are smooth 32px icons and are shown at their native size.
+ */
+
+main:has(> .stats-theme) {
+	display: flex;
+	flex-direction: column;
+}
+
+@font-face {
+	font-family: 'NV Pixel';
+	src: url('../assets/stats/fonts/nv-pixel.woff2') format('woff2');
+	font-display: swap;
+}
+
+.stats-theme {
+	--px: 2px;
+
+	/* Type */
+	--stats-font-body: 'NV Pixel', monospace;
+	--stats-size-body: calc(var(--px) * 9);
+	--stats-leading: calc(var(--px) * 12);
+	--stats-font-title: 'NV Pixel', monospace;
+	--stats-size-title: calc(var(--px) * 18);
+	--stats-title-leading: calc(var(--px) * 24);
+	--stats-title-line: calc(var(--px) * 2);
+	--stats-shadow: var(--px) var(--px) 0 rgba(0, 0, 0, 0.5);
+	--stats-title-shadow: calc(var(--px) * 2) calc(var(--px) * 2) 0 rgba(0, 0, 0, 0.5);
+
+	/* Colours */
+	--stats-text: #eeeeee;
+	--stats-text-strong: #ffffff;
+	--stats-text-muted: #999999;
+	--color-link-mc: #aaccff;
+	--stats-data: #ffffaa;
+	--stats-success: #aaffaa;
+	--stats-danger: #ffaaaa;
+	--stats-info: #ccccff;
+	--color-rank-1: #ffcc00;
+	--color-rank-2: #ddddff;
+	--color-rank-3: #aa8800;
+	--color-rank-other: #888888;
+
+	/* Boxes */
+	--stats-box: rgba(0, 0, 0, 0.5);
+	--stats-box-strong: rgba(0, 0, 0, 0.75);
+	--stats-entry-bg: url('../assets/stats/minecraft/stonebrick.png') 0 0 / 64px 64px #494949;
+	--stats-entry-border: #444444;
+	--stats-entry-border-width: var(--px);
+	--stats-entry-frame: none;
+	--stats-entry-padding: calc(var(--px) * 2);
+	--stats-entry-radius: 9px;
+	--stats-box-radius: 6px;
+	--stats-rule: #666666;
+	--stats-row-hover: rgba(0, 0, 0, 0.33);
+	--stats-avatar-radius: 0;
+	--stats-corners: none;
+
+	/* Page: a strip of dappled-forest grass, a strip of dirt, then stone; bedrock under the footer. */
+	--stats-page-bg:
+		url('../assets/stats/minecraft/grass_side_dappled_forest.png') 0 0 / 64px 64px repeat-x,
+		url('../assets/stats/minecraft/dirt.png') 0 64px / 64px 64px repeat-x,
+		url('../assets/stats/minecraft/stone.png') 0 0 / 64px 64px #323232;
+	--stats-floor: url('../assets/stats/minecraft/bedrock.png') 0 0 / 64px 64px #262626;
+
+	/* Nav: plain pale-blue links in a dark box. */
+	--nav-box: var(--stats-box-strong);
+	--nav-gap: 0;
+	--nav-font: var(--stats-font-body);
+	--nav-size: var(--stats-size-body);
+	--nav-weight: 400;
+	--nav-min-width: 0;
+	--nav-padding: var(--px) calc(var(--px) * 6);
+	--nav-border: transparent;
+	--nav-bg: transparent;
+	--nav-bevel: none;
+	--nav-text: var(--color-link-mc);
+	--nav-text-shadow: none;
+	--nav-hover-bg: transparent;
+	--nav-hover-bevel: none;
+	--nav-hover-text: var(--color-link-mc);
+	--nav-hover-decoration: underline;
+	--nav-hover-outline: none;
+	--nav-current-bg: transparent;
+	--nav-current-bevel: none;
+	--nav-current-text: var(--stats-text-strong);
+
+	/* Fill <main> so the bedrock footer sits on the site footer even on short pages. */
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	font-family: var(--stats-font-body);
+	font-size: var(--stats-size-body);
+	line-height: var(--stats-leading);
+	font-synthesis: none;
+	font-variant-ligatures: none;
+	color: var(--stats-text);
+	background: var(--stats-page-bg);
+	image-rendering: pixelated;
+}
+
+/* The three earlier explorations, kept behind ?look= for comparison. */
+.stats-theme--slate,
+.stats-theme--brand,
+.stats-theme--quiet {
+	--stats-font-body: var(--font-body);
+	--stats-size-body: 1rem;
+	--stats-leading: 1.5;
+	/* Jersey 10 draws 1 font pixel as 3/56 em, so this size makes 1 font pixel exactly --px. */
+	--stats-font-title: 'Jersey 10', monospace;
+	--stats-size-title: calc(var(--px) * 56 / 3);
+	--stats-title-leading: calc(var(--px) * 20);
+	--stats-title-line: var(--px);
+	--stats-shadow: var(--px) var(--px) 0 var(--stats-shadow-colour, #000);
+	--stats-title-shadow: var(--stats-shadow);
+	--stats-data: var(--stats-text);
+	--stats-entry-bg: var(--color-panel);
+	--stats-entry-border: var(--color-panel-border);
+	--stats-entry-border-width: var(--px);
+	--stats-entry-frame: none;
+	--stats-entry-padding: calc(var(--px) * 2);
+	--stats-box: transparent;
+	--stats-entry-radius: 0;
+	--stats-box-radius: 0;
+	--stats-rule: rgba(255, 255, 255, 0.12);
+	--stats-corners: polygon(
+		0 var(--px),
+		var(--px) var(--px),
+		var(--px) 0,
+		calc(100% - var(--px)) 0,
+		calc(100% - var(--px)) var(--px),
+		100% var(--px),
+		100% calc(100% - var(--px)),
+		calc(100% - var(--px)) calc(100% - var(--px)),
+		calc(100% - var(--px)) 100%,
+		var(--px) 100%,
+		var(--px) calc(100% - var(--px)),
+		0 calc(100% - var(--px))
+	);
+	--color-rank-1: #ffcc33;
+	--color-rank-2: #dde2ff;
+	--color-rank-3: #c08040;
+
+	--nav-box: transparent;
+	--nav-gap: calc(var(--px) * 4);
+	--nav-font: var(--font-display);
+	--nav-size: 1.05rem;
+	--nav-weight: 700;
+	--nav-min-width: 9rem;
+	--nav-padding: 0.45rem 1.1rem;
+	--nav-hover-decoration: none;
+	--nav-hover-outline: 2px solid #ffffff;
+}
+
+/* Slate & copper: layered blue-grey slate, copper trim, verdigris links. */
+.stats-theme--slate {
+	--color-panel: rgba(16, 19, 24, 0.78);
+	--color-panel-border: #4a5562;
+	--color-link-mc: #8fe0cc;
+	--stats-text: #e8ecef;
+	--stats-text-muted: #aab4bf;
+	--stats-shadow-colour: #0b0d10;
+	--stats-row-hover: rgba(255, 255, 255, 0.05);
+	--stats-page-bg: url('../assets/stats/textures/slate.svg') 0 0 / 32px 32px #2c3138;
+	--stats-floor: url('../assets/stats/textures/copper-trim.svg') 0 0 / 32px 8px;
+
+	--nav-border: #2a1408;
+	--nav-bg: #a8603a;
+	--nav-bevel: inset 2px 2px 0 #e39a63, inset -2px -2px 0 #6e3a20;
+	--nav-text: #fff4e8;
+	--nav-text-shadow: 2px 2px 0 #5e3019;
+	--nav-hover-bg: #3d8c7a;
+	--nav-hover-bevel: inset 2px 2px 0 #62bba8, inset -2px -2px 0 #24574d;
+	--nav-hover-text: #ffffff;
+	--nav-current-bg: #1d2227;
+	--nav-current-bevel: inset 2px 2px 0 #111417, inset -2px -2px 0 #3a414a;
+	--nav-current-text: #f4c08e;
+}
+
+/* NearVanilla colours: the site's near-black, blue and lime. */
+.stats-theme--brand {
+	--color-panel: rgba(20, 20, 20, 0.9);
+	--color-panel-border: #1e3a8a;
+	--color-link-mc: #7dd3fc;
+	--color-rank-other: #9ca3af;
+	--stats-text: #ffffff;
+	--stats-text-muted: #9ca3af;
+	--stats-shadow-colour: #000000;
+	--stats-row-hover: rgba(56, 189, 248, 0.08);
+	--stats-page-bg: url('../assets/stats/textures/brand-night.svg') 0 0 / 32px 32px var(--color-bg);
+	--stats-floor: url('../assets/stats/textures/brand-stripe.svg') 0 0 / 32px 8px;
+
+	--nav-border: #0b1530;
+	--nav-bg: #1e3a8a;
+	--nav-bevel: inset 2px 2px 0 #3b82f6, inset -2px -2px 0 #172554;
+	--nav-text: #ffffff;
+	--nav-text-shadow: 2px 2px 0 #0b1530;
+	--nav-hover-bg: #2563eb;
+	--nav-hover-bevel: inset 2px 2px 0 #60a5fa, inset -2px -2px 0 #1e3a8a;
+	--nav-hover-text: #ffffff;
+	--nav-current-bg: #a3e635;
+	--nav-current-bevel: inset 2px 2px 0 #d9f99d, inset -2px -2px 0 #65a30d;
+	--nav-current-text: #1a2e05;
+	--nav-current-text-shadow: none;
+}
+
+/* Quiet pixel: the rest of the site's surfaces; pixels only in sprites, headings and corners. */
+.stats-theme--quiet {
+	--color-panel: var(--color-surface);
+	--color-panel-border: rgba(255, 255, 255, 0.1);
+	--color-link-mc: #93c5fd;
+	--stats-text: #ffffff;
+	--stats-text-muted: var(--color-text-muted);
+	--stats-row-hover: rgba(255, 255, 255, 0.04);
+	--stats-shadow: none;
+	--stats-title-shadow: none;
+	--stats-page-bg: var(--color-bg);
+	--stats-floor: var(--color-surface);
+
+	--nav-border: rgba(255, 255, 255, 0.12);
+	--nav-bg: transparent;
+	--nav-bevel: none;
+	--nav-text: #ffffff;
+	--nav-text-shadow: none;
+	--nav-hover-bg: rgba(255, 255, 255, 0.08);
+	--nav-hover-bevel: none;
+	--nav-hover-text: #ffffff;
+	--nav-current-bg: var(--color-accent);
+	--nav-current-bevel: none;
+	--nav-current-text: #ffffff;
+}
+
+/* ------------------------------------------------------------------------------------------ */
+/* Page frame                                                                                  */
+/* ------------------------------------------------------------------------------------------ */
+
+.stats-view {
+	width: 100%;
+	max-width: 1320px;
+	margin: 0 auto;
+	padding: 0 calc(var(--px) * 6) calc(var(--px) * 16);
+}
+
+.stats-view--narrow {
+	max-width: 1320px;
+}
+
+.stats-view__header {
+	text-align: center;
+	margin-bottom: calc(var(--px) * 6);
+}
+
+.stats-view__title {
+	display: inline-flex;
+	align-items: center;
+	gap: calc(var(--px) * 4);
+	margin: calc(var(--px) * 12) 0 calc(var(--px) * 6);
+	font-family: var(--stats-font-title);
+	font-weight: 400;
+	font-size: var(--stats-size-title);
+	line-height: var(--stats-title-leading);
+	color: var(--stats-text-strong);
+	text-shadow: var(--stats-title-shadow);
+	overflow-wrap: anywhere;
+}
+
+.stats-view__title-text {
+	text-decoration: underline;
+	text-decoration-thickness: var(--stats-title-line);
+	text-underline-offset: calc(var(--stats-title-line) * 2);
+}
+
+.stats-view__subtitle {
+	color: var(--stats-text-strong);
+	text-shadow: var(--stats-shadow);
+}
+
+.stats-view__desc {
+	color: var(--stats-text-muted);
+	text-shadow: var(--stats-shadow);
+}
+
+/* ------------------------------------------------------------------------------------------ */
+/* Boxes: a stone-brick "entry" holding one or more dark rounded boxes                         */
+/* ------------------------------------------------------------------------------------------ */
+
+.mc-entry {
+	display: flex;
+	flex-direction: column;
+	gap: calc(var(--px) * 2);
+	padding: var(--stats-entry-padding);
+	background: var(--stats-entry-bg);
+	border: var(--stats-entry-border-width) solid var(--stats-entry-border);
+	border-image: var(--stats-entry-frame);
+	border-radius: var(--stats-entry-radius);
+	clip-path: var(--stats-corners);
+}
+
+.mc-box {
+	padding: calc(var(--px) * 2) calc(var(--px) * 4);
+	background-color: var(--stats-box);
+	border-radius: var(--stats-box-radius);
+	clip-path: var(--stats-corners);
+}
+
+/* ------------------------------------------------------------------------------------------ */
+/* Tables                                                                                      */
+/* ------------------------------------------------------------------------------------------ */
+
+.mc-table-scroll {
+	overflow-x: auto;
+}
+
+.mc-table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.mc-table caption {
+	padding: calc(var(--px) * 2) calc(var(--px) * 4);
+	text-align: left;
+	color: var(--stats-text-muted);
+	text-shadow: var(--stats-shadow);
+}
+
+.mc-table th,
+.mc-table td {
+	padding: calc(var(--px) * 2) calc(var(--px) * 4);
+	text-align: left;
+	vertical-align: middle;
+	white-space: nowrap;
+}
+
+.mc-table thead th {
+	font-weight: 400;
+	color: var(--stats-text-strong);
+	text-shadow: var(--stats-shadow);
+	border-bottom: var(--px) solid var(--stats-rule);
+}
+
+.mc-table tbody td {
+	border-top: var(--px) dashed var(--stats-rule);
+}
+
+.mc-table tbody tr:first-child td {
+	border-top: 0;
+}
+
+.mc-table tbody tr:hover {
+	background-color: var(--stats-row-hover);
+}
+
+.mc-table .mc-table__end {
+	text-align: right;
+}
+
+.mc-table .mc-table__center {
+	text-align: center;
+}
+
+.mc-table .mc-table__wrap {
+	white-space: normal;
+}
+
+/* ------------------------------------------------------------------------------------------ */
+/* Inline pieces                                                                               */
+/* ------------------------------------------------------------------------------------------ */
+
+.mc-link {
+	color: var(--color-link-mc);
+	text-decoration: none;
+}
+
+.mc-link:hover,
+.mc-link:focus-visible {
+	text-decoration: underline;
+}
+
+.mc-data {
+	color: var(--stats-data);
+}
+
+.mc-muted {
+	color: var(--stats-text-muted);
+}
+
+.mc-success {
+	color: var(--stats-success);
+}
+
+.mc-danger {
+	color: var(--stats-danger);
+}
+
+.mc-info {
+	color: var(--stats-info);
+}
+
+/* Rank: optional medal or crown, then "#n" in the rank colour. */
+.mc-rank {
+	display: inline-flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: calc(var(--px) * 2);
+}
+
+.mc-player {
+	display: inline-flex;
+	align-items: center;
+	gap: calc(var(--px) * 3);
+	min-width: 0;
+}
+
+.mc-icon-label {
+	display: inline-flex;
+	align-items: center;
+	gap: calc(var(--px) * 3);
+}
+
+.stats-rank-1 {
+	color: var(--color-rank-1);
+}
+
+.stats-rank-2 {
+	color: var(--color-rank-2);
+}
+
+.stats-rank-3 {
+	color: var(--color-rank-3);
+}
+
+.stats-rank-other {
+	color: var(--color-rank-other);
+}
+
+/* Visually hidden, still read by screen readers. */
+.mc-sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}

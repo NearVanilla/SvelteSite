@@ -1,0 +1,20 @@
+{
+	"minecraft:adventure/adventuring_time": {
+		"criteria": {
+			"minecraft:biome_0": "2026-11-01 12:00:00 +0000",
+			"minecraft:biome_1": "2026-11-01 12:00:00 +0000",
+			"minecraft:biome_2": "2026-11-01 12:00:00 +0000",
+			"minecraft:biome_3": "2026-11-01 12:00:00 +0000",
+			"minecraft:biome_4": "2026-11-01 12:00:00 +0000",
+			"minecraft:biome_5": "2026-11-01 12:00:00 +0000",
+			"minecraft:biome_6": "2026-11-01 12:00:00 +0000",
+			"minecraft:biome_7": "2026-11-01 12:00:00 +0000",
+			"minecraft:biome_8": "2026-11-01 12:00:00 +0000",
+			"minecraft:biome_9": "2026-11-01 12:00:00 +0000",
+			"minecraft:biome_10": "2026-11-01 12:00:00 +0000",
+			"minecraft:biome_11": "2026-11-01 12:00:00 +0000"
+		},
+		"done": false
+	},
+	"DataVersion": 4786
+}

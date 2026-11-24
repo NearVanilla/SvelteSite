@@ -1,0 +1,20 @@
+{
+	"stats": {
+		"minecraft:killed": {
+			"minecraft:zombie": 80,
+			"minecraft:creeper": 10
+		},
+		"minecraft:mined": {
+			"minecraft:stone": 1200,
+			"minecraft:wheat": 600
+		},
+		"minecraft:custom": {
+			"minecraft:walk_one_cm": 2400000,
+			"minecraft:jump": 7000,
+			"minecraft:deaths": 6,
+			"minecraft:mob_kills": 95,
+			"minecraft:play_time": 400000
+		}
+	},
+	"DataVersion": 4786
+}

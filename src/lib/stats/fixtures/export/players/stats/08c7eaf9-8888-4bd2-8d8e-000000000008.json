@@ -1,0 +1,26 @@
+{
+	"stats": {
+		"minecraft:killed": {
+			"minecraft:breeze": 20,
+			"minecraft:zombie": 200
+		},
+		"minecraft:mined": {
+			"minecraft:wheat": 1800,
+			"minecraft:deepslate_diamond_ore": 10
+		},
+		"minecraft:used": {
+			"minecraft:mace": 400
+		},
+		"minecraft:crafted": {
+			"minecraft:crafter": 6
+		},
+		"minecraft:custom": {
+			"minecraft:walk_one_cm": 6600000,
+			"minecraft:jump": 12000,
+			"minecraft:deaths": 12,
+			"minecraft:mob_kills": 300,
+			"minecraft:play_time": 950000
+		}
+	},
+	"DataVersion": 4786
+}
